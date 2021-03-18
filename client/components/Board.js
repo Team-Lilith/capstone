@@ -2,6 +2,7 @@ import {fabric} from 'fabric'
 import React, {useState, useEffect} from 'react'
 import Tools from './Tools'
 import Images from './Images'
+import io from 'socket.io-client'
 
 function Board() {
   const [canvas, setCanvas] = useState('')
