@@ -4,9 +4,9 @@ const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
-const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const db = require('./db')
-const sessionStore = new SequelizeStore({db})
+//const SequelizeStore = require('connect-session-sequelize')(session.Store)
+//const db = require('./db')
+//const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
@@ -52,14 +52,14 @@ const createApp = () => {
   app.use(compression())
 
   // session middleware with passport
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-      store: sessionStore,
-      resave: false,
-      saveUninitialized: false
-    })
-  )
+  // app.use(
+  //   session({
+  //     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+  //     store: sessionStore,
+  //     resave: false,
+  //     saveUninitialized: false
+  //   })
+  // )
   app.use(passport.initialize())
   app.use(passport.session())
 
@@ -105,11 +105,11 @@ const startListening = () => {
   require('./socket')(io)
 }
 
-const syncDb = () => db.sync()
+//const syncDb = () => db.sync()
 
 async function bootApp() {
-  await sessionStore.sync()
-  await syncDb()
+  //await sessionStore.sync()
+  //await syncDb()
   await createApp()
   await startListening()
 }
@@ -118,6 +118,7 @@ async function bootApp() {
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
 if (require.main === module) {
+  console.log('um idk')
   bootApp()
 } else {
   createApp()
