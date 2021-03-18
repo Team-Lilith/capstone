@@ -14,6 +14,8 @@ function Images(props) {
     'https://www.pinclipart.com/picdir/middle/167-1675358_a-real-apple-emoji-emoji-ios-11-png.png'
   ]
 
+  useEffect(() => {}, [])
+
   const addImage = (image, emit) => {
     let canvas = props.canvas
     if (!emit) {
