@@ -1,18 +1,17 @@
 import {fabric} from 'fabric'
-import {connect} from 'puppeteer'
-import React, {useState, useEffect, useDispatch} from 'react'
-import {useSelector} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import socket from '../socket'
 import {getImages} from '../store/images'
 
 function Images(props) {
-  const [images, setImages] = useState('')
+  //const [images, setImages] = useState('')
   const dispatch = useDispatch()
+  const imgArr = useSelector(state => state.images)
 
   useEffect(() => {
     console.log('setting images in effect hook')
-    let images = dispatch(getImages())
-    setImages(images)
+    dispatch(getImages())
   }, [])
   // IMAGE FUNCTIONS
 
@@ -33,9 +32,9 @@ function Images(props) {
   // listen for the server to broadcast an add-image event, and call the addImage function
   socket.on('add-image', image => addImage(image, true))
 
-  return images.length ? (
+  return imgArr.length ? (
     <div className="Images">
-      {images.map(imageUrl => {
+      {imgArr.map(imageUrl => {
         return (
           <img
             src={imageUrl}
@@ -51,10 +50,4 @@ function Images(props) {
   )
 }
 
-const mapImages = state => {
-  return {
-    images: state.images
-  }
-}
-
-export default connect(mapImages)(Images)
+export default Images

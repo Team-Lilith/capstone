@@ -21,12 +21,12 @@ export const getImages = () => async dispatch => {
         querySnapshot.forEach(doc => {
           console.log('inside for each...')
           images.push(doc.data().url)
-          console.log(`${doc.id} => ${doc.data().url}`)
         })
       })
       .catch(error => {
         console.log('Error getting documents: ', error)
       })
+
     console.log('got images', images)
     dispatch(gotImages(images))
   } catch (error) {
