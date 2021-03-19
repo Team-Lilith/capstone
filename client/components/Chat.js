@@ -1,48 +1,62 @@
-import React from 'react'
-import useChat from '../store/chat'
+import React, {useState} from 'react'
+import socket from '../socket'
+import '../index.css'
 
-const Chat = props => {
-  const {roomId} = 1 // Gets roomId from URL
-  const {messages, sendMessage} = useChat(roomId) // Creates a websocket and manages messaging
-  const [newMessage, setNewMessage] = React.useState('') // Message to be sent
+export default function Chat(props) {
+  const [messages, setMessages] = useState([])
+  const userId = 100 // get userId from Auth
+  const roomId = props.roomId // user id passed down from room component
 
-  const handleNewMessageChange = event => {
-    setNewMessage(event.target.value)
+  const handleSubmit = e => {
+    e.preventDefault()
+    //if there's a value in the chat field when submitted
+    if (e.target.newMessage.value) {
+      // the client emits a 'message' event
+      let message = {
+        msg: e.target.newMessage.value,
+        room: roomId,
+        user: userId,
+        id: Math.floor(Math.random() * 1000000)
+      }
+      socket.emit('message', message)
+      // and adds message into the messages array on component state
+      setMessages([...messages, message])
+      e.target.newMessage.value = ''
+    }
   }
 
-  const handleSendMessage = () => {
-    sendMessage(newMessage)
-    setNewMessage('')
-  }
+  // when the server emits a 'message event'
+  //add message into the messages array so it will be displayed
+  socket.on('message', msg => {
+    setMessages([...messages, msg])
+  })
 
   return (
-    <div className="chat-room-container">
-      <h1 className="room-name">Room: {roomId}</h1>
-      <div className="messages-container">
-        <ol className="messages-list">
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={`message-item ${
-                message.ownedByCurrentUser ? 'my-message' : 'received-message'
-              }`}
-            >
-              {message.body}
-            </li>
-          ))}
-        </ol>
+    <div id="chat-container">
+      <div>
+        <h4>Room: {roomId}</h4>
       </div>
-      <textarea
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write message..."
-        className="new-message-input-field"
-      />
-      <button onClick={handleSendMessage} className="send-message-button">
-        Send
-      </button>
+      <div id="display-messages">
+        {messages.map(msg => (
+          <div key={msg.id}>
+            <p>
+              User #{msg.user} says: {msg.msg}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <form onSubmit={handleSubmit} name="message">
+          <div>
+            <input name="newMessage" type="text" />
+          </div>
+
+          <div>
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
-
-export default Chat

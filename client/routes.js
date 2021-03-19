@@ -7,10 +7,9 @@ import {
   Switch
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
-import Board from './components/Board'
+import {Login, Signup, UserHome, Room, Join} from './components'
 import {me} from './store'
-import Chat from './components/Chat'
+
 /**
  * COMPONENT
  */
@@ -23,10 +22,11 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <div>
-        <Board />
-        <Chat />
-      </div>
+      <Switch>
+        <Room path="/room/:id/" />
+        <Route component={Join} />
+      </Switch>
+
       // <Switch>
       //   {/* Routes placed here are available to all visitors */}
       //   <Route path="/login" component={Login} />
