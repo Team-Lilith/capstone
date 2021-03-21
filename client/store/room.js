@@ -5,9 +5,7 @@ const SET_CURRENT_ROOM = 'SET_CURRENT_ROOM'
 export const currentRoom = roomId => ({type: SET_CURRENT_ROOM, roomId})
 
 export const joinRoom = roomId => dispatch => {
-  console.log('BEFORE DISPATCH')
   dispatch(currentRoom(roomId))
-  console.log('BEFORE HISTORY')
   history.push(`/room/${roomId}`)
 }
 

@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import {initiateSocket, disconnectSocket} from '../socket'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {Tools, Images, Chat} from './index'
 import {fabric} from 'fabric'
-import '../index.css'
 import {useParams} from 'react-router'
+import {joinRoom} from '../store/room.js'
+import socket from '../socket'
+import '../index.css'
 
 function Room() {
   const roomId = useSelector(state => state.room)
   const [canvas, setCanvas] = useState('')
   let {id} = useParams()
-  console.log('ID FROM ROUTES', id)
+  const dispatch = useDispatch()
 
   const initCanvas = () =>
     new fabric.Canvas('canvas', {
@@ -18,6 +20,11 @@ function Room() {
       width: 800,
       backgroundColor: 'pink'
     })
+
+  if (!roomId) {
+    dispatch(joinRoom(id))
+    socket.emit('join room', id)
+  }
 
   useEffect(() => {
     setCanvas(initCanvas())

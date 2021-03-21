@@ -10,7 +10,6 @@ function Images(props) {
   const imgArr = useSelector(state => state.images)
 
   useEffect(() => {
-    console.log('setting images in effect hook')
     dispatch(getImages())
   }, [])
   // IMAGE FUNCTIONS
