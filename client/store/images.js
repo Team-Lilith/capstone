@@ -1,4 +1,4 @@
-import firestore from '../firebase'
+import firestore from '../../server/db'
 
 //action types
 const GOT_IMAGES = 'GOT_IMAGES'

@@ -1,6 +1,6 @@
-const db = require('./db')
+const firestore = require('./firebase')
 
 // register models
-require('./models')
+//require('./models')
 
-module.exports = db
+module.exports = firestore
