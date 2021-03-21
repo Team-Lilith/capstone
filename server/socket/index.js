@@ -9,7 +9,7 @@ module.exports = io => {
     socket.on('join room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
       if (room) {
-        if (room.size < 1) {
+        if (room.size < 2) {
           console.log(`Socket ${socket.id} is joining room ${roomId}`)
           socket.join(roomId)
         } else {
