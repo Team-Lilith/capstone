@@ -12,22 +12,18 @@ const gotImages = images => ({
 //thunks
 export const getImages = () => async dispatch => {
   try {
-    console.log('inside async get images')
     let images = []
     await firestore
       .collection('images')
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          console.log('inside for each...')
           images.push(doc.data().url)
         })
       })
       .catch(error => {
         console.log('Error getting documents: ', error)
       })
-
-    console.log('got images', images)
     dispatch(gotImages(images))
   } catch (error) {
     console.error(error)
