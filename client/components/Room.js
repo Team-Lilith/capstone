@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {Tools, Images, Chat} from './index'
 import {fabric} from 'fabric'
 import {useParams} from 'react-router'
-import {joinRoom} from '../store/room.js'
+import {joinRoom, fullRoom} from '../store/room.js'
 import socket from '../socket'
 import '../index.css'
 
@@ -20,6 +20,16 @@ function Room() {
       width: 800,
       backgroundColor: 'pink'
     })
+
+  socket.on('full room', () => {
+    // notification here(?)
+    dispatch(fullRoom())
+  })
+
+  socket.on('no room', () => {
+    // notification here(?)
+    dispatch(fullRoom())
+  })
 
   if (!roomId) {
     dispatch(joinRoom(id))

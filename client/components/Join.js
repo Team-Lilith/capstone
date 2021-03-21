@@ -16,7 +16,7 @@ function Join(props) {
   function create() {
     const roomId = uuid()
     dispatch(joinRoom(roomId))
-    socket.emit('join room', roomId)
+    socket.emit('create room', roomId)
   }
 
   const handleChange = e => {
