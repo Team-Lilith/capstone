@@ -30,7 +30,13 @@ module.exports = io => {
 
     // when a client emits an 'add-image' event, broadcast it
     socket.on('add-image', data => {
+      console.log('broadcasting add-image event')
       socket.broadcast.emit('add-image', data)
+    })
+
+    socket.on('object-modified', data => {
+      console.log(`an object was modified by socket ${socket.id}`)
+      socket.broadcast.emit('new-modification', data)
     })
 
     // when a client emits a 'message' event, broadcast it

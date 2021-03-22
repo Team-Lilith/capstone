@@ -7,6 +7,7 @@ import {useParams} from 'react-router'
 import {joinRoom, fullRoom} from '../store/room.js'
 import socket from '../socket'
 import '../index.css'
+import Effects from './Effects'
 
 function Room() {
   const roomId = useSelector(state => state.room)
@@ -15,11 +16,16 @@ function Room() {
   const dispatch = useDispatch()
 
   const initCanvas = () =>
+    // create new canvas
     new fabric.Canvas('canvas', {
       height: 800,
       width: 800,
       backgroundColor: 'pink'
     })
+
+  // if (canvas === '') {
+  //   setCanvas(initCanvas())
+  // }
 
   socket.on('full room', () => {
     // notification here(?)
@@ -37,9 +43,16 @@ function Room() {
   }
 
   useEffect(() => {
+    // initialize canvas to newly created canvas
     setCanvas(initCanvas())
-    // if (roomId) initiateSocket(roomId);
   }, [])
+
+  // console.log(canvas)
+  // canvas.on('mouse:down', function(options) {
+  //   if (options.target) {
+  //     console.log('an object was clicked! ', options.target.type);
+  //   }
+  // });
 
   return (
     <div id="room">
@@ -59,6 +72,7 @@ function Room() {
       <div id="tools">
         <Tools canvas={canvas} />
       </div>
+      <Effects canvas={canvas} />
     </div>
   )
 }
