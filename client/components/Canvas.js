@@ -1,20 +1,12 @@
 import React from 'react'
 import socket from '../socket'
+import {fabric} from 'fabric'
 
 function Canvas(props) {
   const canvas = props.canvas
 
+  // OBJECT MODIFIED EVENT LISTENER MOVED TO TOOLS
   if (canvas) {
-    canvas.on('object:modified', function(options) {
-      if (options.target) {
-        console.log('an object was modified! ', options.target)
-        socket.emit('object-modified', {
-          obj: options.target,
-          id: options.target.id
-        })
-      }
-    })
-
     socket.on('new-modification', data => {
       console.log('heard new-modification event', typeof data, data)
 

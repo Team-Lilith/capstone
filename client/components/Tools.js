@@ -1,39 +1,23 @@
-import {fabric} from 'fabric'
 import React from 'react'
+import socket from '../socket'
+import {addRect, addCirc, addTri, deselect} from './FabricUtils'
 
 function Tools(props) {
-  const addRect = canvas => {
-    const rect = new fabric.Rect({
-      height: 100,
-      width: 500,
-      fill: 'black'
-    })
-    canvas.add(rect)
-    canvas.renderAll()
-  }
+  const canvas = props.canvas
 
-  const addCirc = canvas => {
-    const circle = new fabric.Circle({
-      radius: 100,
-      fill: 'lightblue'
-    })
-    canvas.add(circle)
-    canvas.renderAll()
-  }
+  // TOOL FUNCTIONS MOVED TO FABRICUTILS.JS
 
-  const addTri = canvas => {
-    const triangle = new fabric.Triangle({
-      width: 80,
-      height: 100,
-      fill: 'mistyrose'
+  // CANVAS EVENT LISTENER - OBJECT MODIFIED
+  if (canvas) {
+    canvas.on('object:modified', function(options) {
+      if (options.target) {
+        console.log('an object was modified! ', options.target)
+        socket.emit('object-modified', {
+          obj: options.target,
+          id: options.target.id
+        })
+      }
     })
-    canvas.add(triangle)
-    canvas.renderAll()
-  }
-
-  const deselect = canvas => {
-    canvas.discardActiveObject()
-    canvas.requestRenderAll()
   }
 
   return (

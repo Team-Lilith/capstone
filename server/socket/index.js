@@ -24,6 +24,7 @@ module.exports = io => {
       }
     })
 
+    // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
       socket.join(roomId)
     })
@@ -34,6 +35,7 @@ module.exports = io => {
       socket.broadcast.emit('add-image', data)
     })
 
+    // when the client emits an 'object-modified' event, broadcast a 'new-modification' event to room
     socket.on('object-modified', data => {
       console.log(`an object was modified by socket ${socket.id}`)
       socket.broadcast.emit('new-modification', data)
