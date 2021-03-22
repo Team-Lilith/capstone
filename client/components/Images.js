@@ -17,21 +17,23 @@ function Images(props) {
 
   const addImage = (image, emit = false) => {
     let canvas = props.canvas
+    //image being received
     if (emit) {
       fabric.Image.fromURL(image.image.src, function(oImg) {
         oImg.scale(0.25)
         oImg.id = image.id
         canvas.add(oImg)
-        console.log('added img: ', oImg)
+        console.log('received img: ', oImg)
       })
     } else {
+      //image being added and sent to room
       console.log('running addImage - not emitted')
       let id = uuid()
       fabric.Image.fromURL(image, function(oImg) {
         oImg.scale(0.25)
         oImg.id = id
         canvas.add(oImg)
-        console.log('added img: ', oImg)
+        console.log('sending img: ', oImg)
         // if this function is being called because the server broadcast an add-image event, don't emit it again
         socket.emit('add-image', {image: oImg, id: id})
         console.log('emitted add-image event')

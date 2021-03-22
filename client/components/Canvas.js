@@ -1,7 +1,7 @@
 import React from 'react'
 import socket from '../socket'
 
-function Effects(props) {
+function Canvas(props) {
   const canvas = props.canvas
 
   if (canvas) {
@@ -16,14 +16,16 @@ function Effects(props) {
     })
 
     socket.on('new-modification', data => {
-      console.log('heard new-modification event')
-      console.log('obj =>', data.obj)
+      console.log('heard new-modification event', typeof data, data)
+
+      console.log(typeof data.obj, ' =>', data.obj)
       console.log('id => ', data.id)
       canvas.getObjects().forEach(object => {
         console.log(object.id)
         if (object.id === data.id) {
           console.log(`found object ${object.id}! => `, object)
           object.set(data.obj)
+          object.setCoords()
           canvas.renderAll()
         }
       })
@@ -33,4 +35,4 @@ function Effects(props) {
   return <></>
 }
 
-export default Effects
+export default Canvas
