@@ -6,4 +6,5 @@ secrets.js
 npm-debug.log
 yarn-error.log
 package-lock.json
+fbconfig.json
 ignore

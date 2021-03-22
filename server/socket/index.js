@@ -4,16 +4,28 @@ module.exports = io => {
     // "socket" refers to the particular client socket connection
     console.log(`A socket connection to the server has been made: ${socket.id}`)
 
-    // When the client disconnects
-    socket.on('disconnect', () => {
-      console.log(`Connection ${socket.id} has left the building`)
-    })
-
     // Each socket can join a room by emitting the room name in a 'join' event
     // The server will listen to the 'join' event and attach that socket to the room
-    socket.on('join', room => {
-      console.log(`Socket ${socket.id} joining ${room}`)
-      socket.join(room)
+    socket.on('join room', roomId => {
+      const room = io.of('/').adapter.rooms.get(roomId)
+      if (room) {
+        if (room.size < 2) {
+          console.log(`Socket ${socket.id} is joining room ${roomId}`)
+          socket.join(roomId)
+        } else {
+          console.log('here @ full room')
+          io.to(socket.id).emit('full room')
+        }
+      } else {
+        io.to(socket.id).emit('no room')
+        console.log(
+          `Socket ${socket.id} is trying to join a non existent room: ${roomId}`
+        )
+      }
+    })
+
+    socket.on('create room', roomId => {
+      socket.join(roomId)
     })
 
     // when a client emits an 'add-image' event, broadcast it
@@ -23,7 +35,12 @@ module.exports = io => {
 
     // when a client emits a 'message' event, broadcast it
     socket.on('message', msg => {
-      socket.broadcast.emit('message', msg)
+      socket.to(msg.room).emit('message', msg)
+    })
+
+    // When the client disconnects
+    socket.on('disconnect', () => {
+      console.log(`Connection ${socket.id} has left the building`)
     })
   })
 }
