@@ -7,6 +7,7 @@ const CLEAR_ROOM = 'CLEAR_ROOM'
 export const currentRoom = roomId => ({type: SET_CURRENT_ROOM, roomId})
 export const clearRoom = () => ({type: CLEAR_ROOM})
 
+// do you need a thunk in these cases?
 export const joinRoom = roomId => dispatch => {
   dispatch(currentRoom(roomId))
   history.push(`/room/${roomId}`)

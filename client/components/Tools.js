@@ -2,6 +2,7 @@ import {fabric} from 'fabric'
 import React from 'react'
 
 function Tools(props) {
+  // maybe abstract these function to a different file
   const addRect = canvas => {
     const rect = new fabric.Rect({
       height: 100,
@@ -36,6 +37,7 @@ function Tools(props) {
     canvas.requestRenderAll()
   }
 
+  // can this be a map function?
   return (
     <div className="App">
       <button type="button" onClick={() => addRect(props.canvas)}>

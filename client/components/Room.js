@@ -21,6 +21,9 @@ function Room() {
       backgroundColor: 'pink'
     })
 
+  // where should the socket logic be?
+  // take "socket.on" and put it in socket.js (frontend)
+  // look at stackchat workshop
   socket.on('full room', () => {
     // notification here(?)
     dispatch(fullRoom())
@@ -32,7 +35,8 @@ function Room() {
   })
 
   if (!roomId) {
-    dispatch(joinRoom(id))
+    dispatch(joinRoom(id)) // dispatch current room instead
+    // redirect from here
     socket.emit('join room', id)
   }
 
