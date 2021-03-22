@@ -1,5 +1,7 @@
 // import firebase from 'firebase'
 // import 'firebase/firestore'
+//firestore
+//auth
 
 // export const LOGIN_REQUEST = "LOGIN_REQUEST";
 // export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
