@@ -1,6 +1,6 @@
 import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
-import socket from '../socket'
+import {emitImage} from '../socket'
 
 // TOOLS
 export const addRect = canvas => {
@@ -39,9 +39,9 @@ export const deselect = canvas => {
 
 // IMAGES
 
-export const addImage = (canvas, image, emit = false) => {
+export const addImage = (canvas, image, isReceived = false) => {
   //image being received
-  if (emit) {
+  if (isReceived) {
     fabric.Image.fromURL(image.image.src, function(oImg) {
       oImg.scale(0.25)
       oImg.id = image.id
@@ -54,7 +54,8 @@ export const addImage = (canvas, image, emit = false) => {
       oImg.scale(0.25)
       oImg.id = id
       canvas.add(oImg)
-      socket.emit('add-image', {image: oImg, id: id})
+      //why do we need to define new obj?
+      emitImage({image: oImg, id: id})
     })
   }
 }
