@@ -18,7 +18,10 @@ export const getImages = () => async dispatch => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          images.push(doc.data().url)
+          images.push({
+            url: doc.data().url,
+            tags: doc.data().tags
+          })
         })
       })
       .catch(error => {
