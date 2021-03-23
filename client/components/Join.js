@@ -13,8 +13,9 @@ function Join(props) {
   const [roomId, setRoomId] = useState('')
   const dispatch = useDispatch()
 
-  function create() {
-    const roomId = uuid()
+  function create(id) {
+    const roomId = id || uuid()
+    console.log('id in create', roomId)
     dispatch(joinRoom(roomId))
     emitCreateRoom(roomId)
   }
@@ -31,7 +32,7 @@ function Join(props) {
   return (
     <div>
       <h1>Join a Room</h1>
-      <button type="button" onClick={create}>
+      <button type="button" onClick={() => create(roomId)}>
         Create A Room
       </button>
 
