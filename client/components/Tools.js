@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
-// import {fabric} from 'fabric'
 import {emitModifiedCanvasObject} from '../socket'
 import {addRect, addCirc, addTri, deselect} from './FabricUtils'
 
@@ -155,38 +154,6 @@ function Tools(props) {
         canvas.requestRenderAll()
       }
     }
-  }
-
-  const addRect = canvas => {
-    const rect = new fabric.Rect({
-      height: 100,
-      width: 500,
-      fill: 'black',
-      cornerColor: 'white'
-    })
-    canvas.add(rect)
-    canvas.renderAll()
-  }
-
-  const addCirc = canvas => {
-    const circle = new fabric.Circle({
-      radius: 100,
-      fill: 'black',
-      cornerColor: 'white'
-    })
-    canvas.add(circle)
-    canvas.renderAll()
-  }
-
-  const addTri = canvas => {
-    const triangle = new fabric.Triangle({
-      width: 80,
-      height: 100,
-      fill: 'black',
-      cornerColor: 'white'
-    })
-    canvas.add(triangle)
-    canvas.renderAll()
   }
 
   return (
