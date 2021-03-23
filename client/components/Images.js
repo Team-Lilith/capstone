@@ -27,7 +27,7 @@ function Images(props) {
       })}
     </div>
   ) : (
-    'no images'
+    <div />
   )
 }
 

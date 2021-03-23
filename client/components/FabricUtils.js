@@ -16,7 +16,7 @@ export const addRect = canvas => {
 export const addCirc = canvas => {
   const circle = new fabric.Circle({
     radius: 100,
-    fill: 'lightblue'
+    fill: 'black'
   })
   canvas.add(circle)
   canvas.renderAll()
@@ -26,7 +26,7 @@ export const addTri = canvas => {
   const triangle = new fabric.Triangle({
     width: 80,
     height: 100,
-    fill: 'mistyrose'
+    fill: 'black'
   })
   canvas.add(triangle)
   canvas.renderAll()
@@ -38,7 +38,6 @@ export const deselect = canvas => {
 }
 
 // IMAGES
-
 export const addImage = (canvas, image, isReceived = false) => {
   //image being received
   if (isReceived) {
