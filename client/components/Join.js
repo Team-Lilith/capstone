@@ -6,7 +6,7 @@ import {Tools, Images, Chat} from './index'
 import {fabric} from 'fabric'
 import {joinRoom} from '../store/room.js'
 import {v1 as uuid} from 'uuid'
-import socket from '../socket'
+import {emitCreateRoom, emitJoinRoom} from '../socket'
 import '../index.css'
 
 function Join(props) {
@@ -16,7 +16,7 @@ function Join(props) {
   function create() {
     const roomId = uuid()
     dispatch(joinRoom(roomId))
-    socket.emit('create room', roomId)
+    emitCreateRoom(roomId)
   }
 
   const handleChange = e => {
@@ -25,7 +25,7 @@ function Join(props) {
 
   const joinNewRoom = roomId => {
     dispatch(joinRoom(roomId))
-    socket.emit('join room', roomId)
+    emitJoinRoom(roomId)
   }
 
   return (
