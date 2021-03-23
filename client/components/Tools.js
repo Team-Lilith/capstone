@@ -1,8 +1,9 @@
-import {fabric} from 'fabric'
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
+import {fabric} from 'fabric'
 
 function Tools(props) {
+  const canvas = props.canvas
   let currentMode
   let mousePressed = false
   let image =
@@ -15,6 +16,19 @@ function Tools(props) {
   }
 
   const [color, setColor] = React.useState('fff')
+
+  // CANVAS EVENT LISTENER - OBJECT MODIFIED
+  if (canvas) {
+    canvas.on('object:modified', function(options) {
+      if (options.target) {
+        const objModified = {
+          obj: options.target,
+          id: options.target.id
+        }
+        emitModifiedCanvasObject(objModified)
+      }
+    })
+  }
 
   useEffect(
     () => {
@@ -169,13 +183,6 @@ function Tools(props) {
       fill: 'black',
       cornerColor: 'white'
     })
-    canvas.add(triangle)
-    canvas.renderAll()
-  }
-
-  const deselect = canvas => {
-    canvas.discardActiveObject()
-    canvas.requestRenderAll()
   }
 
   return (
