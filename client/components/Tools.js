@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
-import {fabric} from 'fabric'
+// import {fabric} from 'fabric'
+import {emitModifiedCanvasObject} from '../socket'
+import {addRect, addCirc, addTri, deselect} from './FabricUtils'
 
 function Tools(props) {
   const canvas = props.canvas
@@ -183,6 +185,8 @@ function Tools(props) {
       fill: 'black',
       cornerColor: 'white'
     })
+    canvas.add(triangle)
+    canvas.renderAll()
   }
 
   return (
