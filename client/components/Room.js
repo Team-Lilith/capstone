@@ -23,7 +23,7 @@ function Room() {
     new fabric.Canvas('canvas', {
       height: 800,
       width: 800,
-      backgroundColor: 'pink'
+      backgroundColor: 'white'
     })
 
   if (!roomId) {
@@ -39,7 +39,7 @@ function Room() {
   return (
     <div id="room">
       <div id="room-top-container">
-        <div id="images">
+        <div className="images">
           <Images canvas={canvas} />
         </div>
         <div id="canvas-div">
