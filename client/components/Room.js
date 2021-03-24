@@ -46,7 +46,7 @@ function Room() {
   return (
     <div id="room">
       <div id="room-top-container">
-        <div className="images">
+        <div id="images">
           <Images canvas={canvas} />
         </div>
         <div id="canvas-div">
