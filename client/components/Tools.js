@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
 import {emitModifiedCanvasObject} from '../socket'
-import {addRect, addCirc, addTri, deselect} from './FabricUtils'
+import {addRect, addCirc, addTri, deselect, toggleMode} from './FabricUtils'
 
 function Tools(props) {
   const canvas = props.canvas
   let currentMode
   let mousePressed = false
-  // let image =
-  // 'https://ctl.s6img.com/society6/img/Cf95RKFdxsaz1o2YTpdEPM_ZkFM/w_700/canvas/~artwork/s6-0009/a/2099891_14762463/~~/white-stf-canvas.jpg'
+  let image =
+    'https://ctl.s6img.com/society6/img/Cf95RKFdxsaz1o2YTpdEPM_ZkFM/w_700/canvas/~artwork/s6-0009/a/2099891_14762463/~~/white-stf-canvas.jpg'
   const svgState = {}
   const group = {}
   const modes = {
@@ -35,7 +35,6 @@ function Tools(props) {
     () => {
       if (canvas) {
         setPanEvents(canvas)
-        // setBackground(image, props.canvas)
       }
     },
     [setPanEvents, canvas]
@@ -92,13 +91,6 @@ function Tools(props) {
     }
   }
 
-  // const setBackground = (url, canvas) => {
-  //   fabric.Image.fromURL(url, img => {
-  //     canvas.backgroundImage = img
-  //     canvas.renderAll()
-  //   })
-  // }
-
   const setPanEvents = canvas => {
     //Mouse Events
     canvas.on('mouse:move', options => {
@@ -127,34 +119,34 @@ function Tools(props) {
     })
   }
 
-  const toggleMode = (mode, canvas) => {
-    if (mode === modes.pan) {
-      if (currentMode === modes.pan) {
-        currentMode = ''
-      } else {
-        currentMode = modes.pan
-        canvas.isDrawingMode = false
-        canvas.requestRenderAll()
-      }
-    } else if (mode === modes.drawing) {
-      if (currentMode === modes.drawing) {
-        currentMode = ''
-        canvas.isDrawingMode = false
-        canvas.requestRenderAll()
-      } else {
-        //change brush options for future reference here
-        //   canvas.freeDrawingBrush.color = "red";
-        //   canvas.freeDrawingBrush.width = 15;
-        //   canvas.freeDrawingBrush = new fabric.CircleBrush(canvas)
-        //   canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+  // const toggleMode = (mode, canvas) => {
+  //   if (mode === modes.pan) {
+  //     if (currentMode === modes.pan) {
+  //       currentMode = ''
+  //     } else {
+  //       currentMode = modes.pan
+  //       canvas.isDrawingMode = false
+  //       canvas.requestRenderAll()
+  //     }
+  //   } else if (mode === modes.drawing) {
+  //     if (currentMode === modes.drawing) {
+  //       currentMode = ''
+  //       canvas.isDrawingMode = false
+  //       canvas.requestRenderAll()
+  //     } else {
+  //       //change brush options for future reference here
+  //       //   canvas.freeDrawingBrush.color = "red";
+  //       //   canvas.freeDrawingBrush.width = 15;
+  //       //   canvas.freeDrawingBrush = new fabric.CircleBrush(canvas)
+  //       //   canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
 
-        currentMode = modes.drawing
-        canvas.freeDrawingBrush.color = color
-        canvas.isDrawingMode = true
-        canvas.requestRenderAll()
-      }
-    }
-  }
+  //       currentMode = modes.drawing
+  //       canvas.freeDrawingBrush.color = color
+  //       canvas.isDrawingMode = true
+  //       canvas.requestRenderAll()
+  //     }
+  //   }
+  // }
 
   return (
     <div className="App">
@@ -168,7 +160,9 @@ function Tools(props) {
         Add Triangle
       </button>
 
-      <button onClick={() => toggleMode(modes.drawing, canvas)}>Draw</button>
+      <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
+        Draw
+      </button>
 
       <button type="button" onClick={() => deselect(canvas)}>
         Deselect
@@ -178,7 +172,9 @@ function Tools(props) {
         Ungroup
       </button>
 
-      <button onClick={() => toggleMode(modes.pan, canvas)}>Drag Canvas</button>
+      <button onClick={() => toggleMode(modes.pan, canvas, color)}>
+        Drag Canvas
+      </button>
       <button onClick={() => clearCanvas(canvas, svgState)}>
         Clear Canvas
       </button>

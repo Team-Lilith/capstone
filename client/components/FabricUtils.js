@@ -44,6 +44,41 @@ export const setCanvasBackground = (url, canvas) => {
   })
 }
 
+export const toggleMode = (mode, canvas, color) => {
+  let currentMode
+  const modes = {
+    pan: 'pan',
+    drawing: 'drawing'
+  }
+
+  if (mode === modes.pan) {
+    if (currentMode === modes.pan) {
+      currentMode = ''
+    } else {
+      currentMode = modes.pan
+      canvas.isDrawingMode = false
+      canvas.requestRenderAll()
+    }
+  } else if (mode === modes.drawing) {
+    if (currentMode === modes.drawing) {
+      currentMode = ''
+      canvas.isDrawingMode = false
+      canvas.requestRenderAll()
+    } else {
+      //change brush options for future reference here
+      //   canvas.freeDrawingBrush.color = "red";
+      //   canvas.freeDrawingBrush.width = 15;
+      //   canvas.freeDrawingBrush = new fabric.CircleBrush(canvas)
+      //   canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+
+      currentMode = modes.drawing
+      canvas.freeDrawingBrush.color = color
+      canvas.isDrawingMode = true
+      canvas.requestRenderAll()
+    }
+  }
+}
+
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {
   //image being received
