@@ -69,7 +69,7 @@ function Images(props) {
       </>
     )
   } else {
-    return 'no images'
+    return <div />
   }
 }
 
