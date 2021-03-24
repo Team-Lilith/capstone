@@ -26,7 +26,7 @@ function Gallery(props) {
       {localGallery.map(object => {
         let canvasSVG = object.canvas
         console.log(canvasSVG)
-        return <div>in prog</div>
+        return <div>{canvasSVG}</div>
       })}
     </div>
   ) : (
