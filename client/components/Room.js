@@ -5,7 +5,7 @@ import {Tools, Images, Chat} from './index'
 import {fabric} from 'fabric'
 import {useParams} from 'react-router'
 import {joinRoom, fullRoom} from '../store/room.js'
-import socket from '../socket'
+import {receiveFullRoom, receiveNoRoom, emitJoinRoom} from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
 
@@ -15,6 +15,9 @@ function Room() {
   let {id} = useParams()
   const dispatch = useDispatch()
 
+  receiveFullRoom(dispatch)
+  receiveNoRoom(dispatch)
+
   const initCanvas = () =>
     // create new canvas
     new fabric.Canvas('canvas', {
@@ -23,19 +26,9 @@ function Room() {
       backgroundColor: 'pink'
     })
 
-  socket.on('full room', () => {
-    // notification here(?)
-    dispatch(fullRoom())
-  })
-
-  socket.on('no room', () => {
-    // notification here(?)
-    dispatch(fullRoom())
-  })
-
   if (!roomId) {
     dispatch(joinRoom(id))
-    socket.emit('join room', id)
+    emitJoinRoom(id)
   }
 
   useEffect(() => {

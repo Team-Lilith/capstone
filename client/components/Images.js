@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import socket from '../socket'
+import {receiveImage} from '../socket'
 import {getImages} from '../store/images'
 import {addImage} from './FabricUtils'
 
@@ -24,13 +24,6 @@ function Images(props) {
     },
     [allImages]
   )
-
-  // IMAGE EVENT LISTENERS
-  // listen for the server to broadcast an add-image event, and call the addImage function
-  socket.off('add-image')
-  socket.on('add-image', image => {
-    addImage(canvas, image, true)
-  })
 
   const changeCategory = e => {
     let cat = e.target.value

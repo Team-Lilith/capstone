@@ -1,5 +1,5 @@
 import React from 'react'
-import socket from '../socket'
+import {emitModifiedCanvasObject} from '../socket'
 import {addRect, addCirc, addTri, deselect} from './FabricUtils'
 
 function Tools(props) {
@@ -11,11 +11,11 @@ function Tools(props) {
   if (canvas) {
     canvas.on('object:modified', function(options) {
       if (options.target) {
-        console.log('an object was modified! ', options.target)
-        socket.emit('object-modified', {
+        const objModified = {
           obj: options.target,
           id: options.target.id
-        })
+        }
+        emitModifiedCanvasObject(objModified)
       }
     })
   }

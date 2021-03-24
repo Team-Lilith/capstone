@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import socket from '../socket'
+import {sendMessage, receiveMessageAndUpdateState} from '../socket'
 import '../index.css'
 
 export default function Chat(props) {
@@ -18,18 +18,14 @@ export default function Chat(props) {
         user: userId,
         id: Math.floor(Math.random() * 1000000)
       }
-      socket.emit('message', message)
+      sendMessage(message)
       // and adds message into the messages array on component state
       setMessages([...messages, message])
       e.target.newMessage.value = ''
     }
   }
 
-  // when the server emits a 'message event'
-  //add message into the messages array so it will be displayed
-  socket.on('message', msg => {
-    setMessages([...messages, msg])
-  })
+  receiveMessageAndUpdateState(setMessages, messages)
 
   return (
     <div id="chat-container">
