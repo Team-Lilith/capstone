@@ -18,29 +18,22 @@ export const getImages = () => async dispatch => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          images.push(doc.data().url)
+          images.push({
+            url: doc.data().url,
+            tags: doc.data().tags
+          })
         })
       })
       .catch(error => {
         console.log('Error getting documents: ', error)
       })
-    dispatch(gotImages(images))
+    const imagesCopy = JSON.parse(JSON.stringify(images))
+    console.log(imagesCopy)
+    dispatch(gotImages(imagesCopy))
   } catch (error) {
     console.error(error)
   }
 }
-
-// async function writeImages(){
-//   await images.forEach((image)=>
-//     firestore.collection("images").add({
-//       url: image
-//     }).then((docRef) => {
-//     console.log("Document written with ID: ", docRef.id);
-//   })
-//   .catch((error) => {
-//     console.error("Error adding document: ", error);
-//   }));
-// }
 
 const initialState = []
 
