@@ -104,15 +104,49 @@ export const clearCanvas = (canvas, svg) => {
   })
 }
 
-export const restoreCanvas = (canvas, svg, image) => {
+export const restoreCanvas = (canvas, svg) => {
   if (svg.val) {
     fabric.loadSVGFromString(svg.val, objects => {
-      objects = objects.filter(object => object['xlink:href'] !== image)
       canvas.add(...objects)
       canvas.requestRenderAll()
     })
   }
 }
+
+// export const setPanEvents = canvas => {
+//   let mousePressed = false
+//   let currentMode
+//   const modes = {
+//     pan: 'pan',
+//     drawing: 'drawing'
+//   }
+
+//   //Mouse Events
+//   canvas.on('mouse:move', options => {
+//     if (mousePressed && currentMode === modes.pan) {
+//       canvas.setCursor('grab')
+//       canvas.renderAll()
+
+//       const mEvent = options.e
+//       const delta = new fabric.Point(mEvent.movementX, mEvent.movementY)
+//       canvas.relativePan(delta)
+//     }
+//   })
+
+//   canvas.on('mouse:down', event => {
+//     mousePressed = true
+//     if (currentMode === modes.pan) {
+//       canvas.setCursor('grab')
+//       canvas.renderAll()
+//     }
+//   })
+
+//   canvas.on('mouse:up', event => {
+//     mousePressed = false
+//     canvas.setCursor('default')
+//     canvas.renderAll()
+//   })
+// }
 
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {

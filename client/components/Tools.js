@@ -10,16 +10,16 @@ import {
   toggleMode,
   clearCanvas,
   restoreCanvas
+  // setPanEvents
 } from './FabricUtils'
 
 function Tools(props) {
   const canvas = props.canvas
 
   let mousePressed = false
-  let image =
-    'https://ctl.s6img.com/society6/img/Cf95RKFdxsaz1o2YTpdEPM_ZkFM/w_700/canvas/~artwork/s6-0009/a/2099891_14762463/~~/white-stf-canvas.jpg'
 
   const group = {}
+  const svgState = {}
 
   let currentMode
   const modes = {
@@ -67,40 +67,6 @@ function Tools(props) {
     })
   }
 
-  // const groupObjects = (canvas, group, shouldGroup) => {
-  //   if (shouldGroup) {
-  //     const objects = canvas.getObjects()
-  //     group.val = new fabric.Group(objects)
-  //     clearCanvas(canvas, svgState)
-  //     canvas.add(group.val)
-  //     canvas.requestRenderAll()
-  //   } else {
-  //     group.val.destroy()
-  //     const oldGroup = group.val.getObjects()
-  //     clearCanvas(canvas, svgState)
-  //     canvas.add(...oldGroup)
-  //     group.val = null
-  //     canvas.requestRenderAll()
-  //   }
-  // }
-
-  // const clearCanvas = (canvas, svg) => {
-  //   svg.val = canvas.toSVG()
-  //   canvas.getObjects().forEach(obj => {
-  //     if (obj !== canvas.backgroundImage) canvas.remove(obj)
-  //   })
-  // }
-
-  // const restoreCanvas = (canvas, svg, image) => {
-  //   if (svg.val) {
-  //     fabric.loadSVGFromString(svg.val, objects => {
-  //       objects = objects.filter(object => object['xlink:href'] !== image)
-  //       canvas.add(...objects)
-  //       canvas.requestRenderAll()
-  //     })
-  //   }
-  // }
-
   const setPanEvents = canvas => {
     //Mouse Events
     canvas.on('mouse:move', options => {
@@ -145,6 +111,8 @@ function Tools(props) {
         Draw
       </button>
 
+      <button onClick={() => toggleMode(modes.pan, canvas, color)}>Drag</button>
+
       <button type="button" onClick={() => deselect(canvas)}>
         Deselect
       </button>
@@ -153,13 +121,10 @@ function Tools(props) {
         Ungroup
       </button>
 
-      <button onClick={() => toggleMode(modes.pan, canvas, color)}>
-        Drag Canvas
-      </button>
       <button onClick={() => clearCanvas(canvas, svgState)}>
         Clear Canvas
       </button>
-      <button onClick={() => restoreCanvas(canvas, svgState, image)}>
+      <button onClick={() => restoreCanvas(canvas, svgState)}>
         Restore Canvas
       </button>
 
