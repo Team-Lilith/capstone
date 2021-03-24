@@ -7,8 +7,8 @@ function Tools(props) {
   const canvas = props.canvas
   let currentMode
   let mousePressed = false
-  let image =
-    'https://ctl.s6img.com/society6/img/Cf95RKFdxsaz1o2YTpdEPM_ZkFM/w_700/canvas/~artwork/s6-0009/a/2099891_14762463/~~/white-stf-canvas.jpg'
+  // let image =
+  // 'https://ctl.s6img.com/society6/img/Cf95RKFdxsaz1o2YTpdEPM_ZkFM/w_700/canvas/~artwork/s6-0009/a/2099891_14762463/~~/white-stf-canvas.jpg'
   const svgState = {}
   const group = {}
   const modes = {
@@ -33,12 +33,12 @@ function Tools(props) {
 
   useEffect(
     () => {
-      if (props.canvas) {
-        setPanEvents(props.canvas)
-        setBackground(image, props.canvas)
+      if (canvas) {
+        setPanEvents(canvas)
+        // setBackground(image, props.canvas)
       }
     },
-    [setPanEvents, props.canvas]
+    [setPanEvents, canvas]
   )
 
   const handleImageUpload = event => {
@@ -48,8 +48,8 @@ function Tools(props) {
     reader.addEventListener('load', () => {
       fabric.Image.fromURL(reader.result, img => {
         img.scaleToHeight(300)
-        props.canvas.add(img)
-        props.canvas.requestRenderAll()
+        canvas.add(img)
+        canvas.requestRenderAll()
       })
     })
   }
@@ -92,12 +92,12 @@ function Tools(props) {
     }
   }
 
-  const setBackground = (url, canvas) => {
-    fabric.Image.fromURL(url, img => {
-      canvas.backgroundImage = img
-      canvas.renderAll()
-    })
-  }
+  // const setBackground = (url, canvas) => {
+  //   fabric.Image.fromURL(url, img => {
+  //     canvas.backgroundImage = img
+  //     canvas.renderAll()
+  //   })
+  // }
 
   const setPanEvents = canvas => {
     //Mouse Events
@@ -134,7 +134,7 @@ function Tools(props) {
       } else {
         currentMode = modes.pan
         canvas.isDrawingMode = false
-        props.canvas.requestRenderAll()
+        canvas.requestRenderAll()
       }
     } else if (mode === modes.drawing) {
       if (currentMode === modes.drawing) {
@@ -158,37 +158,31 @@ function Tools(props) {
 
   return (
     <div className="App">
-      <button type="button" onClick={() => addRect(props.canvas)}>
+      <button type="button" onClick={() => addRect(canvas)}>
         Rectangle
       </button>
-      <button type="button" onClick={() => addCirc(props.canvas)}>
+      <button type="button" onClick={() => addCirc(canvas)}>
         Add Circle
       </button>
-      <button type="button" onClick={() => addTri(props.canvas)}>
+      <button type="button" onClick={() => addTri(canvas)}>
         Add Triangle
       </button>
 
-      <button onClick={() => toggleMode(modes.drawing, props.canvas)}>
-        Draw
-      </button>
+      <button onClick={() => toggleMode(modes.drawing, canvas)}>Draw</button>
 
-      <button type="button" onClick={() => deselect(props.canvas)}>
+      <button type="button" onClick={() => deselect(canvas)}>
         Deselect
       </button>
-      <button onClick={() => groupObjects(props.canvas, group, true)}>
-        Group
-      </button>
-      <button onClick={() => groupObjects(props.canvas, group, false)}>
+      <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
+      <button onClick={() => groupObjects(canvas, group, false)}>
         Ungroup
       </button>
 
-      <button onClick={() => toggleMode(modes.pan, props.canvas)}>
-        Drag Canvas
-      </button>
-      <button onClick={() => clearCanvas(props.canvas, svgState)}>
+      <button onClick={() => toggleMode(modes.pan, canvas)}>Drag Canvas</button>
+      <button onClick={() => clearCanvas(canvas, svgState)}>
         Clear Canvas
       </button>
-      <button onClick={() => restoreCanvas(props.canvas, svgState, image)}>
+      <button onClick={() => restoreCanvas(canvas, svgState, image)}>
         Restore Canvas
       </button>
 

@@ -37,6 +37,13 @@ export const deselect = canvas => {
   canvas.requestRenderAll()
 }
 
+export const setCanvasBackground = (url, canvas) => {
+  fabric.Image.fromURL(url, img => {
+    canvas.backgroundImage = img
+    canvas.renderAll()
+  })
+}
+
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {
   //image being received
