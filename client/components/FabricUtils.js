@@ -148,19 +148,6 @@ export const setPanEvents = canvas => {
   })
 }
 
-export const handleImageUpload = event => {
-  const reader = new FileReader()
-  const imageToUpload = event.target.files[0]
-  reader.readAsDataURL(imageToUpload)
-  reader.addEventListener('load', () => {
-    fabric.Image.fromURL(reader.result, img => {
-      img.scaleToHeight(300)
-      canvas.add(img)
-      canvas.requestRenderAll()
-    })
-  })
-}
-
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {
   //image being received
