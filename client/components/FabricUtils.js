@@ -47,6 +47,18 @@ export const deselect = canvas => {
   canvas.requestRenderAll()
 }
 
+export const bringForward = canvas => {
+  let selected = canvas.getActiveObject()
+  selected.bringForward()
+  canvas.requestRenderAll()
+}
+
+export const sendBackwards = canvas => {
+  let selected = canvas.getActiveObject()
+  selected.sendBackwards()
+  canvas.requestRenderAll()
+}
+
 export const deleteSelected = canvas => {
   let selected = canvas.getActiveObject()
   canvas.remove(selected)

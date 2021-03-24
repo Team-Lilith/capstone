@@ -12,7 +12,9 @@ import {
   clearCanvas,
   restoreCanvas,
   setPanEvents,
-  deleteSelected
+  deleteSelected,
+  bringForward,
+  sendBackwards
 } from './FabricUtils'
 
 function Tools(props) {
@@ -88,6 +90,8 @@ function Tools(props) {
         Deselect
       </button>
       <button onClick={() => deleteSelected(canvas)}>Delete Selected</button>
+      <button onClick={() => bringForward(canvas)}>Bring Forward</button>
+      <button onClick={() => sendBackwards(canvas)}>Send Backwards</button>
       <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
       <button onClick={() => groupObjects(canvas, group, false)}>
         Ungroup
