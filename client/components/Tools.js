@@ -12,6 +12,7 @@ import {
   restoreCanvas,
   setPanEvents
 } from './FabricUtils'
+import Save from './Save'
 
 function Tools(props) {
   const canvas = props.canvas
@@ -64,6 +65,7 @@ function Tools(props) {
 
   return (
     <div className="App">
+      <Save canvas={canvas} />
       <button type="button" onClick={() => addRect(canvas)}>
         Rectangle
       </button>

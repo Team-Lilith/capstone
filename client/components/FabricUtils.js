@@ -1,6 +1,8 @@
 import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
 import {emitImage} from '../socket'
+import firebase from 'firebase'
+import firestore from '../../server/db'
 
 // TOOLS
 export const addRect = canvas => {

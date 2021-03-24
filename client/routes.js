@@ -7,7 +7,7 @@ import {
   Switch
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Room, Join} from './components'
+import {Login, Signup, UserHome, Room, Join, Gallery} from './components'
 import {me} from './store'
 import {useParams} from 'react-router'
 
@@ -26,6 +26,9 @@ class Routes extends Component {
       <Switch>
         <Route path="/room/:id">
           <Room />
+        </Route>
+        <Route path="/gallery">
+          <Gallery />
         </Route>
         <Route component={Join} />
       </Switch>
