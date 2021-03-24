@@ -5,12 +5,14 @@ import {
   addRect,
   addCirc,
   addTri,
+  addText,
   deselect,
   groupObjects,
   toggleMode,
   clearCanvas,
   restoreCanvas,
-  setPanEvents
+  setPanEvents,
+  deleteSelected
 } from './FabricUtils'
 
 function Tools(props) {
@@ -74,6 +76,8 @@ function Tools(props) {
         Add Triangle
       </button>
 
+      <button onClick={() => addText(canvas)}>Add Text</button>
+
       <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
         Draw
       </button>
@@ -83,6 +87,7 @@ function Tools(props) {
       <button type="button" onClick={() => deselect(canvas)}>
         Deselect
       </button>
+      <button onClick={() => deleteSelected(canvas)}>Delete Selected</button>
       <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
       <button onClick={() => groupObjects(canvas, group, false)}>
         Ungroup

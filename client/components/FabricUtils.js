@@ -32,7 +32,25 @@ export const addTri = canvas => {
   canvas.renderAll()
 }
 
+export const addText = canvas => {
+  var text = new fabric.IText('Your thoughts here...', {
+    left: 40,
+    top: 50
+  })
+  text.hasRotatingPoint = true
+  canvas.add(text).setActiveObject(text)
+  text.enterEditing()
+}
+
 export const deselect = canvas => {
+  canvas.discardActiveObject()
+  canvas.requestRenderAll()
+}
+
+export const deleteSelected = canvas => {
+  let selected = canvas.getActiveObject()
+  canvas.remove(selected)
+
   canvas.discardActiveObject()
   canvas.requestRenderAll()
 }
