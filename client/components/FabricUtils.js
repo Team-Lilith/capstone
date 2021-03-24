@@ -79,6 +79,41 @@ export const toggleMode = (mode, canvas, color) => {
   }
 }
 
+export const groupObjects = (canvas, group, shouldGroup) => {
+  const svgState = {}
+  if (shouldGroup) {
+    const objects = canvas.getObjects()
+    group.val = new fabric.Group(objects)
+    clearCanvas(canvas, svgState)
+    canvas.add(group.val)
+    canvas.requestRenderAll()
+  } else {
+    group.val.destroy()
+    const oldGroup = group.val.getObjects()
+    clearCanvas(canvas, svgState)
+    canvas.add(...oldGroup)
+    group.val = null
+    canvas.requestRenderAll()
+  }
+}
+
+export const clearCanvas = (canvas, svg) => {
+  svg.val = canvas.toSVG()
+  canvas.getObjects().forEach(obj => {
+    if (obj !== canvas.backgroundImage) canvas.remove(obj)
+  })
+}
+
+export const restoreCanvas = (canvas, svg, image) => {
+  if (svg.val) {
+    fabric.loadSVGFromString(svg.val, objects => {
+      objects = objects.filter(object => object['xlink:href'] !== image)
+      canvas.add(...objects)
+      canvas.requestRenderAll()
+    })
+  }
+}
+
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {
   //image being received

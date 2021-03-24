@@ -1,21 +1,31 @@
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
 import {emitModifiedCanvasObject} from '../socket'
-import {addRect, addCirc, addTri, deselect, toggleMode} from './FabricUtils'
+import {
+  addRect,
+  addCirc,
+  addTri,
+  deselect,
+  groupObjects,
+  toggleMode,
+  clearCanvas,
+  restoreCanvas
+} from './FabricUtils'
 
 function Tools(props) {
   const canvas = props.canvas
-  let currentMode
+
   let mousePressed = false
   let image =
     'https://ctl.s6img.com/society6/img/Cf95RKFdxsaz1o2YTpdEPM_ZkFM/w_700/canvas/~artwork/s6-0009/a/2099891_14762463/~~/white-stf-canvas.jpg'
-  const svgState = {}
+
   const group = {}
+
+  let currentMode
   const modes = {
     pan: 'pan',
     drawing: 'drawing'
   }
-
   const [color, setColor] = React.useState('fff')
 
   // CANVAS EVENT LISTENER - OBJECT MODIFIED
@@ -40,6 +50,10 @@ function Tools(props) {
     [setPanEvents, canvas]
   )
 
+  const handleColorChange = color => {
+    setColor(color.hex)
+  }
+
   const handleImageUpload = event => {
     const reader = new FileReader()
     const imageToUpload = event.target.files[0]
@@ -53,43 +67,39 @@ function Tools(props) {
     })
   }
 
-  const handleColorChange = color => {
-    setColor(color.hex)
-  }
+  // const groupObjects = (canvas, group, shouldGroup) => {
+  //   if (shouldGroup) {
+  //     const objects = canvas.getObjects()
+  //     group.val = new fabric.Group(objects)
+  //     clearCanvas(canvas, svgState)
+  //     canvas.add(group.val)
+  //     canvas.requestRenderAll()
+  //   } else {
+  //     group.val.destroy()
+  //     const oldGroup = group.val.getObjects()
+  //     clearCanvas(canvas, svgState)
+  //     canvas.add(...oldGroup)
+  //     group.val = null
+  //     canvas.requestRenderAll()
+  //   }
+  // }
 
-  const groupObjects = (canvas, group, shouldGroup) => {
-    if (shouldGroup) {
-      const objects = canvas.getObjects()
-      group.val = new fabric.Group(objects)
-      clearCanvas(canvas, svgState)
-      canvas.add(group.val)
-      canvas.requestRenderAll()
-    } else {
-      group.val.destroy()
-      const oldGroup = group.val.getObjects()
-      clearCanvas(canvas, svgState)
-      canvas.add(...oldGroup)
-      group.val = null
-      canvas.requestRenderAll()
-    }
-  }
+  // const clearCanvas = (canvas, svg) => {
+  //   svg.val = canvas.toSVG()
+  //   canvas.getObjects().forEach(obj => {
+  //     if (obj !== canvas.backgroundImage) canvas.remove(obj)
+  //   })
+  // }
 
-  const clearCanvas = (canvas, svg) => {
-    svg.val = canvas.toSVG()
-    canvas.getObjects().forEach(obj => {
-      if (obj !== canvas.backgroundImage) canvas.remove(obj)
-    })
-  }
-
-  const restoreCanvas = (canvas, svg, image) => {
-    if (svg.val) {
-      fabric.loadSVGFromString(svg.val, objects => {
-        objects = objects.filter(object => object['xlink:href'] !== image)
-        canvas.add(...objects)
-        canvas.requestRenderAll()
-      })
-    }
-  }
+  // const restoreCanvas = (canvas, svg, image) => {
+  //   if (svg.val) {
+  //     fabric.loadSVGFromString(svg.val, objects => {
+  //       objects = objects.filter(object => object['xlink:href'] !== image)
+  //       canvas.add(...objects)
+  //       canvas.requestRenderAll()
+  //     })
+  //   }
+  // }
 
   const setPanEvents = canvas => {
     //Mouse Events
@@ -118,35 +128,6 @@ function Tools(props) {
       canvas.renderAll()
     })
   }
-
-  // const toggleMode = (mode, canvas) => {
-  //   if (mode === modes.pan) {
-  //     if (currentMode === modes.pan) {
-  //       currentMode = ''
-  //     } else {
-  //       currentMode = modes.pan
-  //       canvas.isDrawingMode = false
-  //       canvas.requestRenderAll()
-  //     }
-  //   } else if (mode === modes.drawing) {
-  //     if (currentMode === modes.drawing) {
-  //       currentMode = ''
-  //       canvas.isDrawingMode = false
-  //       canvas.requestRenderAll()
-  //     } else {
-  //       //change brush options for future reference here
-  //       //   canvas.freeDrawingBrush.color = "red";
-  //       //   canvas.freeDrawingBrush.width = 15;
-  //       //   canvas.freeDrawingBrush = new fabric.CircleBrush(canvas)
-  //       //   canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
-
-  //       currentMode = modes.drawing
-  //       canvas.freeDrawingBrush.color = color
-  //       canvas.isDrawingMode = true
-  //       canvas.requestRenderAll()
-  //     }
-  //   }
-  // }
 
   return (
     <div className="App">
