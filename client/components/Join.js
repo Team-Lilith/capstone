@@ -15,7 +15,6 @@ function Join(props) {
 
   function create(id) {
     const roomId = id || uuid()
-    console.log('id in create', roomId)
     dispatch(joinRoom(roomId))
     emitCreateRoom(roomId)
   }
