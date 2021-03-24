@@ -24,7 +24,7 @@ export default function Chat(props) {
       e.target.newMessage.value = ''
     }
   }
-
+  //memory leak?
   receiveMessageAndUpdateState(setMessages, messages)
 
   return (

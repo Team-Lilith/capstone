@@ -8,6 +8,7 @@ module.exports = io => {
     // The server will listen to the 'join' event and attach that socket to the room
     socket.on('join room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
+
       if (room) {
         if (room.size < 2) {
           console.log(`Socket ${socket.id} is joining room ${roomId}`)
@@ -26,7 +27,17 @@ module.exports = io => {
 
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
-      socket.join(roomId)
+      const room = io.of('/').adapter.rooms.get(roomId)
+      if (!room) {
+        socket.join(roomId)
+      } else {
+        io.to(socket.id).emit('no room')
+        console.log(
+          `Socket ${
+            socket.id
+          } is trying to create a room using an existing room id: ${roomId}`
+        )
+      }
     })
 
     // when a client emits an 'add-image' event, broadcast it
