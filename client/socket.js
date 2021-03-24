@@ -1,5 +1,6 @@
 import io from 'socket.io-client'
-import {fullRoom} from './store'
+import {setCurrentRoom} from './store'
+import history from './history'
 
 //CONNECTION
 
@@ -62,15 +63,30 @@ export const receiveImage = (addToCanvas, canvas) => {
   })
 }
 //user tried to join a full room => is routed back to home
-export const receiveFullRoom = dispatch => {
+export const receiveFullRoom = () => {
+  socket.off('full room')
   socket.on('full room', () => {
-    dispatch(fullRoom())
+    history.push('/')
+    console.log('room is full!')
+    // toast notification ?
   })
 }
 //user tried to join a nonexistent room => is routed back to home
-export const receiveNoRoom = dispatch => {
+export const receiveNoRoom = () => {
+  socket.off('no room')
   socket.on('no room', () => {
-    dispatch(fullRoom())
+    history.push('/')
+    console.log('no such room!')
+    // toast notification ?
+  })
+}
+
+//user successfully joins room => is routed to room
+export const joinSuccess = dispatch => {
+  socket.off('join successful')
+  socket.on('join successful', roomId => {
+    dispatch(setCurrentRoom(roomId))
+    history.push(`/room/${roomId}`)
   })
 }
 

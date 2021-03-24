@@ -8,11 +8,12 @@ module.exports = io => {
     // The server will listen to the 'join' event and attach that socket to the room
     socket.on('join room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
-
+      console.log('ROOMS => ', io.of('/').adapter.rooms)
       if (room) {
         if (room.size < 2) {
           console.log(`Socket ${socket.id} is joining room ${roomId}`)
           socket.join(roomId)
+          io.to(socket.id).emit('join successful', roomId)
         } else {
           console.log('here @ full room')
           io.to(socket.id).emit('full room')
@@ -28,8 +29,11 @@ module.exports = io => {
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
+      console.log('socket attempting to create room #', roomId)
       if (!room) {
+        console.log('room does not existing - creating')
         socket.join(roomId)
+        io.to(socket.id).emit('join successful', roomId)
       } else {
         io.to(socket.id).emit('no room')
         console.log(
