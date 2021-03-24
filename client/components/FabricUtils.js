@@ -113,40 +113,53 @@ export const restoreCanvas = (canvas, svg) => {
   }
 }
 
-// export const setPanEvents = canvas => {
-//   let mousePressed = false
-//   let currentMode
-//   const modes = {
-//     pan: 'pan',
-//     drawing: 'drawing'
-//   }
+export const setPanEvents = canvas => {
+  let mousePressed = false
+  let currentMode
+  const modes = {
+    pan: 'pan',
+    drawing: 'drawing'
+  }
 
-//   //Mouse Events
-//   canvas.on('mouse:move', options => {
-//     if (mousePressed && currentMode === modes.pan) {
-//       canvas.setCursor('grab')
-//       canvas.renderAll()
+  //Mouse Events
+  canvas.on('mouse:move', options => {
+    if (mousePressed && currentMode === modes.pan) {
+      canvas.setCursor('grab')
+      canvas.renderAll()
 
-//       const mEvent = options.e
-//       const delta = new fabric.Point(mEvent.movementX, mEvent.movementY)
-//       canvas.relativePan(delta)
-//     }
-//   })
+      const mEvent = options.e
+      const delta = new fabric.Point(mEvent.movementX, mEvent.movementY)
+      canvas.relativePan(delta)
+    }
+  })
 
-//   canvas.on('mouse:down', event => {
-//     mousePressed = true
-//     if (currentMode === modes.pan) {
-//       canvas.setCursor('grab')
-//       canvas.renderAll()
-//     }
-//   })
+  canvas.on('mouse:down', event => {
+    mousePressed = true
+    if (currentMode === modes.pan) {
+      canvas.setCursor('grab')
+      canvas.renderAll()
+    }
+  })
 
-//   canvas.on('mouse:up', event => {
-//     mousePressed = false
-//     canvas.setCursor('default')
-//     canvas.renderAll()
-//   })
-// }
+  canvas.on('mouse:up', event => {
+    mousePressed = false
+    canvas.setCursor('default')
+    canvas.renderAll()
+  })
+}
+
+export const handleImageUpload = event => {
+  const reader = new FileReader()
+  const imageToUpload = event.target.files[0]
+  reader.readAsDataURL(imageToUpload)
+  reader.addEventListener('load', () => {
+    fabric.Image.fromURL(reader.result, img => {
+      img.scaleToHeight(300)
+      canvas.add(img)
+      canvas.requestRenderAll()
+    })
+  })
+}
 
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {

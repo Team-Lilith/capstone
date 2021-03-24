@@ -9,19 +9,14 @@ import {
   groupObjects,
   toggleMode,
   clearCanvas,
-  restoreCanvas
-  // setPanEvents
+  restoreCanvas,
+  setPanEvents
 } from './FabricUtils'
 
 function Tools(props) {
   const canvas = props.canvas
-
-  let mousePressed = false
-
   const group = {}
   const svgState = {}
-
-  let currentMode
   const modes = {
     pan: 'pan',
     drawing: 'drawing'
@@ -64,34 +59,6 @@ function Tools(props) {
         canvas.add(img)
         canvas.requestRenderAll()
       })
-    })
-  }
-
-  const setPanEvents = canvas => {
-    //Mouse Events
-    canvas.on('mouse:move', options => {
-      if (mousePressed && currentMode === modes.pan) {
-        canvas.setCursor('grab')
-        canvas.renderAll()
-
-        const mEvent = options.e
-        const delta = new fabric.Point(mEvent.movementX, mEvent.movementY)
-        canvas.relativePan(delta)
-      }
-    })
-
-    canvas.on('mouse:down', event => {
-      mousePressed = true
-      if (currentMode === modes.pan) {
-        canvas.setCursor('grab')
-        canvas.renderAll()
-      }
-    })
-
-    canvas.on('mouse:up', event => {
-      mousePressed = false
-      canvas.setCursor('default')
-      canvas.renderAll()
     })
   }
 
