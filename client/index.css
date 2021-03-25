@@ -237,6 +237,7 @@ h1 {
 #tools-inner {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 #tools-buttons {
