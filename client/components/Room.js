@@ -24,8 +24,8 @@ function Room() {
   const initCanvas = () =>
     // create new canvas
     new fabric.Canvas('canvas', {
-      height: 800,
-      width: 800,
+      height: 625,
+      width: 625,
       backgroundColor: 'white'
     })
 

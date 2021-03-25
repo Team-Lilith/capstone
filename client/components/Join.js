@@ -34,14 +34,19 @@ function Join() {
     <div id="join-outer">
       <div id="join">
         <h1>Join a Room</h1>
-        <button type="button" onClick={() => createRoom()}>
-          Create A Room
-        </button>
+        <div id="join-input">
+          <input type="text" onChange={handleChange} />
+        </div>
 
-        <input type="text" onChange={handleChange} />
-        <button type="button" onClick={() => joinRoom()}>
-          Join Room
-        </button>
+        <div id="join-buttons">
+          <div className="nav-button" onClick={() => createRoom()}>
+            Create A Room
+          </div>
+
+          <div className="nav-button" onClick={() => joinRoom()}>
+            Join Room
+          </div>
+        </div>
       </div>
     </div>
   )

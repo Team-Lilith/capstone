@@ -6,6 +6,19 @@ body {
   background-color: deepskyblue;
 }
 
+a:link {
+  color: inherit;
+}
+a:active {
+  color: inherit;
+}
+a:visited {
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+
 #room {
   display: flex;
   flex-direction: column;
@@ -15,6 +28,7 @@ body {
   display: flex;
   justify-content: space-between;
   height: 700px;
+  margin-bottom: 30px;
 }
 
 #images {
@@ -31,6 +45,7 @@ body {
 #canvas-div {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 25px;
   margin: 15px;
   height: 700px;
@@ -45,7 +60,11 @@ body {
 }
 
 #tools {
-  border: 2px black solid;
+  padding: 25px;
+  margin: 15px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
 #chat {
@@ -69,7 +88,11 @@ body {
 #display-messages {
   width: 300px;
   height: 90%;
-  border: 3px black solid;
+  padding: 15px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: inset 20px 20px 60px #00a2d9, inset -20px -20px 60px #00dcff;
+  overflow-y: auto;
 }
 
 .image-bar-image {
@@ -92,7 +115,9 @@ body {
 }
 
 #gallery-container {
-  /* background-color: white; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   width: 40%;
   margin-top: 30px;
@@ -100,6 +125,14 @@ body {
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+#gallery-container h1 {
+  margin: 10px;
+}
+
+#gallery-container h3 {
+  margin: 10px;
 }
 
 .nav-button {
@@ -170,6 +203,7 @@ h1 {
 #gallery-outer {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 #join {
@@ -179,6 +213,7 @@ h1 {
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  text-align: center;
 }
 
 #join-outer {
@@ -186,7 +221,29 @@ h1 {
   justify-content: center;
 }
 
+#join-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#join-buttons div {
+  margin: 10px;
+}
+
+#join-input {
+  margin: 10px;
+}
+
 #tools-inner {
   display: flex;
   flex-direction: row;
+}
+
+#tools-buttons {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+#tools-buttons div {
+  margin: 5px;
 }

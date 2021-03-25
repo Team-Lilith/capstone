@@ -13,7 +13,9 @@ function Home() {
       <div id="gallery-container">
         <h3>or...</h3>
         <Link to="/gallery">
-          <h1>Visit our Gallery</h1>
+          <div className="nav-button">
+            <h1>Visit our Gallery</h1>
+          </div>
         </Link>
         <h2>Gallery image here</h2>
       </div>
