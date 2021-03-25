@@ -16,7 +16,7 @@ function Home(props) {
           </div>
 
           <div id="gallery-container">
-            <h3>or...</h3>
+            <h3>or</h3>
             <Link to="/gallery">
               <div className="nav-button">
                 <h1>Visit our Gallery</h1>
