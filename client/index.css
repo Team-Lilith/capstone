@@ -2,6 +2,23 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: deepskyblue;
+}
+
+a:link {
+  color: inherit;
+}
+a:active {
+  color: inherit;
+}
+a:visited {
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+
 #room {
   display: flex;
   flex-direction: column;
@@ -10,28 +27,54 @@
 #room-top-container {
   display: flex;
   justify-content: space-between;
+  height: 700px;
+  margin-bottom: 30px;
 }
 
 #images {
+  padding: 15px;
+  margin: 15px;
   width: 25%;
-  border: 2px black solid;
   overflow-y: auto;
+  height: 700px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
 #canvas-div {
   display: flex;
   justify-content: center;
-  border: 2px black solid;
+  align-items: center;
+  padding: 25px;
+  margin: 15px;
+  height: 700px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+.img-container {
+  height: 90%;
+  overflow-y: auto;
 }
 
 #tools {
-  height: 150px;
-  border: 2px black solid;
+  padding: 25px;
+  margin: 15px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
 #chat {
+  padding: 15px;
+  margin: 15px;
   width: 25%;
-  border: 2px black solid;
+  height: 700px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
 #chat-container {
@@ -45,7 +88,11 @@
 #display-messages {
   width: 300px;
   height: 90%;
-  border: 3px black solid;
+  padding: 15px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: inset 20px 20px 60px #00a2d9, inset -20px -20px 60px #00dcff;
+  overflow-y: auto;
 }
 
 .image-bar-image {
@@ -53,12 +100,150 @@
   max-height: 120px;
 }
 
-/* .images {
-  max-width: 800px;
-  overflow-y: scroll;
+#home {
+  display: flex;
+  justify-content: space-around;
 }
 
-.Images {
-  max-width: 800px;
-  overflow-y: scroll;
-} */
+#auth-container {
+  /* background-color: white; */
+  width: 40%;
+  margin-top: 30px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+#gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 40%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+#gallery-container h1 {
+  margin: 10px;
+}
+
+#gallery-container h3 {
+  margin: 10px;
+}
+
+.nav-button {
+  border-radius: 9px;
+  background: #00bfff;
+  box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
+  padding: 10px;
+}
+
+hr {
+  border: 3px solid skyblue;
+  background-color: skyblue;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 1px 1px 3px lightskyblue, -1px -1px 3px deepskyblue;
+}
+
+#nav-container {
+  display: flex;
+}
+
+#logo {
+  width: auto;
+  height: 50px;
+  align-self: center;
+}
+
+#title {
+  margin: 0px 20px 0px 10px;
+  align-self: center;
+}
+
+h1,
+h3 {
+  font-family: 'Bangers', cursive;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+#auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#toggle-form {
+  text-align: center;
+}
+
+#auth-container {
+  padding: 20px;
+}
+
+#gallery {
+  width: 40%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+#gallery-outer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#join {
+  width: 40%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  text-align: center;
+}
+
+#join-outer {
+  display: flex;
+  justify-content: center;
+}
+
+#join-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#join-buttons div {
+  margin: 10px;
+}
+
+#join-input {
+  margin: 10px;
+}
+
+#tools-inner {
+  display: flex;
+  flex-direction: row;
+}
+
+#tools-buttons {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+#tools-buttons div {
+  margin: 5px;
+}

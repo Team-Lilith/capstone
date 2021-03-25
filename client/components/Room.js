@@ -24,8 +24,8 @@ function Room() {
   const initCanvas = () =>
     // create new canvas
     new fabric.Canvas('canvas', {
-      height: 800,
-      width: 800,
+      height: 625,
+      width: 625,
       backgroundColor: 'white'
     })
 
@@ -46,7 +46,7 @@ function Room() {
   return (
     <div id="room">
       <div id="room-top-container">
-        <div className="images">
+        <div id="images">
           <Images canvas={canvas} />
         </div>
         <div id="canvas-div">

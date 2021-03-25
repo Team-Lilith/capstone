@@ -52,7 +52,7 @@ function Images(props) {
           <option value="animal">Animals</option>
         </select>
 
-        <div className="Images">
+        <div className="img-container">
           {currentImages.map(image => {
             if (image.tags) console.log(image.tags)
             let url = image.url
@@ -69,7 +69,7 @@ function Images(props) {
       </>
     )
   } else {
-    return <div />
+    return 'no images'
   }
 }
 

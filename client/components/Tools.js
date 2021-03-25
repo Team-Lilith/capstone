@@ -98,46 +98,53 @@ function Tools(props) {
   }
 
   return (
-    <div className="App">
-      <button type="button" onClick={() => addRect(canvas, roomId)}>
-        Rectangle
-      </button>
-      <button type="button" onClick={() => addCirc(canvas)}>
+    <div id="tools-inner">
+      <div>
+        <ChromePicker color={color} onChange={handleColorChange} />
+      </div>
+
+
+      <div id="tools-buttons">
+        <div className="nav-button" onClick={()  => addRect(canvas, roomId)}>
+          Add Rectangle
+        </div>
+        <button type="button" onClick={() => addCirc(canvas)}>
         Add Circle
       </button>
       <button type="button" onClick={() => addTri(canvas)}>
         Add Triangle
       </button>
 
-      <button onClick={() => addText(canvas)}>Add Text</button>
+        <button onClick={() => addText(canvas)}>Add Text</button>
 
-      <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
-        Draw
-      </button>
+        <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
+          Draw
+        </button>
 
-      <button onClick={() => toggleMode(modes.pan, canvas, color)}>Drag</button>
+        <button onClick={() => toggleMode(modes.pan, canvas, color)}>
+          Drag
+        </button>
 
-      <button type="button" onClick={() => deselect(canvas)}>
-        Deselect
-      </button>
-      <button onClick={() => deleteSelected(canvas)}>Delete Selected</button>
-      <button onClick={() => bringForward(canvas)}>Bring Forward</button>
-      <button onClick={() => sendBackwards(canvas)}>Send Backwards</button>
-      <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
-      <button onClick={() => groupObjects(canvas, group, false)}>
-        Ungroup
-      </button>
+        <button type="button" onClick={() => deselect(canvas)}>
+          Deselect
+        </button>
+        <button onClick={() => deleteSelected(canvas)}>Delete Selected</button>
+        <button onClick={() => bringForward(canvas)}>Bring Forward</button>
+        <button onClick={() => sendBackwards(canvas)}>Send Backwards</button>
+        <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
+        <button onClick={() => groupObjects(canvas, group, false)}>
+          Ungroup
+        </button>
 
-      <button onClick={() => clearCanvas(canvas, svgState)}>
-        Clear Canvas
-      </button>
-      <button onClick={() => restoreCanvas(canvas, svgState)}>
-        Restore Canvas
-      </button>
+        <button onClick={() => clearCanvas(canvas, svgState)}>
+          Clear Canvas
+        </button>
+        <button onClick={() => restoreCanvas(canvas, svgState)}>
+          Restore Canvas
+        </button>
 
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
-
-      <ChromePicker color={color} onChange={handleColorChange} />
+        <input type="file" accept="image/*" onChange={handleImageUpload} />
+      </div>
     </div>
   )
 }
