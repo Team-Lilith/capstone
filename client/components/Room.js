@@ -1,22 +1,25 @@
 import React, {useState, useEffect} from 'react'
-import {initiateSocket, disconnectSocket} from '../socket'
 import {useSelector, useDispatch} from 'react-redux'
 import {Tools, Images, Chat} from './index'
 import {fabric} from 'fabric'
 import {useParams} from 'react-router'
-import {joinRoom, fullRoom} from '../store/room.js'
-import {receiveFullRoom, receiveNoRoom, emitJoinRoom} from '../socket'
+import {
+  emitJoinRoom,
+  receiveFullRoom,
+  receiveNoRoom,
+  joinSuccess
+} from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
 
 function Room() {
   const roomId = useSelector(state => state.room)
   const [canvas, setCanvas] = useState('')
-  let {id} = useParams()
   const dispatch = useDispatch()
-
-  receiveFullRoom(dispatch)
-  receiveNoRoom(dispatch)
+  let {id} = useParams()
+  joinSuccess(dispatch)
+  receiveFullRoom()
+  receiveNoRoom()
 
   const initCanvas = () =>
     // create new canvas
@@ -26,15 +29,19 @@ function Room() {
       backgroundColor: 'white'
     })
 
-  if (!roomId) {
-    dispatch(joinRoom(id))
-    emitJoinRoom(id)
-  }
-
   useEffect(() => {
     // initialize canvas to newly created canvas
     setCanvas(initCanvas())
   }, [])
+
+  useEffect(
+    () => {
+      if (!roomId) {
+        emitJoinRoom(id)
+      }
+    },
+    [roomId]
+  )
 
   return (
     <div id="room">
