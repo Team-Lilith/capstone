@@ -20,10 +20,10 @@ form div {
   display: inline-block;
 }
 
-.gallery {
+/* .gallery {
   display: flex;
   justify-content: space-between;
 }
 .gallery-element {
   width: 333px;
-}
+} */
