@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firebase from 'firebase'
 import {getUser} from '../store'
@@ -62,7 +63,9 @@ const Login = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <Link to="/gallery">
+          <button type="submit">Login</button>
+        </Link>
       </form>
     </div>
   )
