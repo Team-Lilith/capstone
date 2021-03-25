@@ -15,7 +15,8 @@ import {
   Join,
   Home,
   Gallery,
-  Auth
+  Auth,
+  Profile
 } from './components'
 import {me} from './store'
 import {useParams} from 'react-router'
@@ -40,6 +41,7 @@ class Routes extends Component {
         <Route path="/gallery" component={Gallery} />
         <Route path="/auth" component={Auth} />
         <Route path="/" component={Home} />
+        <Route path="/profile" component={Profile} />
       </Switch>
 
       // <Switch>
