@@ -1,21 +1,27 @@
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
-import {emitModifiedCanvasObject} from '../socket'
+import {v1 as uuid} from 'uuid'
+import socket, {emitModifiedCanvasObject, emitAddedToCanvas} from '../socket'
 import {
   addRect,
   addCirc,
   addTri,
+  addText,
   deselect,
   groupObjects,
   toggleMode,
   clearCanvas,
   restoreCanvas,
-  setPanEvents
+  setPanEvents,
+  deleteSelected,
+  bringForward,
+  sendBackwards
 } from './FabricUtils'
 import Save from './Save'
 
 function Tools(props) {
   const canvas = props.canvas
+  const roomId = props.roomId
   const group = {}
   const svgState = {}
   const modes = {
@@ -34,6 +40,35 @@ function Tools(props) {
         }
         emitModifiedCanvasObject(objModified)
       }
+    })
+    // this canvas event listens to objects moving
+    // this is how we can see two objects move @ same time
+    // id had to be changed bc comming undefined
+    // ^dets in fabric utils file
+    canvas.on('object:moving', function(options) {
+      if (options.target) {
+        const objModified = {
+          obj: options.target,
+          id: options.target.id
+        }
+        emitModifiedCanvasObject(objModified)
+      }
+    })
+    canvas.on('object:added', function(options) {
+      console.log(options)
+      if (!options.target.id) options.target.id = uuid()
+      console.log('id:', options.target.id)
+
+      // same with images we are having a bool
+      // to dictate to emit or not
+      // if not it will be a ping pong event and
+      // objects will be added more than 20 times
+      // see socket file for more dets
+      if (options.target.emit === false) return
+      emitAddedToCanvas({
+        obj: options.target,
+        id: options.target.id
+      })
     })
   }
 
@@ -64,42 +99,52 @@ function Tools(props) {
   }
 
   return (
-    <div className="App">
-      <Save canvas={canvas} />
-      <button type="button" onClick={() => addRect(canvas)}>
-        Rectangle
-      </button>
-      <button type="button" onClick={() => addCirc(canvas)}>
-        Add Circle
-      </button>
-      <button type="button" onClick={() => addTri(canvas)}>
-        Add Triangle
-      </button>
+    <div id="tools-inner">
+      <div>
+        <ChromePicker color={color} onChange={handleColorChange} />
+      </div>
 
-      <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
-        Draw
-      </button>
+      <div id="tools-buttons">
+        <div className="nav-button" onClick={() => addRect(canvas)}>
+          Add Rectangle
+        </div>
+        <button type="button" onClick={() => addCirc(canvas)}>
+          Add Circle
+        </button>
+        <button type="button" onClick={() => addTri(canvas)}>
+          Add Triangle
+        </button>
 
-      <button onClick={() => toggleMode(modes.pan, canvas, color)}>Drag</button>
+        <button onClick={() => addText(canvas)}>Add Text</button>
 
-      <button type="button" onClick={() => deselect(canvas)}>
-        Deselect
-      </button>
-      <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
-      <button onClick={() => groupObjects(canvas, group, false)}>
-        Ungroup
-      </button>
+        <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
+          Draw
+        </button>
 
-      <button onClick={() => clearCanvas(canvas, svgState)}>
-        Clear Canvas
-      </button>
-      <button onClick={() => restoreCanvas(canvas, svgState)}>
-        Restore Canvas
-      </button>
+        <button onClick={() => toggleMode(modes.pan, canvas, color)}>
+          Drag
+        </button>
 
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <button type="button" onClick={() => deselect(canvas)}>
+          Deselect
+        </button>
+        <button onClick={() => deleteSelected(canvas)}>Delete Selected</button>
+        <button onClick={() => bringForward(canvas)}>Bring Forward</button>
+        <button onClick={() => sendBackwards(canvas)}>Send Backwards</button>
+        <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
+        <button onClick={() => groupObjects(canvas, group, false)}>
+          Ungroup
+        </button>
 
-      <ChromePicker color={color} onChange={handleColorChange} />
+        <button onClick={() => clearCanvas(canvas, svgState)}>
+          Clear Canvas
+        </button>
+        <button onClick={() => restoreCanvas(canvas, svgState)}>
+          Restore Canvas
+        </button>
+
+        <input type="file" accept="image/*" onChange={handleImageUpload} />
+      </div>
     </div>
   )
 }

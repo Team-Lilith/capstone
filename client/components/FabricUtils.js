@@ -1,16 +1,19 @@
 import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
 import {emitImage} from '../socket'
-import firebase from 'firebase'
-import firestore from '../../server/db'
 
 // TOOLS
+// we are giving ids to be able to identify each object
+// it was prev comming undefined
+// and once object:moves triggered it merged the objects
+// instead of moving each one separately
 export const addRect = canvas => {
   const rect = new fabric.Rect({
     height: 100,
     width: 500,
     fill: 'black'
   })
+  rect.id = uuid()
   canvas.add(rect)
   canvas.renderAll()
 }
@@ -20,6 +23,7 @@ export const addCirc = canvas => {
     radius: 100,
     fill: 'black'
   })
+  circle.id = uuid()
   canvas.add(circle)
   canvas.renderAll()
 }
@@ -30,11 +34,43 @@ export const addTri = canvas => {
     height: 100,
     fill: 'black'
   })
+  triangle.id = uuid()
   canvas.add(triangle)
   canvas.renderAll()
 }
 
+export const addText = canvas => {
+  var text = new fabric.IText('Your thoughts here...', {
+    left: 40,
+    top: 50
+  })
+  text.id = uuid()
+  text.hasRotatingPoint = true
+  canvas.add(text).setActiveObject(text)
+  text.enterEditing()
+}
+
 export const deselect = canvas => {
+  canvas.discardActiveObject()
+  canvas.requestRenderAll()
+}
+
+export const bringForward = canvas => {
+  let selected = canvas.getActiveObject()
+  selected.bringForward()
+  canvas.requestRenderAll()
+}
+
+export const sendBackwards = canvas => {
+  let selected = canvas.getActiveObject()
+  selected.sendBackwards()
+  canvas.requestRenderAll()
+}
+
+export const deleteSelected = canvas => {
+  let selected = canvas.getActiveObject()
+  canvas.remove(selected)
+
   canvas.discardActiveObject()
   canvas.requestRenderAll()
 }
@@ -150,19 +186,6 @@ export const setPanEvents = canvas => {
   })
 }
 
-export const handleImageUpload = event => {
-  const reader = new FileReader()
-  const imageToUpload = event.target.files[0]
-  reader.readAsDataURL(imageToUpload)
-  reader.addEventListener('load', () => {
-    fabric.Image.fromURL(reader.result, img => {
-      img.scaleToHeight(300)
-      canvas.add(img)
-      canvas.requestRenderAll()
-    })
-  })
-}
-
 // IMAGES
 export const addImage = (canvas, image, isReceived = false) => {
   //image being received
@@ -182,5 +205,12 @@ export const addImage = (canvas, image, isReceived = false) => {
       //why do we need to define new obj?
       emitImage({image: oImg, id: id})
     })
+  }
+}
+
+// OBJECTS
+export const addObject = (canvas, object, isAdded = false) => {
+  if (isAdded) {
+    canvas.add(object)
   }
 }

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchGallery} from '../store'
 import {fabric} from 'fabric'
-import firestore from '../../server/db'
 
 function Gallery(props) {
   const dispatch = useDispatch()
