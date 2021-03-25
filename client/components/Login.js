@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import {toast} from 'react-toastify'
 import firebase from 'firebase'
+import {signInWithGoogle} from '../../server/db/firebase'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState({})
+  const [isUserLoggedIn, setUserAuthStatus] = useState(false)
 
   const loginUser = ({email, password}) => {
     console.log('logging in user')
@@ -60,9 +62,29 @@ const Login = () => {
           onChange={e => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
+        <button type="button" onClick={signInWithGoogle}>
+          Sign in With Google
+        </button>
       </form>
     </div>
   )
 }
 
 export default Login
+
+// onClick={() => {
+//     auth
+//       .signInWithPopup(provider)
+//       .then(res => {
+//         const { displayName, email } = res.user;
+//         const userInfo = {x
+//           email,
+//           displayName
+//         };
+//         setUser(userInfo);
+//         setUserAuthStatus(true);
+
+//         return res;
+//       })
+//       .catch(err => err);
+//   }

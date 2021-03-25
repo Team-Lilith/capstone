@@ -5,7 +5,8 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
-export {Login, Signup} from './auth-form'
+import {default as Register} from './Register'
+export {default as Login} from './Login'
 export {default as Tools} from './Tools'
 export {default as Images} from './Images'
 export {default as Room} from './Room'
