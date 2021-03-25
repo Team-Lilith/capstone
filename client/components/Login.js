@@ -63,8 +63,11 @@ const Login = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+        <br />
+
         <Link to="/gallery">
-          <button type="submit">Login</button>
+          <div className="nav-button">Login</div>
+          {/* <button type="submit">Login</button> */}
         </Link>
       </form>
     </div>

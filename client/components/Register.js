@@ -90,9 +90,12 @@ const Register = () => {
           onChange={e => setPassword(e.target.value)}
         />
         <Link to="gallery">
-          <button onClick={registerUser} type="submit">
+          <div className="nav-button" onClick={registerUser}>
             Sign Up
-          </button>
+          </div>
+          {/* <button onClick={registerUser} type="submit">
+            Sign Up
+          </button> */}
         </Link>
       </form>
     </div>

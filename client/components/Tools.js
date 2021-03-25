@@ -131,7 +131,12 @@ function Tools(props) {
           <div className="nav-button" onClick={() => addText(canvas)}>
             Add Text
           </div>
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          <input
+            className="nav-button"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
         </div>
 
         <div className="button-group">
