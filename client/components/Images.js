@@ -7,6 +7,7 @@ import {addImage} from './FabricUtils'
 function Images(props) {
   const dispatch = useDispatch()
   const allImages = useSelector(state => state.images)
+  const roomId = useSelector(state => state.room)
   const [currentImages, setCurrentImages] = useState([])
   let canvas = props.canvas
 
@@ -59,7 +60,7 @@ function Images(props) {
             return (
               <img
                 src={url}
-                onClick={() => addImage(canvas, url, false)}
+                onClick={() => addImage(canvas, url, false, roomId)}
                 className="image-bar-image"
                 key={url}
               />
@@ -69,7 +70,7 @@ function Images(props) {
       </>
     )
   } else {
-    return 'no images'
+    return 'No images.'
   }
 }
 

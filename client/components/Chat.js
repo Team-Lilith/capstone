@@ -43,7 +43,7 @@ export default function Chat(props) {
         {messages.map(msg => (
           <div key={msg.id}>
             <p>
-              User {msg.user} says: {msg.msg}
+              User {msg.user}: {msg.msg}
             </p>
           </div>
         ))}

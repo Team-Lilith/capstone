@@ -22,12 +22,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </div>
             </Link>
 
-            <a href="#" onClick={handleClick}>
-              <div className="nav-button">
-                <h3>Logout</h3>
-              </div>
-            </a>
-
             <Link to="/join">
               <div className="nav-button">
                 <h3>Create/Join a Room</h3>
@@ -45,6 +39,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <h3>Profile</h3>
               </div>
             </Link>
+
+            <a href="#" onClick={handleClick}>
+              <div className="nav-button">
+                <h3>Logout</h3>
+              </div>
+            </a>
           </div>
         ) : (
           <div>

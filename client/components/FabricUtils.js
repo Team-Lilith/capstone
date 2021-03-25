@@ -187,7 +187,7 @@ export const setPanEvents = canvas => {
 }
 
 // IMAGES
-export const addImage = (canvas, image, isReceived = false) => {
+export const addImage = (canvas, image, isReceived = false, roomId) => {
   //image being received
   if (isReceived) {
     fabric.Image.fromURL(image.image.src, function(oImg) {
@@ -203,7 +203,7 @@ export const addImage = (canvas, image, isReceived = false) => {
       oImg.id = id
       canvas.add(oImg)
       //why do we need to define new obj?
-      emitImage({image: oImg, id: id})
+      emitImage({image: oImg, id: id, room: roomId})
     })
   }
 }

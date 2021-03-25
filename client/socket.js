@@ -139,10 +139,10 @@ export const receiveMessageAndUpdateState = (setState, prevState) => {
   })
 }
 //takes in addImage func, canvas, passing isReceiving to addImage as true so it does not emit
-export const receiveImage = (addToCanvas, canvas) => {
+export const receiveImage = (addToCanvas, canvas, roomId) => {
   socket.off('add-image')
   socket.on('add-image', image => {
-    addToCanvas(canvas, image, true)
+    addToCanvas(canvas, image, true, roomId)
   })
 }
 //user tried to join a full room => is routed back to home

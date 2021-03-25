@@ -31,7 +31,7 @@ module.exports = io => {
       const room = io.of('/').adapter.rooms.get(roomId)
       console.log('socket attempting to create room #', roomId)
       if (!room) {
-        console.log('room does not existing - creating')
+        console.log('room does not exist - creating')
         socket.join(roomId)
         io.to(socket.id).emit('join successful', roomId)
       } else {
@@ -47,7 +47,8 @@ module.exports = io => {
     // when a client emits an 'add-image' event, broadcast it
     socket.on('add-image', data => {
       console.log('broadcasting add-image event')
-      socket.broadcast.emit('add-image', data)
+      console.log('looking for data.room', data)
+      socket.to(data.room).emit('add-image', data)
     })
 
     // this is where object added sync starts
