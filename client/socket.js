@@ -115,6 +115,7 @@ export const receiveAddedObject = canvas => {
         left: obj.left,
         top: obj.top
       })
+      object.enterEditing()
     } else if (obj.type === 'path') {
       object = new fabric.Path(obj.path)
       object.set(obj)
