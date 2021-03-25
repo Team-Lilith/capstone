@@ -8,10 +8,15 @@ const Login = () => {
   const [user, setUser] = useState({})
 
   const loginUser = ({email, password}) => {
+    console.log('logging in user')
+    console.log(email, password)
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(res => setUser(res.user))
+      .then(res => {
+        console.log(res.user)
+        setUser(res.user)
+      })
       .catch(err => {
         if (err.code === 'auth/wrong-password') {
           return toast.error('Email or password is incorrect')

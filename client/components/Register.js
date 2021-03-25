@@ -9,12 +9,16 @@ const Register = () => {
   const [user, setUser] = useState({})
 
   const registerUser = ({email, password}) => {
+    console.log('email:', email)
+    console.log('pas:', password)
+
     firestore
       .auth()
       .createUserWithEmailAndPassword(email, password)
       //.then((data) => data.json())
       .then(res => {
         setUser(res.user)
+        console.log('setting user')
       })
       .catch(err => {
         if (err.code === 'auth/email-already-in-use') {
@@ -28,6 +32,8 @@ const Register = () => {
   }
 
   const handleSubmit = e => {
+    console.log('handling submit')
+    console.log(e.target)
     e.preventDefault()
     if (!email || !password) {
       return toast.error('Please enter your email and password')
@@ -47,13 +53,13 @@ const Register = () => {
     <div className="column">
       <form onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
-        <input
+        {/* <input
           type="nickname"
           placeholder="nickname"
           name="nickname"
           value={nickname}
           onChange={e => setnickName(e.target.value)}
-        />
+        /> */}
         <input
           type="email"
           placeholder="Email"

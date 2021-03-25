@@ -1,4 +1,4 @@
-const firestore = require('./firebase')
+const {firestore} = require('./firebase')
 
 // register models
 //require('./models')
