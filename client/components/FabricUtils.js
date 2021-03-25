@@ -7,7 +7,7 @@ import socket, {emitImage} from '../socket'
 // it was prev comming undefined
 // and once object:moves triggered it merged the objects
 // instead of moving each one separately
-export const addRect = (canvas, roomId) => {
+export const addRect = canvas => {
   const rect = new fabric.Rect({
     height: 100,
     width: 500,

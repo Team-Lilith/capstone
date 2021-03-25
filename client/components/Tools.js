@@ -103,17 +103,16 @@ function Tools(props) {
         <ChromePicker color={color} onChange={handleColorChange} />
       </div>
 
-
       <div id="tools-buttons">
-        <div className="nav-button" onClick={()  => addRect(canvas, roomId)}>
+        <div className="nav-button" onClick={() => addRect(canvas)}>
           Add Rectangle
         </div>
         <button type="button" onClick={() => addCirc(canvas)}>
-        Add Circle
-      </button>
-      <button type="button" onClick={() => addTri(canvas)}>
-        Add Triangle
-      </button>
+          Add Circle
+        </button>
+        <button type="button" onClick={() => addTri(canvas)}>
+          Add Triangle
+        </button>
 
         <button onClick={() => addText(canvas)}>Add Text</button>
 
