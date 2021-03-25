@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchGallery} from '../store'
+import {fabric} from 'fabric'
 import firestore from '../../server/db'
-import {object} from 'prop-types'
 
 function Gallery(props) {
   const dispatch = useDispatch()
   const gallery = useSelector(state => state.gallery)
-  const [localGallery, setGallery] = useState([])
 
   useEffect(
     () => {
@@ -15,45 +14,30 @@ function Gallery(props) {
         dispatch(fetchGallery())
         console.log('fetching gallery')
       } else {
-        console.log('got gallery')
-        setGallery(gallery)
+        for (let i = 0; i < gallery.length; i++) {
+          let newCanvas = new fabric.Canvas(gallery[i].id)
+          newCanvas.loadFromJSON(
+            gallery[i].data.canvas,
+            newCanvas.renderAll.bind(newCanvas),
+            function(o, object) {
+              object.set('selectable', false)
+            }
+          )
+        }
       }
     },
     [gallery]
   )
-  return localGallery ? (
-    <div className="gallery">
-      {localGallery.map(object => {
-        let kanvas = object.data.canvas
-        var timestamp = object.data.timestamp
-        var date = timestamp.toDate()
-        console.log(date)
 
-        console.log(kanvas, 'kanvas')
-        var canvas = new fabric.Canvas(object.id)
-        canvas.loadFromJSON(kanvas, canvas.renderAll.bind(canvas), function(
-          o,
-          object
-        ) {
-          object.set('selectable', false)
-        })
-        return (
-          <div key={object.id} className="gallery-element">
-            <p>
-              {'Date: ' +
-                (date.getMonth() + 1) +
-                '.' +
-                date.getDate() +
-                '.' +
-                date.getFullYear()}
-            </p>
-            <canvas id={object.id} />
-          </div>
-        )
+  return gallery ? (
+    <div className="gallery">
+      {gallery.map(el => {
+        console.log('el id', el.id)
+        return <canvas key={el.id} id={el.id} className="gallery-element" />
       })}
     </div>
   ) : (
-    'nothing to show'
+    'nothing here'
   )
 }
 
