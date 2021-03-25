@@ -7,11 +7,19 @@ import {
   Switch
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Join} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Room,
+  Join,
+  Home,
+  Gallery,
+  Auth,
+  Profile
+} from './components'
 import {me} from './store'
-import Login from './components/Login'
-import Register from './components/Register'
-//import {useParams} from 'react-router'
+import {useParams} from 'react-router'
 
 /**
  * COMPONENT
@@ -25,25 +33,30 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      // <Switch>
-      //   <Route path="/room/:id">
-      //     <Room />
-      //   </Route>
-      //   <Route component={Join} />
-      // </Switch>
-
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Register} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/join" component={Join} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
+        <Route path="/room/:id">
+          <Room />
+        </Route>
+        <Route path="/join" component={Join} />
+        <Route path="/gallery" component={Gallery} />
+        <Route path="/auth" component={Auth} />
+        <Route path="/" component={Home} />
+        <Route path="/profile" component={Profile} />
       </Switch>
+
+      // <Switch>
+      //   {/* Routes placed here are available to all visitors */}
+      //   <Route path="/login" component={Login} />
+      //   <Route path="/signup" component={Signup} />
+      //   {isLoggedIn && (
+      //     <Switch>
+      //       {/* Routes placed here are only available after logging in */}
+      //       <Route path="/home" component={UserHome} />
+      //     </Switch>
+      //   )}
+      //   {/* Displays our Login component as a fallback */}
+      //   <Route component={Login} />
+      // </Switch>
     )
   }
 }
