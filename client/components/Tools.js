@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {ChromePicker} from 'react-color'
-import {emitModifiedCanvasObject} from '../socket'
+import {v1 as uuid} from 'uuid'
+import socket, {emitModifiedCanvasObject, emitAddedToCanvas} from '../socket'
 import {
   addRect,
   addCirc,
@@ -19,6 +20,7 @@ import {
 
 function Tools(props) {
   const canvas = props.canvas
+  const roomId = props.roomId
   const group = {}
   const svgState = {}
   const modes = {
@@ -37,6 +39,35 @@ function Tools(props) {
         }
         emitModifiedCanvasObject(objModified)
       }
+    })
+    // this canvas event listens to objects moving
+    // this is how we can see two objects move @ same time
+    // id had to be changed bc comming undefined
+    // ^dets in fabric utils file
+    canvas.on('object:moving', function(options) {
+      if (options.target) {
+        const objModified = {
+          obj: options.target,
+          id: options.target.id
+        }
+        emitModifiedCanvasObject(objModified)
+      }
+    })
+    canvas.on('object:added', function(options) {
+      console.log(options)
+      if (!options.target.id) options.target.id = uuid()
+      console.log('id:', options.target.id)
+
+      // same with images we are having a bool
+      // to dictate to emit or not
+      // if not it will be a ping pong event and
+      // objects will be added more than 20 times
+      // see socket file for more dets
+      if (options.target.emit === false) return
+      emitAddedToCanvas({
+        obj: options.target,
+        id: options.target.id
+      })
     })
   }
 
@@ -68,7 +99,7 @@ function Tools(props) {
 
   return (
     <div className="App">
-      <button type="button" onClick={() => addRect(canvas)}>
+      <button type="button" onClick={() => addRect(canvas, roomId)}>
         Rectangle
       </button>
       <button type="button" onClick={() => addCirc(canvas)}>
