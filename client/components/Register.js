@@ -89,7 +89,7 @@ const Register = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <Link>
+        <Link to="gallery">
           <button onClick={registerUser} type="submit">
             Sign Up
           </button>
