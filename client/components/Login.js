@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {toast} from 'react-toastify'
-import firebase from 'firebase'
+import firestore from 'firebase'
 import {signInWithGoogle} from '../../server/db/firebase'
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
   const loginUser = ({email, password}) => {
     console.log('logging in user')
     console.log(email, password)
-    firebase
+    firestore
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
@@ -28,6 +28,10 @@ const Login = () => {
           return toast.error('Something went wrong')
         }
       })
+  }
+
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(provider)
   }
 
   const handleSubmit = e => {
