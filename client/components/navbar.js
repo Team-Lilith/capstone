@@ -56,7 +56,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </div>
             </Link>
 
-            <Link to="/login">
+            {/* <Link to="/login">
               <div className="nav-button">
                 <h3>Login</h3>
               </div>
@@ -66,7 +66,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               <div className="nav-button">
                 <h3>Sign Up</h3>
               </div>
-            </Link>
+            </Link> */}
 
             <Link to="/join">
               <div className="nav-button">
