@@ -20,7 +20,10 @@ export const fetchGallery = () => async dispatch => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          gallery.push(doc.data())
+          gallery.push({
+            data: doc.data(),
+            id: doc.id
+          })
           console.log(`${doc.id} => ${doc.data()}`)
         })
         console.log('got gallery')
@@ -34,7 +37,7 @@ export const fetchGallery = () => async dispatch => {
 //SAVING CANVAS
 export const saveCanvas = (canvas, users = null) => {
   try {
-    const canvasObj = canvas.toSVG()
+    const canvasObj = JSON.stringify(canvas.toDatalessJSON())
     firestore
       .collection('gallery')
       .add({

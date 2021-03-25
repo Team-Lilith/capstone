@@ -19,3 +19,11 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.gallery {
+  display: flex;
+  justify-content: space-between;
+}
+.gallery-element {
+  width: 333px;
+}

@@ -24,9 +24,32 @@ function Gallery(props) {
   return localGallery ? (
     <div className="gallery">
       {localGallery.map(object => {
-        let canvasSVG = object.canvas
-        console.log(canvasSVG)
-        return <div>{canvasSVG}</div>
+        let kanvas = object.data.canvas
+        var timestamp = object.data.timestamp
+        var date = timestamp.toDate()
+        console.log(date)
+
+        console.log(kanvas, 'kanvas')
+        var canvas = new fabric.Canvas(object.id)
+        canvas.loadFromJSON(kanvas, canvas.renderAll.bind(canvas), function(
+          o,
+          object
+        ) {
+          object.set('selectable', false)
+        })
+        return (
+          <div key={object.id} className="gallery-element">
+            <p>
+              {'Date: ' +
+                (date.getMonth() + 1) +
+                '.' +
+                date.getDate() +
+                '.' +
+                date.getFullYear()}
+            </p>
+            <canvas id={object.id} />
+          </div>
+        )
       })}
     </div>
   ) : (
