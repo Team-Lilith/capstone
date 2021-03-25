@@ -1,5 +1,5 @@
 import React from 'react'
-import {modifyCanvasObject, receiveImage} from '../socket'
+import {modifyCanvasObject, receiveImage, receiveAddedObject} from '../socket'
 import {fabric} from 'fabric'
 import {addImage, setCanvasBackground} from './FabricUtils'
 
@@ -10,6 +10,7 @@ function Canvas(props) {
   if (canvas) {
     modifyCanvasObject(canvas)
     receiveImage(addImage, canvas)
+    receiveAddedObject(canvas)
     // setCanvasBackground(image, canvas)
   }
 

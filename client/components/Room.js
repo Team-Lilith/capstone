@@ -59,7 +59,7 @@ function Room() {
       </div>
 
       <div id="tools">
-        <Tools canvas={canvas} />
+        <Tools canvas={canvas} roomId={id} />
       </div>
       <Canvas canvas={canvas} />
     </div>

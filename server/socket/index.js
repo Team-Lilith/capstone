@@ -50,6 +50,13 @@ module.exports = io => {
       socket.broadcast.emit('add-image', data)
     })
 
+    // this is where object added sync starts
+    // we are emiting canvas add change
+    socket.on('object added', data => {
+      console.log('here @ object added', data)
+      socket.broadcast.emit('canvas add change', data)
+    })
+
     // when the client emits an 'object-modified' event, broadcast a 'new-modification' event to room
     socket.on('object-modified', data => {
       console.log(`an object was modified by socket ${socket.id}`)

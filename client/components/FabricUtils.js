@@ -1,14 +1,19 @@
 import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
-import {emitImage} from '../socket'
+import socket, {emitImage} from '../socket'
 
 // TOOLS
-export const addRect = canvas => {
+// we are giving ids to be able to identify each object
+// it was prev comming undefined
+// and once object:moves triggered it merged the objects
+// instead of moving each one separately
+export const addRect = (canvas, roomId) => {
   const rect = new fabric.Rect({
     height: 100,
     width: 500,
     fill: 'black'
   })
+  rect.id = uuid()
   canvas.add(rect)
   canvas.renderAll()
 }
@@ -18,6 +23,7 @@ export const addCirc = canvas => {
     radius: 100,
     fill: 'black'
   })
+  circle.id = uuid()
   canvas.add(circle)
   canvas.renderAll()
 }
@@ -28,6 +34,7 @@ export const addTri = canvas => {
     height: 100,
     fill: 'black'
   })
+  triangle.id = uuid()
   canvas.add(triangle)
   canvas.renderAll()
 }
@@ -37,6 +44,7 @@ export const addText = canvas => {
     left: 40,
     top: 50
   })
+  text.id = uuid()
   text.hasRotatingPoint = true
   canvas.add(text).setActiveObject(text)
   text.enterEditing()
@@ -197,5 +205,12 @@ export const addImage = (canvas, image, isReceived = false) => {
       //why do we need to define new obj?
       emitImage({image: oImg, id: id})
     })
+  }
+}
+
+// OBJECTS
+export const addObject = (canvas, object, isAdded = false) => {
+  if (isAdded) {
+    canvas.add(object)
   }
 }
