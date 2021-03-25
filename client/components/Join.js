@@ -1,42 +1,44 @@
-import React, {useState, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {initiateSocket, disconnectSocket} from '../socket'
-import {Tools, Images, Chat} from './index'
-import {fabric} from 'fabric'
-import {joinRoom} from '../store/room.js'
+import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {v1 as uuid} from 'uuid'
-import {emitCreateRoom, emitJoinRoom} from '../socket'
+import {
+  emitCreateRoom,
+  emitJoinRoom,
+  joinSuccess,
+  receiveNoRoom,
+  receiveFullRoom
+} from '../socket'
 import '../index.css'
 
-function Join(props) {
+function Join() {
   const [roomId, setRoomId] = useState('')
   const dispatch = useDispatch()
+  joinSuccess(dispatch)
+  receiveNoRoom()
+  receiveFullRoom()
 
-  function create(id) {
-    const roomId = id || uuid()
-    dispatch(joinRoom(roomId))
-    emitCreateRoom(roomId)
+  function createRoom() {
+    const id = roomId || uuid()
+    emitCreateRoom(id)
+  }
+
+  const joinRoom = () => {
+    emitJoinRoom(roomId)
   }
 
   const handleChange = e => {
     setRoomId(e.target.value)
   }
 
-  const joinNewRoom = roomId => {
-    dispatch(joinRoom(roomId))
-    emitJoinRoom(roomId)
-  }
-
   return (
     <div>
       <h1>Join a Room</h1>
-      <button type="button" onClick={() => create(roomId)}>
+      <button type="button" onClick={() => createRoom()}>
         Create A Room
       </button>
 
       <input type="text" onChange={handleChange} />
-      <button type="button" onClick={() => joinNewRoom(roomId)}>
+      <button type="button" onClick={() => joinRoom()}>
         Join Room
       </button>
     </div>
