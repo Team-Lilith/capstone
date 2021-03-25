@@ -9,8 +9,7 @@ import {
 import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
-  UserHome,
+  Register,
   Room,
   Join,
   Home,
@@ -19,7 +18,6 @@ import {
   Profile
 } from './components'
 import {me} from './store'
-import {useParams} from 'react-router'
 
 /**
  * COMPONENT
@@ -40,8 +38,10 @@ class Routes extends Component {
         <Route path="/join" component={Join} />
         <Route path="/gallery" component={Gallery} />
         <Route path="/auth" component={Auth} />
-        <Route path="/" component={Home} />
         <Route path="/profile" component={Profile} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Register} />
+        <Route path="/" component={Home} />
       </Switch>
 
       // <Switch>

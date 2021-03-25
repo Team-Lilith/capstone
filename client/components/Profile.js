@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react'
 
 function Profile() {
   return (
     <div id="profile">
       <div id="profile-container">
-        <h2>User Profile information here.</h2>
+        <h1>My Profile</h1>
+        <h3>User Profile information here.</h3>
       </div>
     </div>
   )

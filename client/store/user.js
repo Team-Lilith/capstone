@@ -15,7 +15,7 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+export const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
