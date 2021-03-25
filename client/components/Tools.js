@@ -105,45 +105,77 @@ function Tools(props) {
       </div>
 
       <div id="tools-buttons">
-        <div className="nav-button" onClick={() => addRect(canvas)}>
-          Add Rectangle
+        <div className="button-group">
+          <div
+            className="nav-button"
+            onClick={() => toggleMode(modes.drawing, canvas, color)}
+          >
+            Draw
+          </div>
+          <div
+            className="nav-button"
+            onClick={() => toggleMode(modes.pan, canvas, color)}
+          >
+            Stop Drawing
+          </div>
         </div>
-        <button type="button" onClick={() => addCirc(canvas)}>
-          Add Circle
-        </button>
-        <button type="button" onClick={() => addTri(canvas)}>
-          Add Triangle
-        </button>
+        <div className="button-group">
+          <div className="nav-button" onClick={() => addRect(canvas)}>
+            Add Rectangle
+          </div>
+          <div className="nav-button" onClick={() => addCirc(canvas)}>
+            Add Circle
+          </div>
+          <div className="nav-button" onClick={() => addTri(canvas)}>
+            Add Triangle
+          </div>
+          <div className="nav-button" onClick={() => addText(canvas)}>
+            Add Text
+          </div>
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+        </div>
 
-        <button onClick={() => addText(canvas)}>Add Text</button>
+        <div className="button-group">
+          <div className="nav-button" onClick={() => deselect(canvas)}>
+            Deselect
+          </div>
+          <div className="nav-button" onClick={() => deleteSelected(canvas)}>
+            Delete Selected
+          </div>
+          <div className="nav-button" onClick={() => bringForward(canvas)}>
+            Bring Forward
+          </div>
+          <div className="nav-button" onClick={() => sendBackwards(canvas)}>
+            Send Backwards
+          </div>
+        </div>
 
-        <button onClick={() => toggleMode(modes.drawing, canvas, color)}>
-          Draw
-        </button>
-
-        <button onClick={() => toggleMode(modes.pan, canvas, color)}>
-          Drag
-        </button>
-
-        <button type="button" onClick={() => deselect(canvas)}>
-          Deselect
-        </button>
-        <button onClick={() => deleteSelected(canvas)}>Delete Selected</button>
-        <button onClick={() => bringForward(canvas)}>Bring Forward</button>
-        <button onClick={() => sendBackwards(canvas)}>Send Backwards</button>
-        <button onClick={() => groupObjects(canvas, group, true)}>Group</button>
-        <button onClick={() => groupObjects(canvas, group, false)}>
-          Ungroup
-        </button>
-
-        <button onClick={() => clearCanvas(canvas, svgState)}>
-          Clear Canvas
-        </button>
-        <button onClick={() => restoreCanvas(canvas, svgState)}>
-          Restore Canvas
-        </button>
-
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <div className="button-group">
+          <div
+            className="nav-button"
+            onClick={() => groupObjects(canvas, group, true)}
+          >
+            Group
+          </div>
+          <div
+            className="nav-button"
+            onClick={() => groupObjects(canvas, group, false)}
+          >
+            Ungroup
+          </div>
+          <div
+            className="nav-button"
+            onClick={() => clearCanvas(canvas, svgState)}
+          >
+            Clear Canvas
+          </div>
+          <div
+            className="nav-button"
+            onClick={() => restoreCanvas(canvas, svgState)}
+          >
+            Restore Canvas
+          </div>
+        </div>
       </div>
     </div>
   )
