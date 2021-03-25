@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import {toast} from 'react-toastify'
 import firebase from 'firebase'
+import {getUser} from '../store'
+import {useSelector, useDispatch} from 'react-redux'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState({})
+  // const [user, setUser] = useState({})
+  const dispatch = useDispatch()
 
   const loginUser = ({email, password}) => {
     console.log('logging in user')
@@ -15,7 +18,7 @@ const Login = () => {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res.user)
-        setUser(res.user)
+        dispatch(getUser(res.user))
       })
       .catch(err => {
         if (err.code === 'auth/wrong-password') {
