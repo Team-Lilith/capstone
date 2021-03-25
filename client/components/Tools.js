@@ -17,6 +17,7 @@ import {
   bringForward,
   sendBackwards
 } from './FabricUtils'
+import Save from './Save'
 
 function Tools(props) {
   const canvas = props.canvas
@@ -173,6 +174,11 @@ function Tools(props) {
             onClick={() => restoreCanvas(canvas, svgState)}
           >
             Restore Canvas
+          </div>
+        </div>
+        <div className="button-group">
+          <div className="nav-button">
+            <Save canvas={canvas} />
           </div>
         </div>
       </div>
