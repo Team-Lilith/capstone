@@ -8,7 +8,7 @@ const Register = () => {
   const [nickname, setnickName] = useState('')
   const [user, setUser] = useState({})
 
-  const registerUser = ({email, password}) => {
+  const registerUser = ({nickname, email, password}) => {
     console.log('email:', email)
     console.log('pas:', password)
 
@@ -17,6 +17,19 @@ const Register = () => {
       .createUserWithEmailAndPassword(email, password)
       //.then((data) => data.json())
       .then(res => {
+        res.user
+          .updateProfile({
+            displayName: nickname
+          })
+          .then(function() {
+            // Update successful.
+            console.log('then')
+          })
+          .catch(function() {
+            // An error happened.
+            console.log('catch')
+          })
+
         setUser(res.user)
         console.log('setting user')
       })
@@ -43,6 +56,7 @@ const Register = () => {
     }
 
     const data = {
+      nickname,
       email,
       password
     }
@@ -53,13 +67,13 @@ const Register = () => {
     <div className="column">
       <form onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
-        {/* <input
+        <input
           type="nickname"
           placeholder="nickname"
           name="nickname"
           value={nickname}
           onChange={e => setnickName(e.target.value)}
-        /> */}
+        />
         <input
           type="email"
           placeholder="Email"
