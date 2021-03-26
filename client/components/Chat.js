@@ -1,11 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import {sendMessage, receiveMessageAndUpdateState} from '../socket'
+import {getUser} from '../store'
 import '../index.css'
 
 export default function Chat(props) {
   const [messages, setMessages] = useState([])
-  const userId = 100 // get userId from Auth
+  // const userId = 100 // get userId from Auth
   const roomId = props.roomId // user id passed down from room component
+  const userId = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  console.log('user info', userId)
+
+  useEffect(() => {}, [userId])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -15,7 +22,7 @@ export default function Chat(props) {
       let message = {
         msg: e.target.newMessage.value,
         room: roomId,
-        user: userId,
+        user: userId.displayName,
         id: Math.floor(Math.random() * 1000000)
       }
       sendMessage(message)
@@ -36,7 +43,7 @@ export default function Chat(props) {
         {messages.map(msg => (
           <div key={msg.id}>
             <p>
-              User #{msg.user} says: {msg.msg}
+              User {msg.user}: {msg.msg}
             </p>
           </div>
         ))}

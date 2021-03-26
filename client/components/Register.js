@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
 
@@ -88,6 +89,7 @@ const Register = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+
         <button onClick={registerUser} type="submit">
           Sign Up
         </button>

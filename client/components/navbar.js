@@ -22,21 +22,15 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </div>
             </Link>
 
-            <a href="#" onClick={handleClick}>
+            {/* <Link to="/gallery">
               <div className="nav-button">
-                <h3>Logout</h3>
+                <h3>Gallery</h3>
               </div>
-            </a>
+            </Link> */}
 
             <Link to="/join">
               <div className="nav-button">
-                <h3>Create/Join a Room</h3>
-              </div>
-            </Link>
-
-            <Link to="/gallery">
-              <div className="nav-button">
-                <h3>Gallery</h3>
+                <h3>Rooms</h3>
               </div>
             </Link>
 
@@ -45,6 +39,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <h3>Profile</h3>
               </div>
             </Link>
+
+            <a href="#" onClick={handleClick}>
+              <div className="nav-button">
+                <h3>Logout</h3>
+              </div>
+            </a>
           </div>
         ) : (
           <div>
@@ -56,7 +56,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </div>
             </Link>
 
-            <Link to="/login">
+            {/* <Link to="/login">
               <div className="nav-button">
                 <h3>Login</h3>
               </div>
@@ -66,11 +66,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               <div className="nav-button">
                 <h3>Sign Up</h3>
               </div>
-            </Link>
+            </Link> */}
 
             <Link to="/join">
               <div className="nav-button">
-                <h3>Create/Join a Room</h3>
+                <h3>Rooms</h3>
               </div>
             </Link>
 

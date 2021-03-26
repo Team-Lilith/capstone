@@ -30,47 +30,54 @@ function Tools(props) {
   }
   const [color, setColor] = React.useState('fff')
 
-  // CANVAS EVENT LISTENER - OBJECT MODIFIED
-  if (canvas) {
-    canvas.on('object:modified', function(options) {
-      if (options.target) {
-        const objModified = {
-          obj: options.target,
-          id: options.target.id
-        }
-        emitModifiedCanvasObject(objModified)
-      }
-    })
-    // this canvas event listens to objects moving
-    // this is how we can see two objects move @ same time
-    // id had to be changed bc comming undefined
-    // ^dets in fabric utils file
-    canvas.on('object:moving', function(options) {
-      if (options.target) {
-        const objModified = {
-          obj: options.target,
-          id: options.target.id
-        }
-        emitModifiedCanvasObject(objModified)
-      }
-    })
-    canvas.on('object:added', function(options) {
-      console.log(options)
-      if (!options.target.id) options.target.id = uuid()
-      console.log('id:', options.target.id)
+  useEffect(
+    () => {
+      console.log('on the use effect')
 
-      // same with images we are having a bool
-      // to dictate to emit or not
-      // if not it will be a ping pong event and
-      // objects will be added more than 20 times
-      // see socket file for more dets
-      if (options.target.emit === false) return
-      emitAddedToCanvas({
-        obj: options.target,
-        id: options.target.id
-      })
-    })
-  }
+      if (canvas) {
+        // console.log('testing re render')
+        canvas.on('object:modified', function(options) {
+          if (options.target) {
+            const objModified = {
+              obj: options.target,
+              id: options.target.id
+            }
+            emitModifiedCanvasObject(objModified)
+          }
+        })
+        // this canvas event listens to objects moving
+        // this is how we can see two objects move @ same time
+        // id had to be changed bc comming undefined
+        // ^dets in fabric utils file
+        canvas.on('object:moving', function(options) {
+          if (options.target) {
+            const objModified = {
+              obj: options.target,
+              id: options.target.id
+            }
+            emitModifiedCanvasObject(objModified)
+          }
+        })
+        canvas.on('object:added', function(options) {
+          console.log(options)
+          if (!options.target.id) options.target.id = uuid()
+          console.log('id:', options.target.id)
+
+          // same with images we are having a bool
+          // to dictate to emit or not
+          // if not it will be a ping pong event and
+          // objects will be added more than 20 times
+          // see socket file for more dets
+          if (options.target.emit === false) return
+          emitAddedToCanvas({
+            obj: options.target,
+            id: options.target.id
+          })
+        })
+      }
+    },
+    [canvas]
+  )
 
   useEffect(
     () => {
@@ -132,7 +139,12 @@ function Tools(props) {
           <div className="nav-button" onClick={() => addText(canvas)}>
             Add Text
           </div>
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          <input
+            className="nav-button"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
         </div>
 
         <div className="button-group">
