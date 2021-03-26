@@ -1,20 +1,21 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
-import firebase from 'firebase'
+import firestore from 'firebase'
+import {signInWithGoogle} from '../../server/db/firebase'
 import {getUser} from '../store'
 import {useSelector, useDispatch} from 'react-redux'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [user, setUser] = useState({})
-  const dispatch = useDispatch()
+  const [user, setUser] = useState({})
+  const [isUserLoggedIn, setUserAuthStatus] = useState(false)
 
   const loginUser = ({email, password}) => {
     console.log('logging in user')
     console.log(email, password)
-    firebase
+    firestore
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
@@ -66,9 +67,29 @@ const Login = () => {
         <br />
 
         <button type="submit">Login</button>
+        <button type="button" onClick={signInWithGoogle}>
+          Sign in With Google
+        </button>
       </form>
     </div>
   )
 }
 
 export default Login
+
+// onClick={() => {
+//     auth
+//       .signInWithPopup(provider)
+//       .then(res => {
+//         const { displayName, email } = res.user;
+//         const userInfo = {x
+//           email,
+//           displayName
+//         };
+//         setUser(userInfo);
+//         setUserAuthStatus(true);
+
+//         return res;
+//       })
+//       .catch(err => err);
+//   }
