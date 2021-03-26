@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import {firestore} from '../../server/db/firebase'
+import {firestore} from '../../server/db'
 
 //action types
 const SET_GALLERY = 'GET_GALLERY'
@@ -54,6 +54,12 @@ export const saveCanvas = (canvas, users = null) => {
   } catch (error) {
     console.log('error saving canvas to db', error)
   }
+}
+
+export const saveToPng = canvas => {
+  canvas.toBlob(function(blob) {
+    saveAs(blob, 'myIMG.png')
+  })
 }
 
 const initialState = []
