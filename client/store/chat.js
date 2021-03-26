@@ -1,5 +1,3 @@
-import realtimeDB from '../../server/db/firebase'
-
 //action types
 const STORE_MESSAGE = 'STORE_MESSAGE'
 
