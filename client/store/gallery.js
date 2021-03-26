@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import {firestore} from '../../server/db/firebase'
+import {firestore} from '../../server/db'
 
 //action types
 const SET_GALLERY = 'GET_GALLERY'

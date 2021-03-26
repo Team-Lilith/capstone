@@ -14,9 +14,9 @@ function Save(props) {
       <button type="submit" onClick={() => saveCanvas(canvas)}>
         Save!
       </button>
-      <button type="submit" onClick={() => saveToPng(canvas)}>
+      {/* <button type="submit" onClick={() => saveToPng(canvas)}>
         Save to Computer!
-      </button>
+      </button> */}
     </div>
   )
 }
