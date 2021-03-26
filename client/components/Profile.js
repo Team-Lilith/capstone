@@ -14,7 +14,7 @@ function Profile(props) {
       <div id="my-art-container">
         <div>
           <div>My Art</div>
-          <div>-My Canvases will here-</div>
+          <div>-My Canvases will be here-</div>
         </div>
       </div>
     </div>
