@@ -56,6 +56,12 @@ export const saveCanvas = (canvas, users = null) => {
   }
 }
 
+export const saveToPng = canvas => {
+  canvas.toBlob(function(blob) {
+    saveAs(blob, 'myIMG.png')
+  })
+}
+
 const initialState = []
 
 //reducer
