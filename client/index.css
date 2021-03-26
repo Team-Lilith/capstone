@@ -237,6 +237,7 @@ h1 {
 #tools-inner {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 #tools-buttons {
@@ -246,4 +247,19 @@ h1 {
 }
 #tools-buttons div {
   margin: 5px;
+}
+
+#profile-container {
+  width: 40%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+#profile {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }

@@ -16,10 +16,29 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
+            <Link to="/home">
+              <div className="nav-button">
+                <h3>Home</h3>
+              </div>
+            </Link>
+
             <a href="#" onClick={handleClick}>
-              Logout
+              <div className="nav-button">
+                <h3>Logout</h3>
+              </div>
             </a>
+
+            <Link to="/join">
+              <div className="nav-button">
+                <h3>Create/Join a Room</h3>
+              </div>
+            </Link>
+
+            <Link to="/gallery">
+              <div className="nav-button">
+                <h3>Gallery</h3>
+              </div>
+            </Link>
 
             <Link to="/profile">
               <div className="nav-button">
@@ -30,15 +49,22 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
+
             <Link to="/">
-              {/* <button type="button" className="nav-button">Home</button> */}
               <div className="nav-button">
                 <h3>Home</h3>
               </div>
             </Link>
-            <Link to="/auth">
+
+            <Link to="/login">
               <div className="nav-button">
-                <h3>Login/Signup</h3>
+                <h3>Login</h3>
+              </div>
+            </Link>
+
+            <Link to="/signup">
+              <div className="nav-button">
+                <h3>Sign Up</h3>
               </div>
             </Link>
 
@@ -47,6 +73,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <h3>Create/Join a Room</h3>
               </div>
             </Link>
+
             <Link to="/gallery">
               <div className="nav-button">
                 <h3>Gallery</h3>
@@ -65,7 +92,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.uid
   }
 }
 

@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
 import {signInWithGoogle} from '../../server/db/firebase'
+import {getUser} from '../store'
+import {useSelector, useDispatch} from 'react-redux'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -17,7 +19,7 @@ const Login = () => {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res.user)
-        setUser(res.user)
+        dispatch(getUser(res.user))
       })
       .catch(err => {
         if (err.code === 'auth/wrong-password') {
@@ -28,10 +30,6 @@ const Login = () => {
           return toast.error('Something went wrong')
         }
       })
-  }
-
-  const signInWithGoogle = () => {
-    auth.signInWithPopup(provider)
   }
 
   const handleSubmit = e => {

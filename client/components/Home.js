@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import {Login, Auth} from './index'
+import {Login, Register} from './index'
 import {Link} from 'react-router-dom'
 
 function Home() {
   return (
     <div id="home">
       <div id="auth-container">
-        {/* <Login /> */}
-        <Auth />
+        <Login />
+        <Register />
       </div>
 
       <div id="gallery-container">
