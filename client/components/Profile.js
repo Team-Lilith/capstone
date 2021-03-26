@@ -1,14 +1,30 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-function Profile() {
+function Profile(props) {
+  const user = props.user
+  console.log('PROPS FROM PROFILE', props.user)
   return (
     <div id="profile">
       <div id="profile-container">
-        <h1>My Profile</h1>
-        <h3>User Profile information here.</h3>
+        <h1>Profile</h1>
+        <div>@{user.displayName}</div>
+      </div>
+      <br />
+      <div id="my-art-container">
+        <div>
+          <div>My Art</div>
+          <div>-My Canvases will here-</div>
+        </div>
       </div>
     </div>
   )
 }
 
-export default Profile
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapState)(Profile)
