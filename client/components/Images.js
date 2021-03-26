@@ -41,21 +41,34 @@ function Images(props) {
     }
   }
 
-  if (currentImages.length) {
+  if (allImages.length) {
     return (
       <>
         <label htmlFor="tags">Choose a category:</label>
         <select name="tags" id="tags" onChange={changeCategory}>
           <option value="all">All</option>
-          <option value="abstract">Abstract</option>
-          <option value="frame">Frames</option>
-          <option value="cartoon">Cartoon</option>
+          <option value="angel">Angels</option>
           <option value="animal">Animals</option>
+          <option value="aura">Auras</option>
+          <option value="cartoon">Cartoons</option>
+          <option value="emoji">Emojis</option>
+          <option value="flower">Flowers</option>
+          <option value="frames">Frames</option>
+          <option value="girly">Girly</option>
+          <option value="love">Love</option>
+          <option value="nature">Nature</option>
+          <option value="people">People</option>
+          <option value="quotes">Quotes</option>
+          <option value="religious">Religious</option>
+          <option value="selfie">Selfie</option>
+          <option value="space">Space</option>
+          <option value="unicorns">Unicorns</option>
+          <option value="vintage">Vintage</option>
+          <option value="wings">Wings</option>
         </select>
 
         <div className="img-container">
           {currentImages.map(image => {
-            if (image.tags) console.log(image.tags)
             let url = image.url
             return (
               <img
