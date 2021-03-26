@@ -9,8 +9,9 @@ import {useSelector, useDispatch} from 'react-redux'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState({})
-  const [isUserLoggedIn, setUserAuthStatus] = useState(false)
+  // const [user, setUser] = useState({})
+  // const [isUserLoggedIn, setUserAuthStatus] = useState(false)
+  const dispatch = useDispatch()
 
   const loginUser = ({email, password}) => {
     console.log('logging in user')
@@ -64,9 +65,9 @@ const Login = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <br />
 
         <button type="submit">Login</button>
+        <h3>or...</h3>
         <button type="button" onClick={signInWithGoogle}>
           Sign in With Google
         </button>
