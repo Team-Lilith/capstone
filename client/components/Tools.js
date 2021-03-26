@@ -71,7 +71,8 @@ function Tools(props) {
           if (options.target.emit === false) return
           emitAddedToCanvas({
             obj: options.target,
-            id: options.target.id
+            id: options.target.id,
+            room: roomId
           })
         })
       }

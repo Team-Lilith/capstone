@@ -32,6 +32,7 @@ export const emitJoinRoom = id => {
 }
 
 export const emitModifiedCanvasObject = objWithId => {
+  console.log('modified', objWithId)
   socket.emit('object-modified', objWithId)
 }
 
