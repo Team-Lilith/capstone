@@ -30,10 +30,10 @@ const provider = new firebase.auth.GoogleAuthProvider()
 //Initialize Firebase
 //firebase.initializeApp(defaultAppConfig)
 
-const firestore = firebase.firestore()
+export const firestore = firebase.firestore()
 
 export const signInWithGoogle = () => {
   auth.signInWithPopup(provider)
 }
 
-export default {firebase, firestore, auth, provider}
+export default {firebase, auth, provider}
