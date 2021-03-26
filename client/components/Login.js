@@ -65,10 +65,7 @@ const Login = () => {
         />
         <br />
 
-        <Link to="/gallery">
-          <div className="nav-button">Login</div>
-          {/* <button type="submit">Login</button> */}
-        </Link>
+        <button type="submit">Login</button>
       </form>
     </div>
   )

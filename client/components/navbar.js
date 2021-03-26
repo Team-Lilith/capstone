@@ -22,11 +22,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </div>
             </Link>
 
-            <Link to="/gallery">
+            {/* <Link to="/gallery">
               <div className="nav-button">
                 <h3>Gallery</h3>
               </div>
-            </Link>
+            </Link> */}
 
             <Link to="/join">
               <div className="nav-button">
