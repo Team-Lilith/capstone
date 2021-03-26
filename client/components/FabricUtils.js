@@ -8,6 +8,7 @@ import socket, {emitImage} from '../socket'
 // and once object:moves triggered it merged the objects
 // instead of moving each one separately
 export const addRect = canvas => {
+  console.log('rect func')
   const rect = new fabric.Rect({
     height: 100,
     width: 500,
