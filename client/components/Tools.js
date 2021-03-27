@@ -108,37 +108,36 @@ function Tools(props) {
 
   return (
     <div id="tools-inner">
-      <div>
-        <HuePicker color={color} onChange={handleColorChange} />
-      </div>
-
       <div id="tools-buttons">
         <div className="button-group">
+          <div id="hue-picker">
+            <HuePicker color={color} onChange={handleColorChange} />
+          </div>
           <div
             className="nav-button"
             onClick={() => toggleMode(modes.drawing, canvas, color)}
           >
-            Draw
+            <h2>Draw</h2>
           </div>
           <div
             className="nav-button"
             onClick={() => toggleMode(modes.pan, canvas, color)}
           >
-            Stop Drawing
+            <h2>Stop Drawing</h2>
           </div>
         </div>
         <div className="button-group">
           <div className="nav-button" onClick={() => addRect(canvas)}>
-            Add Rectangle
+            <h2>Add Rectangle</h2>
           </div>
           <div className="nav-button" onClick={() => addCirc(canvas)}>
-            Add Circle
+            <h2>Add Circle</h2>
           </div>
           <div className="nav-button" onClick={() => addTri(canvas)}>
-            Add Triangle
+            <h2>Add Triangle</h2>
           </div>
           <div className="nav-button" onClick={() => addText(canvas)}>
-            Add Text
+            <h2>Add Text</h2>
           </div>
           <input
             className="nav-button"
@@ -150,16 +149,16 @@ function Tools(props) {
 
         <div className="button-group">
           <div className="nav-button" onClick={() => deselect(canvas)}>
-            Deselect
+            <h2>Deselect</h2>
           </div>
           <div className="nav-button" onClick={() => deleteSelected(canvas)}>
-            Delete Selected
+            <h2> Delete Selected</h2>
           </div>
           <div className="nav-button" onClick={() => bringForward(canvas)}>
-            Bring Forward
+            <h2> Bring Forward</h2>
           </div>
           <div className="nav-button" onClick={() => sendBackwards(canvas)}>
-            Send Backwards
+            <h2>Send Backwards</h2>
           </div>
         </div>
 
@@ -168,25 +167,25 @@ function Tools(props) {
             className="nav-button"
             onClick={() => groupObjects(canvas, group, true)}
           >
-            Group
+            <h2>Group</h2>
           </div>
           <div
             className="nav-button"
             onClick={() => groupObjects(canvas, group, false)}
           >
-            Ungroup
+            <h2>Ungroup</h2>
           </div>
           <div
             className="nav-button"
             onClick={() => clearCanvas(canvas, svgState)}
           >
-            Clear Canvas
+            <h2>Clear Canvas</h2>
           </div>
           <div
             className="nav-button"
             onClick={() => restoreCanvas(canvas, svgState)}
           >
-            Restore Canvas
+            <h2>Restore Canvas</h2>
           </div>
         </div>
         <div className="button-group">

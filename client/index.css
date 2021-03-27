@@ -22,6 +22,7 @@ a:hover {
 #room {
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 }
 
 #room-top-container {
@@ -138,6 +139,22 @@ a:hover {
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-title {
+  text-align: center;
+  margin: 30px;
+  padding: 20px 40px;
+}
+
+.gallery-title h1 {
+  font-size: 60px;
+}
+
 #gallery-container {
   display: flex;
   flex-direction: column;
@@ -202,24 +219,46 @@ hr {
 
 #nav-container {
   display: flex;
-  flex-wrap: wrap;
-  /* justify-content: center;
-  align-items: center; */
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+#nav-left {
+  display: flex;
+  align-items: center;
+}
+
+#nav-right {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#nav-right h2 {
+  padding: 5px;
+}
+
+#nav-right h2 {
+  margin: 5px;
 }
 
 #logo {
   width: auto;
-  height: 50px;
+  height: 60px;
   align-self: center;
 }
 
 #title {
   margin: 0px 20px 0px 10px;
   align-self: center;
+  font-size: 70px;
 }
 
 h1,
-h3 {
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Bangers', cursive;
   margin-top: 0;
   margin-bottom: 0;
@@ -467,4 +506,27 @@ input[type='nickname'] {
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+#image-container-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  padding: 5px;
+}
+
+#hue-picker {
+  padding-bottom: 25px;
+}
+
+.canvases-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.canvases-container div {
+  padding: 15px;
 }
