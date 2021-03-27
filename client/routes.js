@@ -15,7 +15,8 @@ import {
   Home,
   Gallery,
   Auth,
-  Profile
+  Profile,
+  HomeSignUp
 } from './components'
 import {me} from './store'
 
@@ -39,8 +40,8 @@ class Routes extends Component {
         <Route path="/gallery" component={Gallery} />
         <Route path="/auth" component={Auth} />
         <Route path="/profile" component={Profile} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Register} />
+        {/* <Route path="/login" component={Login} /> */}
+        <Route path="/signup" component={HomeSignUp} />
         <Route path="/" component={Home} />
       </Switch>
 

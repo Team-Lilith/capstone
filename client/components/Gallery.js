@@ -30,13 +30,17 @@ function Gallery(props) {
 
   return gallery ? (
     <div className="gallery">
-      {gallery.map(el => {
-        console.log('el id', el.id)
-        return <canvas key={el.id} id={el.id} className="gallery-element" />
-      })}
+      <div className="gallery-title">
+        <h1>Gallery</h1>
+      </div>
+      <div className="canvases-container">
+        {gallery.map(el => {
+          return <canvas key={el.id} id={el.id} className="gallery-element" />
+        })}
+      </div>
     </div>
   ) : (
-    'nothing here'
+    'Nothing here.'
   )
 }
 

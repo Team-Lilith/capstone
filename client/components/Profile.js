@@ -10,11 +10,12 @@ function Profile(props) {
         <h1>Profile</h1>
         <div>@{user.displayName}</div>
       </div>
-      <br />
+
       <div id="my-art-container">
         <div>
-          <div>My Art</div>
-          <div>-My Canvases will be here-</div>
+          <div id="my-art-inner-container">My Art</div>
+          <div>-My canvases will be here-</div>
+          <div>-Map over my canvases here-</div>
         </div>
       </div>
     </div>

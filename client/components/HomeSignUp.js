@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {signInWithGoogle} from '../../server/db/firebase'
 import GoogleButton from 'react-google-button'
 
-function Home(props) {
+function HomeSignUp(props) {
   console.log('logged in?', props.isLoggedIn)
 
   return (
@@ -13,11 +13,7 @@ function Home(props) {
       {!props.isLoggedIn ? (
         <div id="home">
           <div id="auth-container">
-            <Login />
-
-            <Link to="/signup">
-              <div className="link-to-signup">New? Sign Up Here</div>
-            </Link>
+            <Register />
 
             <div className="login-divider">
               <div className="divider" />
@@ -61,4 +57,4 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(Home)
+export default connect(mapState)(HomeSignUp)
