@@ -110,12 +110,6 @@ function Tools(props) {
   return (
     <div id="tools-inner">
       <div id="tools-buttons">
-        <Tooltip title="Drawing Color" arrow>
-          <div className="nav-button">
-            <HuePicker color={color} onChange={handleColorChange} />
-          </div>
-        </Tooltip>
-
         <Tooltip title="Draw" arrow>
           <img
             className="nav-button"
@@ -241,6 +235,11 @@ function Tools(props) {
         </Tooltip>
 
         <Save canvas={canvas} />
+      </div>
+      <div className="tools-colors">
+        <Tooltip title="Drawing Color" arrow>
+          <HuePicker color={color} onChange={handleColorChange} />
+        </Tooltip>
       </div>
     </div>
   )

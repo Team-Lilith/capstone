@@ -20,6 +20,8 @@ a:hover {
 }
 
 #room {
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
 }
@@ -53,9 +55,9 @@ a:hover {
   padding: 25px;
   margin: 15px;
   height: 700px;
-  border-radius: 50px;
+  /* border-radius: 50px;
   background: #00bfff;
-  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff; */
 }
 
 .img-container {
@@ -64,6 +66,8 @@ a:hover {
 }
 
 #tools {
+  width: 600px;
+  height: 100px;
   padding: 25px;
   margin: 15px;
   border-radius: 50px;
@@ -393,14 +397,16 @@ input[type='nickname'] {
 
 #tools-inner {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 #tools-buttons {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 #tools-buttons img {

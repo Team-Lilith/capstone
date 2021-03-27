@@ -45,6 +45,9 @@ function Room() {
 
   return (
     <div id="room">
+      <div id="tools">
+        <Tools canvas={canvas} roomId={id} />
+      </div>
       <div id="room-top-container">
         <div id="images">
           <Images canvas={canvas} />
@@ -58,9 +61,6 @@ function Room() {
         </div>
       </div>
 
-      <div id="tools">
-        <Tools canvas={canvas} roomId={id} />
-      </div>
       <Canvas canvas={canvas} />
     </div>
   )
