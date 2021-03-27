@@ -12,7 +12,7 @@ function Save(props) {
   return (
     <div>
       <button type="submit" onClick={() => saveCanvas(canvas)}>
-        Save!
+        Save
       </button>
       {/* <button type="submit" onClick={() => saveToPng(canvas)}>
         Save to Computer!

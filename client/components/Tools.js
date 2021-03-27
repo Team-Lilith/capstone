@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {ChromePicker} from 'react-color'
+import {HuePicker} from 'react-color'
 import {v1 as uuid} from 'uuid'
 import socket, {emitModifiedCanvasObject, emitAddedToCanvas} from '../socket'
 import {
@@ -109,7 +109,7 @@ function Tools(props) {
   return (
     <div id="tools-inner">
       <div>
-        <ChromePicker color={color} onChange={handleColorChange} />
+        <HuePicker color={color} onChange={handleColorChange} />
       </div>
 
       <div id="tools-buttons">
