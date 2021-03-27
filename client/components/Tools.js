@@ -121,7 +121,7 @@ function Tools(props) {
         <Tooltip title="Stop Drawing" arrow>
           <img
             className="nav-button"
-            src="/images/cursor.png"
+            src="/images/move.png"
             onClick={() => toggleMode(modes.pan, canvas, color)}
           />
         </Tooltip>
