@@ -402,6 +402,11 @@ input[type='nickname'] {
   align-items: flex-start;
   flex-wrap: wrap;
 }
+
+#tools-buttons img {
+  width: 35px;
+}
+
 #tools-buttons div {
   margin: 5px;
 }
