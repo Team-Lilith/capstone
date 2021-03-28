@@ -14,13 +14,10 @@ const Login = () => {
   const dispatch = useDispatch()
 
   const loginUser = ({email, password}) => {
-    console.log('logging in user')
-    console.log(email, password)
     firestore
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
-        console.log(res.user)
         dispatch(getUser(res.user))
       })
       .catch(err => {

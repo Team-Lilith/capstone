@@ -8,7 +8,6 @@ import socket, {emitImage} from '../socket'
 // and once object:moves triggered it merged the objects
 // instead of moving each one separately
 export const addRect = canvas => {
-  console.log('rect func')
   const rect = new fabric.Rect({
     height: 100,
     width: 500,
@@ -58,8 +57,17 @@ export const deselect = canvas => {
 
 export const bringForward = canvas => {
   let selected = canvas.getActiveObject()
-  selected.bringForward()
-  canvas.requestRenderAll()
+  let objects = canvas.getObjects()
+
+  objects.forEach(object => {
+    if (object === selected) {
+      object.bringForward()
+      canvas.requestRenderAll()
+      console.log('here at for each')
+    }
+  })
+  // selected.bringForward()
+  console.log('here at bring forward')
 }
 
 export const sendBackwards = canvas => {

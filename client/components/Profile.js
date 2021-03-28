@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 
 function Profile(props) {
   const user = props.user
-  console.log('PROPS FROM PROFILE', props.user)
   return (
     <div id="profile">
       <div id="profile-container">

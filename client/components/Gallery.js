@@ -6,12 +6,11 @@ import {fabric} from 'fabric'
 function Gallery(props) {
   const dispatch = useDispatch()
   const gallery = useSelector(state => state.gallery)
-  //console.log()
+
   useEffect(
     () => {
       if (!gallery.length) {
         dispatch(fetchGallery())
-        console.log('fetching gallery')
       } else {
         for (let i = 0; i < gallery.length; i++) {
           let newCanvas = new fabric.Canvas(gallery[i].id)

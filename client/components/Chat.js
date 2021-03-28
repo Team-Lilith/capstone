@@ -10,7 +10,6 @@ export default function Chat(props) {
   const roomId = props.roomId // user id passed down from room component
   const userId = useSelector(state => state.user)
   const dispatch = useDispatch()
-  console.log('user info', userId)
 
   useEffect(() => {}, [userId])
 

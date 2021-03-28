@@ -10,9 +10,6 @@ const Register = () => {
   const [user, setUser] = useState({})
 
   const registerUser = ({nickname, email, password}) => {
-    console.log('email:', email)
-    console.log('pas:', password)
-
     firestore
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -24,15 +21,12 @@ const Register = () => {
           })
           .then(function() {
             // Update successful.
-            console.log('then')
           })
           .catch(function() {
             // An error happened.
-            console.log('catch')
           })
 
         setUser(res.user)
-        console.log('setting user')
       })
       .catch(err => {
         if (err.code === 'auth/email-already-in-use') {
@@ -46,8 +40,6 @@ const Register = () => {
   }
 
   const handleSubmit = e => {
-    console.log('handling submit')
-    console.log(e.target)
     e.preventDefault()
     if (!email || !password) {
       return toast.error('Please enter your email and password')

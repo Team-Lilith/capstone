@@ -32,7 +32,6 @@ export const emitJoinRoom = id => {
 }
 
 export const emitModifiedCanvasObject = objWithId => {
-  console.log('modified', objWithId)
   socket.emit('object-modified', objWithId)
 }
 
@@ -121,7 +120,6 @@ export const receiveAddedObject = canvas => {
     } else if (obj.type === 'path') {
       object = new fabric.Path(obj.path)
       object.set(obj)
-      console.log('yup', object)
     } else {
       return
     }
@@ -151,7 +149,6 @@ export const receiveFullRoom = () => {
   socket.off('full room')
   socket.on('full room', () => {
     history.push('/')
-    console.log('room is full!')
     // toast notification ?
   })
 }
@@ -160,7 +157,6 @@ export const receiveNoRoom = () => {
   socket.off('no room')
   socket.on('no room', () => {
     history.push('/')
-    console.log('no such room!')
     // toast notification ?
   })
 }

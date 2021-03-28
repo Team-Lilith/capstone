@@ -33,10 +33,7 @@ function Tools(props) {
 
   useEffect(
     () => {
-      console.log('on the use effect')
-
       if (canvas) {
-        // console.log('testing re render')
         canvas.on('object:modified', function(options) {
           if (options.target) {
             const objModified = {
@@ -60,9 +57,7 @@ function Tools(props) {
           }
         })
         canvas.on('object:added', function(options) {
-          console.log(options)
           if (!options.target.id) options.target.id = uuid()
-          console.log('id:', options.target.id)
 
           // same with images we are having a bool
           // to dictate to emit or not
