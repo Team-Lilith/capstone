@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
-import {signInWithGoogle} from '../../server/db/firebase'
+import {google} from '../../server/db/firebase'
 import GoogleButton from 'react-google-button'
 
 const Register = () => {
@@ -41,6 +41,25 @@ const Register = () => {
           return toast.warning(
             'This email is already in use, Please login or continue with another email'
           )
+        } else {
+          return toast.error('Something went wrong')
+        }
+      })
+  }
+
+  const registerWithGoogle = () => {
+    firestore
+      .auth()
+      .signInWithPopup(google)
+      .then(res => {
+        console.log(res.user)
+        dispatch(getUser(res.user))
+      })
+      .catch(err => {
+        if (err.code === 'auth/wrong-password') {
+          return toast.error('Email or password is incorrect')
+        } else if (err.code === 'auth/user-not-found') {
+          return toast.error('Email or password is invalid')
         } else {
           return toast.error('Something went wrong')
         }
@@ -110,7 +129,7 @@ const Register = () => {
       <div className="google-btn">
         <GoogleButton
           type="light"
-          onClick={signInWithGoogle}
+          onClick={registerWithGoogle}
           label="Sign up with Google"
         />
       </div>
