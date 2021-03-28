@@ -7,9 +7,11 @@ const App = () => {
   const roomId = useSelector(state => state.room)
   console.log('app, roomId =>', roomId)
   return (
-    <div id="body">
+    <div>
       <Navbar />
-      <Routes />
+      <div id="body">
+        <Routes />
+      </div>
     </div>
   )
 }

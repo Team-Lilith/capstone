@@ -42,8 +42,8 @@ export default function Chat(props) {
       <div id="display-messages">
         {messages.map(msg => (
           <div key={msg.id}>
-            <p>
-              User {msg.user}: {msg.msg}
+            <p className="message-bubble">
+              {msg.user ? msg.user : 'Anon'}: {msg.msg}
             </p>
           </div>
         ))}
@@ -51,15 +51,11 @@ export default function Chat(props) {
 
       <div className="message-input">
         <form onSubmit={handleSubmit} name="message">
-          <div>
-            <input name="newMessage" type="text" />
-          </div>
+          <input name="newMessage" type="text" />
 
-          <div>
-            <button className="nav-button" type="submit">
-              <h2>Send</h2>
-            </button>
-          </div>
+          <button className="nav-button" type="submit">
+            <h2>Send</h2>
+          </button>
         </form>
       </div>
     </div>
