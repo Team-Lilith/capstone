@@ -589,6 +589,7 @@ input[type='nickname'] {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  cursor: auto;
 }
 
 .canvases-container div {
