@@ -6,7 +6,7 @@ import {fabric} from 'fabric'
 function Gallery(props) {
   const dispatch = useDispatch()
   const gallery = useSelector(state => state.gallery)
-
+  //console.log()
   useEffect(
     () => {
       if (!gallery.length) {
