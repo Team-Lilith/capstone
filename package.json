@@ -41,6 +41,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "axios": "^0.19.0",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
@@ -58,6 +59,7 @@
     "react": "^16.8.6",
     "react-color": "^2.19.3",
     "react-dom": "^16.8.6",
+    "react-google-button": "^0.7.2",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^7.0.3",

@@ -70,7 +70,7 @@ const Register = () => {
         <h1>Sign Up</h1>
         <input
           type="nickname"
-          placeholder="nickname"
+          placeholder="Nickname"
           name="nickname"
           value={nickname}
           onChange={e => setnickName(e.target.value)}
@@ -89,8 +89,8 @@ const Register = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-
-        <button onClick={registerUser} type="submit">
+        <br />
+        <button className="login-btn" onClick={registerUser} type="submit">
           Sign Up
         </button>
       </form>

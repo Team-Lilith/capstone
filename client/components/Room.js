@@ -49,7 +49,11 @@ function Room() {
         <div id="images">
           <Images canvas={canvas} />
         </div>
+
         <div id="canvas-div">
+          <div id="tools">
+            <Tools canvas={canvas} roomId={id} />
+          </div>
           <canvas id="canvas" />
         </div>
 
@@ -58,9 +62,6 @@ function Room() {
         </div>
       </div>
 
-      <div id="tools">
-        <Tools canvas={canvas} roomId={id} />
-      </div>
       <Canvas canvas={canvas} />
     </div>
   )

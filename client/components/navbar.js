@@ -17,7 +17,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Home</h3>
               </div>
             </Link>
@@ -29,19 +29,19 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </Link> */}
 
             <Link to="/join">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Rooms</h3>
               </div>
             </Link>
 
             <Link to="/profile">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Profile</h3>
               </div>
             </Link>
 
             <a href="#" onClick={handleClick}>
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Logout</h3>
               </div>
             </a>
@@ -51,7 +51,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             {/* The navbar will show these links before you log in */}
 
             <Link to="/">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Home</h3>
               </div>
             </Link>
@@ -69,13 +69,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </Link> */}
 
             <Link to="/join">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Rooms</h3>
               </div>
             </Link>
 
             <Link to="/gallery">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Gallery</h3>
               </div>
             </Link>

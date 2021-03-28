@@ -37,7 +37,7 @@ export default function Chat(props) {
   return (
     <div id="chat-container">
       <div>
-        <h4>Room: {roomId}</h4>
+        <h4>Chat Room</h4>
       </div>
       <div id="display-messages">
         {messages.map(msg => (
@@ -49,14 +49,16 @@ export default function Chat(props) {
         ))}
       </div>
 
-      <div>
+      <div className="message-input">
         <form onSubmit={handleSubmit} name="message">
           <div>
             <input name="newMessage" type="text" />
           </div>
 
           <div>
-            <button type="submit">Send</button>
+            <button className="nav-button" type="submit">
+              Send
+            </button>
           </div>
         </form>
       </div>

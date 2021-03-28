@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
-import {ChromePicker} from 'react-color'
+import {HuePicker} from 'react-color'
 import {v1 as uuid} from 'uuid'
+import {Tooltip} from '@material-ui/core'
 import socket, {emitModifiedCanvasObject, emitAddedToCanvas} from '../socket'
 import {
   addRect,
@@ -108,92 +109,137 @@ function Tools(props) {
 
   return (
     <div id="tools-inner">
-      <div>
-        <ChromePicker color={color} onChange={handleColorChange} />
-      </div>
-
       <div id="tools-buttons">
-        <div className="button-group">
-          <div
+        <Tooltip title="Draw" arrow>
+          <img
             className="nav-button"
+            src="/images/drawing.png"
             onClick={() => toggleMode(modes.drawing, canvas, color)}
-          >
-            Draw
-          </div>
-          <div
-            className="nav-button"
-            onClick={() => toggleMode(modes.pan, canvas, color)}
-          >
-            Stop Drawing
-          </div>
-        </div>
-        <div className="button-group">
-          <div className="nav-button" onClick={() => addRect(canvas)}>
-            Add Rectangle
-          </div>
-          <div className="nav-button" onClick={() => addCirc(canvas)}>
-            Add Circle
-          </div>
-          <div className="nav-button" onClick={() => addTri(canvas)}>
-            Add Triangle
-          </div>
-          <div className="nav-button" onClick={() => addText(canvas)}>
-            Add Text
-          </div>
-          <input
-            className="nav-button"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
           />
-        </div>
+        </Tooltip>
 
-        <div className="button-group">
-          <div className="nav-button" onClick={() => deselect(canvas)}>
-            Deselect
-          </div>
-          <div className="nav-button" onClick={() => deleteSelected(canvas)}>
-            Delete Selected
-          </div>
-          <div className="nav-button" onClick={() => bringForward(canvas)}>
-            Bring Forward
-          </div>
-          <div className="nav-button" onClick={() => sendBackwards(canvas)}>
-            Send Backwards
-          </div>
-        </div>
-
-        <div className="button-group">
-          <div
+        <Tooltip title="Stop Drawing" arrow>
+          <img
             className="nav-button"
+            src="/images/move.png"
+            onClick={() => toggleMode(modes.pan, canvas, color)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Add Rectangle" arrow>
+          <img
+            className="nav-button"
+            src="/images/rectangle.png"
+            onClick={() => addRect(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Add Circle" arrow>
+          <img
+            className="nav-button"
+            src="/images/dry-clean.png"
+            onClick={() => addCirc(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Add Triangle" arrow>
+          <img
+            className="nav-button"
+            src="/images/up-arrow (2).png"
+            onClick={() => addTri(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Add Text" arrow>
+          <img
+            className="nav-button"
+            src="/images/font.png"
+            onClick={() => addText(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Upload Image" arrow>
+          <div>
+            <img
+              className="nav-button"
+              src="/images/insert-picture-icon.png"
+              onClick={() =>
+                document.getElementById('tools-image-upload').click()
+              }
+            />
+            <input
+              id="tools-image-upload"
+              className="nav-button"
+              style={{display: 'none'}}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </div>
+        </Tooltip>
+
+        <Tooltip title="Delete Selected" arrow>
+          <img
+            className="nav-button"
+            src="/images/rubber.png"
+            onClick={() => deleteSelected(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Bring Forward" arrow>
+          <img
+            className="nav-button"
+            src="/images/up-arrow.png"
+            onClick={() => bringForward(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Send Backwards" arrow>
+          <img
+            className="nav-button"
+            src="/images/down-arrow.png"
+            onClick={() => sendBackwards(canvas)}
+          />
+        </Tooltip>
+
+        <Tooltip title="Group All" arrow>
+          <img
+            className="nav-button"
+            src="/images/object.png"
             onClick={() => groupObjects(canvas, group, true)}
-          >
-            Group
-          </div>
-          <div
+          />
+        </Tooltip>
+
+        <Tooltip title="Ungroup" arrow>
+          <img
             className="nav-button"
+            src="/images/ungroup.png"
             onClick={() => groupObjects(canvas, group, false)}
-          >
-            Ungroup
-          </div>
-          <div
+          />
+        </Tooltip>
+
+        <Tooltip title="Clear Canvas" arrow>
+          <img
             className="nav-button"
+            src="/images/trash.png"
             onClick={() => clearCanvas(canvas, svgState)}
-          >
-            Clear Canvas
-          </div>
-          <div
+          />
+        </Tooltip>
+
+        <Tooltip title="Restore Canvas" arrow>
+          <img
             className="nav-button"
+            src="/images/back-arrow.png"
             onClick={() => restoreCanvas(canvas, svgState)}
-          >
-            Restore Canvas
-          </div>
-        </div>
-        <div className="button-group">
-          <div className="nav-button">
-            <Save canvas={canvas} />
-          </div>
-        </div>
+          />
+        </Tooltip>
+
+        <Save canvas={canvas} />
+      </div>
+      <div className="tools-colors">
+        <Tooltip title="Drawing Color" arrow>
+          <HuePicker color={color} onChange={handleColorChange} />
+        </Tooltip>
       </div>
     </div>
   )

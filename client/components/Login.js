@@ -66,11 +66,15 @@ const Login = () => {
           onChange={e => setPassword(e.target.value)}
         />
 
-        <button type="submit">Login</button>
-        <h3>or...</h3>
-        <button type="button" onClick={signInWithGoogle}>
-          Sign in With Google
+        <br />
+
+        <button className="login-btn" type="submit">
+          Login
         </button>
+        {/* <h3>or...</h3> */}
+        {/* <button className="login-input" type="button" onClick={signInWithGoogle}>
+          Sign in With Google
+        </button> */}
       </form>
     </div>
   )
@@ -82,7 +86,7 @@ export default Login
 //     auth
 //       .signInWithPopup(provider)
 //       .then(res => {
-//         const { displayName, email } = res.user;
+//         const { , email } = res.user;
 //         const userInfo = {x
 //           email,
 //           displayName
