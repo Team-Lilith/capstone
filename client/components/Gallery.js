@@ -30,10 +30,8 @@ function Gallery(props) {
 
   return gallery ? (
     <div className="gallery">
-      <div className="gallery-title">
-        <h1>Gallery</h1>
-      </div>
-      <div className="canvases-container">
+      <h1>Gallery</h1>
+      <div>
         {gallery.map(el => {
           return (
             <div key={el.id}>
