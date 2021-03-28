@@ -22,6 +22,10 @@ function Home(props) {
             </div>
 
             <Guest />
+
+            <Link to="/signup">
+              <p className="link-to-signup">New? Sign Up Here</p>
+            </Link>
             {/* <button className="google-btn" type="button" onClick={signInWithGoogle}>
               Sign in With Google
             </button> */}

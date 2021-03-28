@@ -78,6 +78,7 @@ const Login = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
+        <br />
         <input
           type="password"
           placeholder="Password"
@@ -85,7 +86,7 @@ const Login = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-
+        <br />
         <button className="login-btn" type="submit">
           Login
         </button>
@@ -102,9 +103,6 @@ const Login = () => {
           label="Login with Google"
         />
       </div>
-      <Link to="/signup">
-        <p className="link-to-signup">New? Sign Up Here</p>
-      </Link>
     </div>
   )
 }

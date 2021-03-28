@@ -104,6 +104,7 @@ const Register = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
+        <br />
         <input
           type="password"
           placeholder="Password"
@@ -111,10 +112,16 @@ const Register = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+        <br />
         <button className="login-btn" onClick={registerUser} type="submit">
           Sign Up
         </button>
       </form>
+      <div className="login-divider">
+        <div className="divider" />
+        <div className="or-divider">or</div>
+        <div className="divider" />
+      </div>
 
       <div className="google-btn">
         <GoogleButton
