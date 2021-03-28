@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
+import {signInWithGoogle} from '../../server/db/firebase'
+import GoogleButton from 'react-google-button'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -26,9 +28,9 @@ const Register = () => {
             // Update successful.
             console.log('then')
           })
-          .catch(function() {
+          .catch(function(error) {
             // An error happened.
-            console.log('catch')
+            console.log(error)
           })
 
         setUser(res.user)
@@ -65,9 +67,9 @@ const Register = () => {
   }
 
   return (
-    <div className="column">
+    <div className="column register-container">
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h2>Sign Up</h2>
         <input
           type="nickname"
           placeholder="Nickname"
@@ -75,6 +77,7 @@ const Register = () => {
           value={nickname}
           onChange={e => setnickName(e.target.value)}
         />
+        <br />
         <input
           type="email"
           placeholder="Email"
@@ -89,11 +92,28 @@ const Register = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <br />
         <button className="login-btn" onClick={registerUser} type="submit">
           Sign Up
         </button>
       </form>
+
+      <Link to="/login">
+        <div className="link-to-signup">Have an account? Log in Here</div>
+      </Link>
+
+      <div className="login-divider">
+        <div className="divider" />
+        <div className="or-divider">or</div>
+        <div className="divider" />
+      </div>
+
+      <div className="google-btn">
+        <GoogleButton
+          type="light"
+          onClick={signInWithGoogle}
+          label="Sign up with Google"
+        />
+      </div>
     </div>
   )
 }

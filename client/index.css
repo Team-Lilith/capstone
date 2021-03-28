@@ -8,6 +8,10 @@ body {
   padding: 0;
 }
 
+form input {
+  border-radius: 20px;
+}
+
 #body {
   display: flex;
   flex-direction: column;
@@ -174,16 +178,23 @@ a:hover {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+.register-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
 
 #auth-container {
-  /* background-color: white; */
+  height: 80vh;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 400px;
-  margin-top: 70px;
+
+  width: 40vw;
+  height: 80vh;
+  margin-top: 7vh;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
@@ -211,9 +222,9 @@ a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 500px;
-  height: 400px;
-  margin-top: 70px;
+  width: 40vw;
+  height: 80vh;
+  margin-top: 7vh;
   margin-bottom: 70px;
   padding: 20px;
   border-radius: 50px;
@@ -274,6 +285,7 @@ hr {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  height: 8vh;
 }
 
 #nav-left {
@@ -346,7 +358,6 @@ input[type='nickname'] {
   box-sizing: border-box;
   border: 0;
   border: 1px solid rgba(0, 0, 0, 0.09);
-  border-radius: 2px;
   margin-right: 8px;
   /* text-align: center; */
 }
@@ -412,10 +423,6 @@ input[type='nickname'] {
 
 #toggle-form {
   text-align: center;
-}
-
-#auth-container {
-  padding: 20px;
 }
 
 .canvases-gallery {

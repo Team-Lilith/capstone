@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
-import {signInWithGoogle} from '../../server/db/firebase'
 import {getUser} from '../store'
 import {useSelector, useDispatch} from 'react-redux'
+import {signInWithGoogle} from '../../server/db/firebase'
+import GoogleButton from 'react-google-button'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -50,7 +51,7 @@ const Login = () => {
   return (
     <div className="column">
       <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <input
           type="email"
           placeholder="Email"
@@ -66,16 +67,25 @@ const Login = () => {
           onChange={e => setPassword(e.target.value)}
         />
 
-        <br />
-
         <button className="login-btn" type="submit">
           Login
         </button>
+
         {/* <h3>or...</h3> */}
         {/* <button className="login-input" type="button" onClick={signInWithGoogle}>
           Sign in With Google
         </button> */}
       </form>
+      <div className="google-btn">
+        <GoogleButton
+          type="light"
+          onClick={signInWithGoogle}
+          label="Login with Google"
+        />
+      </div>
+      <Link to="/signup">
+        <p className="link-to-signup">New? Sign Up Here</p>
+      </Link>
     </div>
   )
 }
