@@ -58,7 +58,6 @@ function Tools(props) {
         })
         canvas.on('object:added', function(options) {
           if (!options.target.id) options.target.id = uuid()
-
           // same with images we are having a bool
           // to dictate to emit or not
           // if not it will be a ping pong event and

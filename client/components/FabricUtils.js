@@ -56,23 +56,20 @@ export const deselect = canvas => {
 }
 
 export const bringForward = canvas => {
-  let selected = canvas.getActiveObject()
-  let objects = canvas.getObjects()
+  let selected = canvas.getActiveObject() || canvas.getActiveGroup()
 
-  objects.forEach(object => {
-    if (object === selected) {
-      object.bringForward()
-      canvas.requestRenderAll()
-      console.log('here at for each')
-    }
-  })
-  // selected.bringForward()
-  console.log('here at bring forward')
+  if (selected) {
+    selected.bringForward()
+  }
+  canvas.requestRenderAll()
 }
 
 export const sendBackwards = canvas => {
-  let selected = canvas.getActiveObject()
-  selected.sendBackwards()
+  let selected = canvas.getActiveObject() || canvas.getActiveGroup()
+
+  if (selected) {
+    selected.sendBackwards()
+  }
   canvas.requestRenderAll()
 }
 

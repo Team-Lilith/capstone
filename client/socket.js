@@ -45,6 +45,7 @@ export const emitAddedToCanvas = objectAdded => {
 export const modifyCanvasObject = canvas => {
   //listens for object modified
   socket.on('new-modification', data => {
+    console.log('looking for object that changed layer', data)
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
         //finds obj on canvas by id + sets modified obj to that obj to update it
@@ -83,15 +84,6 @@ export const receiveAddedObject = canvas => {
   socket.on('canvas add change', data => {
     console.log('receive object', data)
     const {obj, id} = data
-    // const object = new fabric.Object()
-    // object.set(data)
-    // object.emit = false;
-    // canvas.add(object)
-    // const rect = new fabric.Rect({
-    //   height: data.height,
-    //   width: data.width,
-    //   fill: data.fill,
-    // })
     let object
     if (obj.type === 'rect') {
       object = new fabric.Rect({
@@ -120,6 +112,12 @@ export const receiveAddedObject = canvas => {
     } else if (obj.type === 'path') {
       object = new fabric.Path(obj.path)
       object.set(obj)
+    } else if (obj.type === 'image') {
+      let image = document.createElement('img')
+      image.setAttribute('src', obj.src)
+      console.log('IMAGE', image)
+      object = new fabric.Image(image, obj)
+      console.log('IMAGE OBJ', object)
     } else {
       return
     }
@@ -141,6 +139,7 @@ export const receiveMessageAndUpdateState = (setState, prevState) => {
 export const receiveImage = (addToCanvas, canvas, roomId) => {
   socket.off('add-image')
   socket.on('add-image', image => {
+    console.log('imageeee', image)
     addToCanvas(canvas, image, true, roomId)
   })
 }
