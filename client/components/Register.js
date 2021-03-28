@@ -9,11 +9,11 @@ const Register = () => {
   const [nickname, setnickName] = useState('')
   const [user, setUser] = useState({})
 
-  const registerUser = ({nickname, email, password}) => {
+  const registerUser = async ({nickname, email, password}) => {
     console.log('email:', email)
     console.log('pas:', password)
 
-    firestore
+    await firestore
       .auth()
       .createUserWithEmailAndPassword(email, password)
       //.then((data) => data.json())
