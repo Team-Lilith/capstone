@@ -23,6 +23,8 @@ function Gallery(props) {
               object.set('selectable', false)
             }
           )
+          canv.hoverCursor = 'auto'
+          canv.defaultCursor = 'pointer'
           canv.setZoom(0.5)
           canv.setWidth(625 * canv.getZoom())
           canv.setHeight(625 * canv.getZoom())

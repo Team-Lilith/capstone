@@ -77,6 +77,9 @@ a:hover {
 .canvas-container {
   width: 50%;
 }
+.gallery-element {
+  cursor: pointer;
+}
 
 #canvas-div {
   /* flex: 1; */
