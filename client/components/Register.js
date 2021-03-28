@@ -116,16 +116,6 @@ const Register = () => {
         </button>
       </form>
 
-      <Link to="/login">
-        <div className="link-to-signup">Have an account? Log in Here</div>
-      </Link>
-
-      <div className="login-divider">
-        <div className="divider" />
-        <div className="or-divider">or</div>
-        <div className="divider" />
-      </div>
-
       <div className="google-btn">
         <GoogleButton
           type="light"
@@ -133,6 +123,10 @@ const Register = () => {
           label="Sign up with Google"
         />
       </div>
+
+      <Link to="/login">
+        <div className="link-to-signup">Have an account? Log in Here</div>
+      </Link>
     </div>
   )
 }
