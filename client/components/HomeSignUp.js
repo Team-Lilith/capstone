@@ -28,7 +28,7 @@ function HomeSignUp(props) {
               <GoogleButton
                 type="light"
                 onClick={signInWithGoogle}
-                label="Sign in with Google"
+                label="Sign up with Google"
               />
             </div>
           </div>
