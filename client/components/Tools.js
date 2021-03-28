@@ -110,6 +110,13 @@ function Tools(props) {
   return (
     <div id="tools-inner">
       <div id="tools-buttons">
+        <Tooltip title="Deselect" arrow>
+          <img
+            className="nav-button"
+            src="/images/cursor.png"
+            onClick={() => deselect(props.canvas)}
+          />
+        </Tooltip>
         <Tooltip title="Draw" arrow>
           <img
             className="nav-button"
