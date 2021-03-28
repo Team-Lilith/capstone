@@ -44,29 +44,31 @@ function Images(props) {
   if (allImages.length) {
     return (
       <>
-        <label htmlFor="tags">Choose a category:</label>
-        <select name="tags" id="tags" onChange={changeCategory}>
-          <option value="all">All</option>
-          <option value="angel">Angels</option>
-          <option value="animal">Animals</option>
-          <option value="aura">Auras</option>
-          <option value="cartoon">Cartoons</option>
-          <option value="emoji">Emojis</option>
-          <option value="flower">Flowers</option>
-          <option value="frames">Frames</option>
-          <option value="girly">Girly</option>
-          <option value="love">Love</option>
-          <option value="nature">Nature</option>
-          <option value="people">People</option>
-          <option value="quotes">Quotes</option>
-          <option value="religious">Religious</option>
-          <option value="selfie">Selfie</option>
-          <option value="space">Space</option>
-          <option value="unicorns">Unicorns</option>
-          <option value="vintage">Vintage</option>
-          <option value="wings">Wings</option>
-        </select>
-
+        <div id="image-container-header">
+          <h2>Click an image to add it to your canvas!</h2>
+          <select name="tags" id="tags" onChange={changeCategory}>
+            <option>Pick an image category:</option>
+            <option value="all">All Images</option>
+            <option value="angel">Angels</option>
+            <option value="animal">Animals</option>
+            <option value="aura">Auras</option>
+            <option value="cartoon">Cartoons</option>
+            <option value="emoji">Emojis</option>
+            <option value="flower">Flowers</option>
+            <option value="frames">Frames</option>
+            <option value="girly">Girly</option>
+            <option value="love">Love</option>
+            <option value="nature">Nature</option>
+            <option value="people">People</option>
+            <option value="quotes">Quotes</option>
+            <option value="religious">Religious</option>
+            <option value="selfie">Selfie</option>
+            <option value="space">Space</option>
+            <option value="unicorns">Unicorns</option>
+            <option value="vintage">Vintage</option>
+            <option value="wings">Wings</option>
+          </select>
+        </div>
         <div className="img-container">
           {currentImages.map(image => {
             let url = image.url

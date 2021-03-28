@@ -34,13 +34,14 @@ function Gallery(props) {
       <div>
         {gallery.map(el => {
           return (
-            <canvas
-              key={el.id}
-              id={el.id}
-              width="300px"
-              height="200px"
-              // className="gallery-element"
-            />
+            <div key={el.id}>
+              <canvas
+                id={el.id}
+                width="625px"
+                height="625px"
+                className="gallery-element"
+              />
+            </div>
           )
         })}
       </div>

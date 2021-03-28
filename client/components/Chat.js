@@ -37,7 +37,7 @@ export default function Chat(props) {
   return (
     <div id="chat-container">
       <div>
-        <h4>Chat Room</h4>
+        <h2>Chat Room</h2>
       </div>
       <div id="display-messages">
         {messages.map(msg => (
@@ -57,7 +57,7 @@ export default function Chat(props) {
 
           <div>
             <button className="nav-button" type="submit">
-              Send
+              <h2>Send</h2>
             </button>
           </div>
         </form>
