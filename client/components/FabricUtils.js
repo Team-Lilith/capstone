@@ -76,7 +76,7 @@ export const sendBackwards = canvas => {
 export const deleteSelected = canvas => {
   let selected = canvas.getActiveObject()
   canvas.remove(selected)
-
+  console.log('removed object', selected)
   canvas.discardActiveObject()
   canvas.requestRenderAll()
 }

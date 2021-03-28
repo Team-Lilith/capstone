@@ -70,6 +70,13 @@ function Tools(props) {
             room: roomId
           })
         })
+
+        canvas.on('object:removed', function(options) {
+          if (!options.target.id) options.target.id = uuid()
+          // if (options.target.emit === false) return
+
+          console.log('here in object:removed', options.target)
+        })
       }
     },
     [canvas]

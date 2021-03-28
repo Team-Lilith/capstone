@@ -113,6 +113,7 @@ export const receiveAddedObject = canvas => {
       object = new fabric.Path(obj.path)
       object.set(obj)
     } else if (obj.type === 'image') {
+      socket.off('add-image')
       let image = document.createElement('img')
       image.setAttribute('src', obj.src)
       console.log('IMAGE', image)

@@ -228,9 +228,9 @@ a:hover {
 #gallery-container h3 {
   margin: 10px;
   font-size: 25px;
-  background: linear-gradient(black, #00dcff);
+  /* background: linear-gradient(black, #00dcff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
 }
 
 .nav-button {
