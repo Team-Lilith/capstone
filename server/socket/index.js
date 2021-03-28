@@ -4,6 +4,14 @@ module.exports = io => {
     // "socket" refers to the particular client socket connection
     console.log(`A socket connection to the server has been made: ${socket.id}`)
 
+    function deleteRoom(roomId) {
+      console.log('in deleteRoom')
+      setTimeout(function() {
+        console.log(`deleting room ${roomId}!`)
+        // realtimeDB.remove(roomId)
+      }, 10000)
+    }
+
     // Each socket can join a room by emitting the room name in a 'join' event
     // The server will listen to the 'join' event and attach that socket to the room
     socket.on('join room', roomId => {
@@ -34,6 +42,8 @@ module.exports = io => {
         console.log('room does not exist - creating')
         socket.join(roomId)
         io.to(socket.id).emit('join successful', roomId)
+        console.log('next call deleteRoom')
+        deleteRoom(roomId)
       } else {
         io.to(socket.id).emit('no room')
         console.log(
@@ -44,30 +54,24 @@ module.exports = io => {
       }
     })
 
-    // when a client emits an 'add-image' event, broadcast it
     socket.on('add-image', data => {
-      console.log('broadcasting add-image event')
-      console.log('looking for data.room', data.room)
+      console.log('server emitting add-image event to room')
       socket.to(data.room).emit('add-image', data)
     })
 
-    // this is where object added sync starts
-    // we are emiting canvas add change
     socket.on('object added', data => {
-      console.log('here @ object added, room: ', data.room)
-      // socket.broadcast.emit('canvas add change', data)
+      console.log('server emitting object added event to room')
       socket.to(data.room).emit('canvas add change', data)
     })
 
-    // when the client emits an 'object-modified' event, broadcast a 'new-modification' event to room
     socket.on('object-modified', data => {
-      console.log('here @ object modified, room: ', data.room)
+      console.log('server broadcasting new-modification event')
       socket.broadcast.emit('new-modification', data)
       // socket.to(data.room).emit('add-image', data)
     })
 
-    // when a client emits a 'message' event, broadcast it
     socket.on('message', msg => {
+      console.log('server emitting message event to room')
       socket.to(msg.room).emit('message', msg)
     })
 

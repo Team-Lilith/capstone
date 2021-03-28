@@ -3,6 +3,7 @@ import {fabric} from 'fabric'
 import {fullRoom} from './store'
 import {setCurrentRoom} from './store'
 import history from './history'
+import {realtimeDB} from '../server/db'
 
 //CONNECTION
 
@@ -171,6 +172,11 @@ export const joinSuccess = dispatch => {
   socket.on('join successful', roomId => {
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
+    realtimeDB.ref(roomId).set({
+      canvas: '',
+      messages: [],
+      users: ['user name here']
+    })
   })
 }
 
