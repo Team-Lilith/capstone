@@ -12,11 +12,8 @@ function Profile(props) {
       </div>
 
       <div id="my-art-container">
-        <div>
-          <div id="my-art-inner-container">My Art</div>
-          <div>-My canvases will be here-</div>
-          <div>-Map over my canvases here-</div>
-        </div>
+        <div>My Art</div>
+        <div>(map over my canvases here)</div>
       </div>
     </div>
   )
