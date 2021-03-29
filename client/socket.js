@@ -4,9 +4,6 @@ import {fullRoom} from './store'
 import {setCurrentRoom} from './store'
 import history from './history'
 
-fabric.Object.prototype.getZIndex = function() {
-  return this.canvas.getObjects().indexOf(this)
-}
 //CONNECTION
 
 //establishes socket connection upon landing on webpage
@@ -56,9 +53,9 @@ export const modifyCanvasObject = canvas => {
     console.log('looking for object that changed layer', data)
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
+        canvas.getObjects().indexOf(data.obj)
         //finds obj on canvas by id + sets modified obj to that obj to update it
         object.set(data.obj)
-        object.getZIndex()
         //set Coords allows obj to be remodified after updating
         object.setCoords()
         canvas.renderAll()
