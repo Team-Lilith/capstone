@@ -36,10 +36,10 @@ export const fetchGallery = () => async dispatch => {
 }
 
 //SAVING CANVAS
-export const saveCanvas = (canvas, users = null) => {
+export const saveCanvas = async (canvas, users = null) => {
   try {
     const canvasObj = canvas.toDatalessJSON()
-    firestore
+    await firestore
       .collection('gallery')
       .add({
         canvas: canvasObj,
@@ -52,6 +52,7 @@ export const saveCanvas = (canvas, users = null) => {
       .catch(error => {
         console.error('Error adding document: ', error)
       })
+    console.log('saved canvas')
     history.push('/gallery')
   } catch (error) {
     console.log('error saving canvas to db', error)
