@@ -6,9 +6,11 @@ import Routes from './routes'
 const App = () => {
   const roomId = useSelector(state => state.room)
   return (
-    <div id="body">
+    <div>
       <Navbar />
-      <Routes />
+      <div id="body">
+        <Routes />
+      </div>
     </div>
   )
 }

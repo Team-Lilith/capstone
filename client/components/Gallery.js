@@ -14,13 +14,19 @@ function Gallery(props) {
       } else {
         for (let i = 0; i < gallery.length; i++) {
           let newCanvas = new fabric.Canvas(gallery[i].id)
-          newCanvas.loadFromJSON(
+
+          let canv = newCanvas.loadFromJSON(
             gallery[i].data.canvas,
             newCanvas.renderAll.bind(newCanvas),
             function(o, object) {
               object.set('selectable', false)
             }
           )
+          canv.hoverCursor = 'auto'
+          canv.defaultCursor = 'pointer'
+          canv.setZoom(0.5)
+          canv.setWidth(625 * canv.getZoom())
+          canv.setHeight(625 * canv.getZoom())
         }
       }
     },
@@ -30,14 +36,14 @@ function Gallery(props) {
   return gallery ? (
     <div className="gallery">
       <h1>Gallery</h1>
-      <div>
+      <div className="canvases-container">
         {gallery.map(el => {
           return (
             <div key={el.id}>
               <canvas
                 id={el.id}
-                width="625px"
-                height="625px"
+                // width="625px"
+                // height="625px"
                 className="gallery-element"
               />
             </div>

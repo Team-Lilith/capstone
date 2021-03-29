@@ -168,7 +168,8 @@ export const receiveImage = (addToCanvas, canvas, roomId) => {
 export const receiveFullRoom = () => {
   socket.off('full room')
   socket.on('full room', () => {
-    history.push('/')
+    history.push('/join')
+    console.log('room is full!')
     // toast notification ?
   })
 }
@@ -176,7 +177,8 @@ export const receiveFullRoom = () => {
 export const receiveNoRoom = () => {
   socket.off('no room')
   socket.on('no room', () => {
-    history.push('/')
+    history.push('/join')
+    console.log('no such room!')
     // toast notification ?
   })
 }
