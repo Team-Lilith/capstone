@@ -3,16 +3,10 @@ require('firebase/auth')
 require('firebase/firestore')
 require('firebase/database')
 
-//var FIREBASE_CONFIG = require('./fbconfig.json')
+var FIREBASE_CONFIG = require('./fbconfig.json')
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyCpJMMeWhHixunuu6h_5BF7Xo7V6z1AnRI',
-  authDomain: 'capstone-e6ea2.firebaseapp.com',
-  databaseURL: 'https://capstone-e6ea2-default-rtdb.firebaseio.com',
-  projectId: 'capstone-e6ea2',
-  storageBucket: 'capstone-e6ea2.appspot.com',
-  messagingSenderId: '133828787014',
-  appId: '1:133828787014:web:ad8b29f5afdde84e074347'
+if (process.env.NODE_ENV === 'development') {
+  var firebaseConfig = FIREBASE_CONFIG
 }
 
 // Your web app's Firebase configuration
@@ -22,19 +16,23 @@ const firebaseConfig = {
 
 firebase.default.initializeApp(firebaseConfig)
 
+// const provider = new firebase.default.auth.GoogleAuthProvider()
+
+// const signInWithGoogle = () => {
+//   firebase.default.auth.signInWithPopup(provider)
+// }
+
 const auth = firebase.default.auth()
-const provider = new firebase.default.auth.GoogleAuthProvider()
 const firestore = firebase.default.firestore()
-const signInWithGoogle = () => {
-  firebase.default.auth.signInWithPopup(provider)
-}
+const google = new firebase.default.auth.GoogleAuthProvider()
 const realtimeDB = firebase.default.database()
 
 module.exports = {
   firebase,
   auth,
-  provider,
+  google,
   firestore,
-  realtimeDB,
-  signInWithGoogle
+  realtimeDB
+  // provider,
+  // signInWithGoogle
 }

@@ -14,7 +14,6 @@ import {
   Join,
   Home,
   Gallery,
-  Auth,
   Profile,
   HomeSignUp
 } from './components'
@@ -38,26 +37,10 @@ class Routes extends Component {
         </Route>
         <Route path="/join" component={Join} />
         <Route path="/gallery" component={Gallery} />
-        <Route path="/auth" component={Auth} />
         <Route path="/profile" component={Profile} />
-        {/* <Route path="/login" component={Login} /> */}
         <Route path="/signup" component={HomeSignUp} />
         <Route path="/" component={Home} />
       </Switch>
-
-      // <Switch>
-      //   {/* Routes placed here are available to all visitors */}
-      //   <Route path="/login" component={Login} />
-      //   <Route path="/signup" component={Signup} />
-      //   {isLoggedIn && (
-      //     <Switch>
-      //       {/* Routes placed here are only available after logging in */}
-      //       <Route path="/home" component={UserHome} />
-      //     </Switch>
-      //   )}
-      //   {/* Displays our Login component as a fallback */}
-      //   <Route component={Login} />
-      // </Switch>
     )
   }
 }

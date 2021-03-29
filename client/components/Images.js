@@ -30,20 +30,18 @@ function Images(props) {
   const [currentImages, setCurrentImages] = useState([])
   let canvas = props.canvas
 
-  // useEffect(
-  //   () => {
-  //     if (!allImages.length) {
-  //       dispatch(getImages())
-  //       console.log('!all images - dispatch get images')
-  //     } else {
-  //       console.log(allImages)
-  //       console.log('allimages found = set as currentImages')
-  //       const imageCopy = JSON.parse(JSON.stringify(allImages))
-  //       setCurrentImages(imageCopy)
-  //     }
-  //   },
-  //   [allImages]
-  // )
+  useEffect(
+    () => {
+      if (!allImages.length) {
+        dispatch(getImages())
+      } else {
+        console.log(allImages)
+        const imageCopy = JSON.parse(JSON.stringify(allImages))
+        setCurrentImages(imageCopy)
+      }
+    },
+    [allImages]
+  )
 
   const changeCategory = e => {
     let cat = e.target.value
@@ -64,7 +62,7 @@ function Images(props) {
     return (
       <>
         <div id="image-container-header">
-          <h2>Click an image to add it to your canvas!</h2>
+          <h3>Click an image to add it to your canvas!</h3>
           <select name="tags" id="tags" onChange={changeCategory}>
             <option>Pick an image category:</option>
             <option value="all">All Images</option>

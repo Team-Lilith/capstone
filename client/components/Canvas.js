@@ -1,6 +1,11 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import {modifyCanvasObject, receiveImage, receiveAddedObject} from '../socket'
+import {
+  modifyCanvasObject,
+  receiveImage,
+  receiveAddedObject,
+  receiveRemovedObject
+} from '../socket'
 import {fabric} from 'fabric'
 import {addImage, setCanvasBackground} from './FabricUtils'
 
@@ -13,6 +18,7 @@ function Canvas(props) {
     modifyCanvasObject(canvas)
     receiveImage(addImage, canvas, roomId)
     receiveAddedObject(canvas)
+    receiveRemovedObject(canvas)
     // setCanvasBackground(image, canvas)
   }
 
