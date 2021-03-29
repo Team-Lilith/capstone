@@ -28,11 +28,11 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => (
               </div>
             </Link> */}
 
-            <Link to="/join">
-              <div className="nav-hover-button">
-                <h3>Rooms</h3>
-              </div>
-            </Link>
+              <Link to="/join">
+                <div className="nav-hover-button">
+                  <h3>Create</h3>
+                </div>
+              </Link>
 
             <Link to="/profile">
               <div className="nav-hover-button">
@@ -67,12 +67,6 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => (
                 <h3>Sign Up</h3>
               </div>
             </Link> */}
-
-            <Link to="/join">
-              <div className="nav-hover-button">
-                <h3>Rooms</h3>
-              </div>
-            </Link>
 
             <Link to="/gallery">
               <div className="nav-hover-button">
