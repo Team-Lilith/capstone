@@ -1,7 +1,7 @@
-import firebase from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/database'
+const firebase = require('firebase')
+require('firebase/auth')
+require('firebase/firestore')
+require('firebase/database')
 
 //var FIREBASE_CONFIG = require('./fbconfig.json')
 
@@ -20,14 +20,21 @@ const firebaseConfig = {
 //   var firebaseConfig = FIREBASE_CONFIG
 // }
 
-firebase.initializeApp(firebaseConfig)
+firebase.default.initializeApp(firebaseConfig)
 
-const auth = firebase.auth()
-const provider = new firebase.auth.GoogleAuthProvider()
-const firestore = firebase.firestore()
+const auth = firebase.default.auth()
+const provider = new firebase.default.auth.GoogleAuthProvider()
+const firestore = firebase.default.firestore()
 const signInWithGoogle = () => {
-  auth.signInWithPopup(provider)
+  firebase.default.auth.signInWithPopup(provider)
 }
-const realtimeDB = firebase.database()
+const realtimeDB = firebase.default.database()
 
-export {firebase, auth, provider, firestore, realtimeDB, signInWithGoogle}
+module.exports = {
+  firebase,
+  auth,
+  provider,
+  firestore,
+  realtimeDB,
+  signInWithGoogle
+}

@@ -1,15 +1,14 @@
-module.exports = io => {
+module.exports = (io, realtimeDB) => {
   io.on('connection', socket => {
     // A client has made a connection to this server
     // "socket" refers to the particular client socket connection
     console.log(`A socket connection to the server has been made: ${socket.id}`)
 
+    // room is deleted from realtimeDB 30min after being created
     function deleteRoom(roomId) {
-      console.log('in deleteRoom')
       setTimeout(function() {
-        console.log(`deleting room ${roomId}!`)
-        // realtimeDB.remove(roomId)
-      }, 10000)
+        realtimeDB.ref(roomId).remove()
+      }, 1800000)
     }
 
     // Each socket can join a room by emitting the room name in a 'join' event
@@ -42,8 +41,8 @@ module.exports = io => {
         console.log('room does not exist - creating')
         socket.join(roomId)
         io.to(socket.id).emit('join successful', roomId)
-        console.log('next call deleteRoom')
-        deleteRoom(roomId)
+        // delete room info from db after 30min =>
+        // deleteRoom(roomId)
       } else {
         io.to(socket.id).emit('no room')
         console.log(

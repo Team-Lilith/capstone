@@ -16,8 +16,30 @@ socket.on('connect', () => {
 })
 
 //EMITTERS
-export const sendMessage = message => {
-  socket.emit('message', message)
+
+const updateRoomMessages = (roomId, msg) => {
+  let messages = realtimeDB.ref(roomId).child('messages')
+  messages
+    .get()
+    .then(function(snapshot) {
+      if (snapshot.exists()) {
+        let updatedMsgs = [...snapshot.val(), msg]
+        messages.set(updatedMsgs)
+      } else {
+        messages.set([msg])
+      }
+    })
+    .catch(function(error) {
+      console.error(error)
+    })
+}
+
+export const sendMessage = data => {
+  socket.emit('message', data)
+  const user = data.user || 'none'
+  const room = data.room
+  const sendData = {msg: data.msg, user: user, room: room, id: data.id}
+  updateRoomMessages(room, sendData)
 }
 
 export const emitImage = imageObjWithId => {
