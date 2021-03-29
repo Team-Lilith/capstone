@@ -131,6 +131,9 @@ export const groupObjects = (canvas, group, shouldGroup) => {
   if (shouldGroup) {
     const objects = canvas.getObjects()
     group.val = new fabric.Group(objects)
+    // objects.forEach(obj => {
+    //   canvas.remove(obj)
+    // })
     // clearCanvas(canvas, svgState)
     // socket.off('canvas add change')
     canvas.add(group.val)
@@ -138,6 +141,9 @@ export const groupObjects = (canvas, group, shouldGroup) => {
   } else {
     group.val.destroy()
     const oldGroup = group.val.getObjects()
+    // objects.forEach(obj => {
+    //   canvas.remove(obj)
+    // })
     // clearCanvas(canvas, svgState)
     // socket.off('canvas add change')
     canvas.add(...oldGroup)
