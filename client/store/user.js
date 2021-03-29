@@ -23,6 +23,37 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
+export const loginGuest = ({nickname}) => async dispatch => {
+  console.log('logging in guest')
+  console.log(nickname)
+  await firestore
+    .auth()
+    .signInAnonymously()
+    .then(res => {
+      console.log(res.user)
+      res.user
+        .updateProfile({
+          displayName: nickname
+        })
+        .catch(function(error) {
+          // An error happened.
+          console.log(error)
+        })
+      history.push('/join')
+      dispatch(setUser(res.user))
+    })
+    .catch(err => {
+      console.log('error', err)
+      if (err.code === 'auth/wrong-password') {
+        return toast.error('Email or password is incorrect')
+      } else if (err.code === 'auth/user-not-found') {
+        return toast.error('Email or password is invalid')
+      } else {
+        return toast.error('Something went wrong')
+      }
+    })
+}
+
 export const registerWithGoogle = () => async dispatch => {
   await firestore
     .auth()
