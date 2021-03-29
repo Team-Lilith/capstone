@@ -53,7 +53,7 @@ export const modifyCanvasObject = canvas => {
     console.log('looking for object that changed layer', data)
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
-        canvas.getObjects().indexOf(data.obj)
+        // canvas.getObjects().indexOf(data.obj)
         //finds obj on canvas by id + sets modified obj to that obj to update it
         object.set(data.obj)
         //set Coords allows obj to be remodified after updating

@@ -65,7 +65,7 @@ a:hover {
 #images {
   padding: 15px;
   margin: 15px;
-  max-width: 350px;
+  max-width: 500px;
   /* width: 600px; */
   overflow-y: auto;
   height: 100%;
@@ -549,7 +549,7 @@ input[type='nickname'] {
   /* padding: 10px 30px; */
   /* padding-top: 10px; */
   /* padding-bottom: 0; */
-  /* max-width: 600px; */
+  /* th: 600px; */
   /* height: 200px; */
   display: flex;
   flex-direction: column;
