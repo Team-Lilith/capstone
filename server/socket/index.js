@@ -45,7 +45,7 @@ module.exports = (io, realtimeDB) => {
         // delete room info from db after 30min
         deleteRoom(roomId)
       } else {
-        io.to(socket.id).emit('no room')
+        io.to(socket.id).emit('existing room')
         console.log(
           `Socket ${
             socket.id
