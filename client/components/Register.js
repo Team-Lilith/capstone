@@ -4,66 +4,15 @@ import {toast} from 'react-toastify'
 import firestore from 'firebase'
 import {google} from '../../server/db/firebase'
 import GoogleButton from 'react-google-button'
+import {registerWithGoogle, registerUser} from '../store'
+import {useDispatch} from 'react-redux'
 
 const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [nickname, setnickName] = useState('')
   const [user, setUser] = useState({})
-
-  const registerUser = async ({nickname, email, password}) => {
-    console.log('email:', email)
-    console.log('pas:', password)
-
-    await firestore
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      //.then((data) => data.json())
-      .then(res => {
-        res.user
-          .updateProfile({
-            displayName: nickname
-          })
-          .then(function() {
-            // Update successful.
-          })
-          .catch(function(error) {
-            // An error happened.
-            console.log(error)
-          })
-
-        setUser(res.user)
-      })
-      .catch(err => {
-        console.log(err)
-        if (err.code === 'auth/email-already-in-use') {
-          return toast.warning(
-            'This email is already in use, Please login or continue with another email'
-          )
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  }
-
-  const registerWithGoogle = () => {
-    firestore
-      .auth()
-      .signInWithPopup(google)
-      .then(res => {
-        console.log(res.user)
-        dispatch(getUser(res.user))
-      })
-      .catch(err => {
-        if (err.code === 'auth/wrong-password') {
-          return toast.error('Email or password is incorrect')
-        } else if (err.code === 'auth/user-not-found') {
-          return toast.error('Email or password is invalid')
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  }
+  const dispatch = useDispatch()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -79,7 +28,7 @@ const Register = () => {
       email,
       password
     }
-    registerUser(data)
+    dispatch(registerUser(data))
   }
 
   return (
@@ -123,7 +72,7 @@ const Register = () => {
       <div className="google-btn">
         <GoogleButton
           type="light"
-          onClick={registerWithGoogle}
+          onClick={() => dispatch(registerWithGoogle())}
           label="Sign up with Google"
         />
       </div>

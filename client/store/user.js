@@ -23,6 +23,60 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
+export const registerWithGoogle = () => async dispatch => {
+  await firestore
+    .auth()
+    .signInWithPopup(google)
+    .then(res => {
+      console.log(res.user)
+      dispatch(setUser(res.user))
+    })
+    .catch(err => {
+      if (err.code === 'auth/wrong-password') {
+        return toast.error('Email or password is incorrect')
+      } else if (err.code === 'auth/user-not-found') {
+        return toast.error('Email or password is invalid')
+      } else {
+        return toast.error('Something went wrong')
+      }
+    })
+}
+
+export const registerUser = ({nickname, email, password}) => async dispatch => {
+  console.log('email:', email)
+  console.log('pas:', password)
+
+  await firestore
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    //.then((data) => data.json())
+    .then(res => {
+      res.user
+        .updateProfile({
+          displayName: nickname
+        })
+        .then(function() {
+          // Update successful.
+        })
+        .catch(function(error) {
+          // An error happened.
+          console.log(error)
+        })
+      history.push('/join')
+      dispatch(setUser(res.user))
+    })
+    .catch(err => {
+      console.log(err)
+      if (err.code === 'auth/email-already-in-use') {
+        return toast.warning(
+          'This email is already in use, Please login or continue with another email'
+        )
+      } else {
+        return toast.error('Something went wrong')
+      }
+    })
+}
+
 export const loginUser = ({email, password}) => async dispatch => {
   console.log('logging in user')
   console.log(email, password)
