@@ -2,7 +2,11 @@ import React, {useEffect} from 'react'
 import {HuePicker} from 'react-color'
 import {v1 as uuid} from 'uuid'
 import {Tooltip} from '@material-ui/core'
-import socket, {emitModifiedCanvasObject, emitAddedToCanvas} from '../socket'
+import socket, {
+  emitModifiedCanvasObject,
+  emitAddedToCanvas,
+  emitCanvasRemoveChange
+} from '../socket'
 import {
   addRect,
   addCirc,
@@ -75,7 +79,11 @@ function Tools(props) {
           if (!options.target.id) options.target.id = uuid()
           // if (options.target.emit === false) return
 
-          console.log('here in object:removed', options.target)
+          emitCanvasRemoveChange({
+            obj: options.target,
+            id: options.target.id,
+            room: roomId
+          })
         })
       }
     },

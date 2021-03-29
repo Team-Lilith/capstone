@@ -63,6 +63,11 @@ module.exports = io => {
       // socket.to(data.room).emit('add-image', data)
     })
 
+    socket.on('object removed', data => {
+      console.log('here @ object removed, room: ', data.room)
+      socket.to(data.room).emit('canvas remove change', data)
+    })
+
     // when a client emits a 'message' event, broadcast it
     socket.on('message', msg => {
       socket.to(msg.room).emit('message', msg)

@@ -41,6 +41,11 @@ export const emitAddedToCanvas = objectAdded => {
   socket.emit('object added', objectAdded)
 }
 
+export const emitCanvasRemoveChange = objectRemoved => {
+  console.log('emit object removed', objectRemoved)
+  socket.emit('object removed', objectRemoved)
+}
+
 //LISTENERS
 export const modifyCanvasObject = canvas => {
   //listens for object modified
@@ -127,6 +132,20 @@ export const receiveAddedObject = canvas => {
     canvas.add(object)
     object.setCoords()
     canvas.requestRenderAll()
+  })
+}
+
+export const receiveRemovedObject = canvas => {
+  socket.on('canvas remove change', data => {
+    console.log('receive object to delete', data)
+
+    canvas.getObjects().forEach(object => {
+      if (object.id === data.id) {
+        canvas.remove(object)
+        canvas.discardActiveObject()
+        canvas.requestRenderAll()
+      }
+    })
   })
 }
 

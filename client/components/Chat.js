@@ -36,7 +36,7 @@ export default function Chat(props) {
   return (
     <div id="chat-container">
       <div>
-        <h2>Chat Room</h2>
+        <h4>Chat Room</h4>
       </div>
       <div id="display-messages">
         {messages.map(msg => (

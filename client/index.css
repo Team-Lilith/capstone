@@ -32,7 +32,7 @@ a:hover {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 #room-top-container {
@@ -65,8 +65,8 @@ a:hover {
 #images {
   padding: 15px;
   margin: 15px;
-  /* max-width: 350px; */
-  width: 25%;
+  max-width: 350px;
+  /* width: 600px; */
   overflow-y: auto;
   height: 100%;
   border-radius: 50px;
@@ -133,7 +133,8 @@ a:hover {
 
 #chat-container h4 {
   font-family: 'Bangers', cursive;
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .message-input {
@@ -152,7 +153,7 @@ a:hover {
 }
 
 .message-input button {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 #display-messages {
@@ -274,11 +275,14 @@ hr {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  flex-direction: row;
 }
 
 #nav-left {
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
+  /* flex-direction: column; */
 }
 
 #nav-right {
@@ -304,7 +308,7 @@ hr {
 #title {
   margin: 0px 20px 0px 10px;
   align-self: center;
-  font-size: 70px;
+  font-size: 50px;
 }
 
 h1,
@@ -503,12 +507,13 @@ input[type='nickname'] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 #tools-buttons {
   display: flex;
   align-items: flex-start;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   flex: 1;
 }
 
