@@ -1,9 +1,12 @@
 import axios from 'axios'
+import {toast} from 'react-toastify'
+import firestore from 'firebase'
+import {google} from '../../server/db/firebase'
 import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_USER = 'GET_USER'
+const SET_USER = 'SET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -14,16 +17,65 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-export const getUser = user => ({type: GET_USER, user})
+export const setUser = user => ({type: SET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
  */
+export const loginUser = ({email, password}) => async dispatch => {
+  console.log('logging in user')
+  console.log(email, password)
+  let user = {}
+  await firestore
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(res => {
+      user = res.user
+      console.log(res.user)
+      history.push('/join')
+    })
+    .catch(err => {
+      //console.log(err)
+      if (err.code === 'auth/wrong-password') {
+        return toast.error('Email or password is incorrect')
+      } else if (err.code === 'auth/user-not-found') {
+        return toast.error('Email or password is invalid')
+      } else {
+        return toast.error('Something went wrong')
+      }
+    })
+  dispatch(setUser(user))
+}
+
+export const signInWithGoogle = () => async dispatch => {
+  try {
+    await firestore
+      .auth()
+      .signInWithPopup(google)
+      .then(res => {
+        console.log(res.user)
+        history.push('/join')
+        dispatch(setUser(res.user))
+      })
+      .catch(err => {
+        if (err.code === 'auth/wrong-password') {
+          return toast.error('Email or password is incorrect')
+        } else if (err.code === 'auth/user-not-found') {
+          return toast.error('Email or password is invalid')
+        } else {
+          return toast.error('Something went wrong')
+        }
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(setUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
   }
@@ -34,11 +86,11 @@ export const auth = (email, password, method) => async dispatch => {
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(setUser({error: authError}))
   }
 
   try {
-    dispatch(getUser(res.data))
+    dispatch(setUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -60,7 +112,7 @@ export const logout = () => async dispatch => {
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
-    case GET_USER:
+    case SET_USER:
       return action.user
     case REMOVE_USER:
       return defaultUser

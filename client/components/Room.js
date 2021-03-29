@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Tools, Images, Chat} from './index'
+import {connect} from 'redux'
 import {fabric} from 'fabric'
 import {useParams} from 'react-router'
 import {
