@@ -109,8 +109,6 @@ export const registerUser = ({nickname, email, password}) => async dispatch => {
 }
 
 export const loginUser = ({email, password}) => async dispatch => {
-  console.log('logging in user')
-  console.log(email, password)
   let user = {}
   await firestore
     .auth()
@@ -119,6 +117,7 @@ export const loginUser = ({email, password}) => async dispatch => {
       user = res.user
       console.log(res.user)
       history.push('/join')
+      dispatch(setUser(user))
     })
     .catch(err => {
       //console.log(err)
@@ -130,7 +129,6 @@ export const loginUser = ({email, password}) => async dispatch => {
         return toast.error('Something went wrong')
       }
     })
-  dispatch(setUser(user))
 }
 
 export const signInWithGoogle = () => async dispatch => {
