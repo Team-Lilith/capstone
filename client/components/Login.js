@@ -13,12 +13,32 @@ const Login = () => {
   // const [isUserLoggedIn, setUserAuthStatus] = useState(false)
   const dispatch = useDispatch()
 
-  const loginUser = ({email, password}) => {
+  const loginUser = async ({email, password}) => {
     console.log('logging in user')
     console.log(email, password)
-    firestore
+    await firestore
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res.user)
+        dispatch(getUser(res.user))
+      })
+      .catch(err => {
+        console.log(err)
+        if (err.code === 'auth/wrong-password') {
+          return toast.error('Email or password is incorrect')
+        } else if (err.code === 'auth/user-not-found') {
+          return toast.error('Email or password is invalid')
+        } else {
+          return toast.error('Something went wrong')
+        }
+      })
+  }
+
+  const signInWithGoogle = () => {
+    firestore
+      .auth()
+      .signInWithPopup(google)
       .then(res => {
         console.log(res.user)
         dispatch(getUser(res.user))
