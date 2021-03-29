@@ -12,9 +12,11 @@ import {
 } from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
+import {getInitialCanvas} from '../store'
 
 function Room() {
   const roomId = useSelector(state => state.room)
+  const initialCanvas = useSelector(state => state.canvas)
   const [canvas, setCanvas] = useState('')
   const dispatch = useDispatch()
   let {id} = useParams()
@@ -40,9 +42,21 @@ function Room() {
     () => {
       if (!roomId) {
         emitJoinRoom(id)
+      } else {
+        dispatch(getInitialCanvas(roomId))
       }
     },
     [roomId]
+  )
+
+  useEffect(
+    () => {
+      if (initialCanvas) {
+        console.log('loading inital canvas')
+        canvas.loadFromJSON(initialCanvas)
+      }
+    },
+    [initialCanvas]
   )
 
   return (

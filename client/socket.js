@@ -15,7 +15,7 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
-//EMITTERS
+// HELPERS
 
 const updateRoomMessages = (roomId, msg) => {
   let messages = realtimeDB.ref(roomId).child('messages')
@@ -35,6 +35,16 @@ const updateRoomMessages = (roomId, msg) => {
       console.error(error)
     })
 }
+
+const updateRoomCanvas = (roomId, canvas) => {
+  let canvasJSON = canvas.toDatalessJSON()
+  let dbCanvas = realtimeDB.ref(roomId).child('canvas')
+  dbCanvas.set(canvasJSON).catch(function(error) {
+    console.error(error)
+  })
+}
+
+//EMITTERS
 
 export const sendMessage = data => {
   socket.emit('message', data)
@@ -56,21 +66,24 @@ export const emitJoinRoom = id => {
   socket.emit('join room', id)
 }
 
-export const emitModifiedCanvasObject = objWithId => {
-  console.log('modified', objWithId)
+export const emitModifiedCanvasObject = (objWithId, roomId) => {
+  console.log('modified', objWithId, roomId)
   socket.emit('object-modified', objWithId)
+  updateRoomCanvas(roomId, objWithId.obj.canvas)
 }
 
 // here we emit object added socket and send back object newly added
 export const emitAddedToCanvas = objectAdded => {
   console.log('emit object', objectAdded)
   socket.emit('object added', objectAdded)
+  updateRoomCanvas(objectAdded.room, objectAdded.obj.canvas)
 }
 
 //LISTENERS
 export const modifyCanvasObject = canvas => {
   //listens for object modified
   socket.on('new-modification', data => {
+    console.log('heard modification event')
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
         //finds obj on canvas by id + sets modified obj to that obj to update it
@@ -83,41 +96,11 @@ export const modifyCanvasObject = canvas => {
   })
 }
 
-// here we listen to canvas add change
-// we turn it off (socket.off) to remove duplicates
-// we extract obj and id from data
-// data => options.target (obj) and options.target.id (id)
-// we define empty object that will be filled with the if that runs
-// had to be hard coded in this particular way
-// because the other ways i tried to add the new object with
-// were giving me back the object but transparent
-// and also it was messing up with the images (sending a transparent image doble)
-// so, depending on the type of the object that the second user receives
-// this is the same object that will send back
-// with the same specifications that we created them in fabric utils
-// we then change the emiting to false to not trigger another add
-// change the object and insert that into the other users canvas
-// the else is to take the case of the images because they have a DB id
-// to be able to sync the drawing we use the path object and sent back the
-// coordinates of the object that the user that drew emits
-// so we can give that back to the second user
-// if not done this way the only way two users could see the same
-// was if both users added the same thing individually
-
 export const receiveAddedObject = canvas => {
   socket.off('canvas add change')
   socket.on('canvas add change', data => {
     console.log('receive object', data)
     const {obj, id} = data
-    // const object = new fabric.Object()
-    // object.set(data)
-    // object.emit = false;
-    // canvas.add(object)
-    // const rect = new fabric.Rect({
-    //   height: data.height,
-    //   width: data.width,
-    //   fill: data.fill,
-    // })
     let object
     if (obj.type === 'rect') {
       object = new fabric.Rect({
