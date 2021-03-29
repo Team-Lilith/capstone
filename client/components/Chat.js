@@ -10,7 +10,6 @@ export default function Chat(props) {
   const roomId = props.roomId // user id passed down from room component
   const userId = useSelector(state => state.user)
   const dispatch = useDispatch()
-  console.log('user info', userId)
 
   useEffect(() => {}, [userId])
 
@@ -37,7 +36,7 @@ export default function Chat(props) {
   return (
     <div id="chat-container">
       <div>
-        <h2>Chat Room</h2>
+        <h4>Chat Room</h4>
       </div>
       <div id="display-messages">
         {messages.map(msg => (

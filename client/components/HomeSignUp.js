@@ -6,8 +6,6 @@ import {signInWithGoogle} from '../../server/db/firebase'
 import GoogleButton from 'react-google-button'
 
 function HomeSignUp(props) {
-  console.log('logged in?', props.isLoggedIn)
-
   return (
     <div>
       {!props.isLoggedIn ? (
@@ -28,7 +26,7 @@ function HomeSignUp(props) {
               <GoogleButton
                 type="light"
                 onClick={signInWithGoogle}
-                label="Sign in with Google"
+                label="Sign up with Google"
               />
             </div>
           </div>

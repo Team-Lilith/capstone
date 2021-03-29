@@ -2,7 +2,11 @@ import React, {useEffect} from 'react'
 import {HuePicker} from 'react-color'
 import {v1 as uuid} from 'uuid'
 import {Tooltip} from '@material-ui/core'
-import socket, {emitModifiedCanvasObject, emitAddedToCanvas} from '../socket'
+import socket, {
+  emitModifiedCanvasObject,
+  emitAddedToCanvas,
+  emitCanvasRemoveChange
+} from '../socket'
 import {
   addRect,
   addCirc,
@@ -33,10 +37,7 @@ function Tools(props) {
 
   useEffect(
     () => {
-      console.log('on the use effect')
-
       if (canvas) {
-        // console.log('testing re render')
         canvas.on('object:modified', function(options) {
           if (options.target) {
             const objModified = {
@@ -60,10 +61,7 @@ function Tools(props) {
           }
         })
         canvas.on('object:added', function(options) {
-          console.log(options)
           if (!options.target.id) options.target.id = uuid()
-          console.log('id:', options.target.id)
-
           // same with images we are having a bool
           // to dictate to emit or not
           // if not it will be a ping pong event and
@@ -71,6 +69,17 @@ function Tools(props) {
           // see socket file for more dets
           if (options.target.emit === false) return
           emitAddedToCanvas({
+            obj: options.target,
+            id: options.target.id,
+            room: roomId
+          })
+        })
+
+        canvas.on('object:removed', function(options) {
+          if (!options.target.id) options.target.id = uuid()
+          // if (options.target.emit === false) return
+
+          emitCanvasRemoveChange({
             obj: options.target,
             id: options.target.id,
             room: roomId

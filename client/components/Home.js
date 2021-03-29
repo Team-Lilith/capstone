@@ -6,8 +6,6 @@ import {signInWithGoogle} from '../../server/db/firebase'
 import GoogleButton from 'react-google-button'
 
 function Home(props) {
-  console.log('logged in?', props.isLoggedIn)
-
   return (
     <div>
       {!props.isLoggedIn ? (

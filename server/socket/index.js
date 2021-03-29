@@ -15,7 +15,6 @@ module.exports = io => {
           socket.join(roomId)
           io.to(socket.id).emit('join successful', roomId)
         } else {
-          console.log('here @ full room')
           io.to(socket.id).emit('full room')
         }
       } else {
@@ -29,7 +28,7 @@ module.exports = io => {
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
-      console.log('socket attempting to create room #', roomId)
+      console.log('socket attempting to create room:', roomId)
       if (!room) {
         console.log('room does not exist - creating')
         socket.join(roomId)
@@ -46,8 +45,6 @@ module.exports = io => {
 
     // when a client emits an 'add-image' event, broadcast it
     socket.on('add-image', data => {
-      console.log('broadcasting add-image event')
-      console.log('looking for data.room', data.room)
       socket.to(data.room).emit('add-image', data)
     })
 
@@ -64,6 +61,11 @@ module.exports = io => {
       console.log('here @ object modified, room: ', data.room)
       socket.broadcast.emit('new-modification', data)
       // socket.to(data.room).emit('add-image', data)
+    })
+
+    socket.on('object removed', data => {
+      console.log('here @ object removed, room: ', data.room)
+      socket.to(data.room).emit('canvas remove change', data)
     })
 
     // when a client emits a 'message' event, broadcast it

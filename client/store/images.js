@@ -28,7 +28,6 @@ export const getImages = () => async dispatch => {
         console.log('Error getting documents: ', error)
       })
     const imagesCopy = JSON.parse(JSON.stringify(images))
-    console.log(imagesCopy)
     dispatch(gotImages(imagesCopy))
   } catch (error) {
     console.error(error)

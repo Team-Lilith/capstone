@@ -8,7 +8,6 @@ import socket, {emitImage} from '../socket'
 // and once object:moves triggered it merged the objects
 // instead of moving each one separately
 export const addRect = canvas => {
-  console.log('rect func')
   const rect = new fabric.Rect({
     height: 100,
     width: 500,
@@ -57,21 +56,30 @@ export const deselect = canvas => {
 }
 
 export const bringForward = canvas => {
-  let selected = canvas.getActiveObject()
-  selected.bringForward()
+  let selected = canvas.getActiveObject() || canvas.getActiveGroup()
+
+  if (selected) {
+    selected.bringForward()
+    // selected.sentFront = true
+    // console.log('selected', selected)
+  }
   canvas.requestRenderAll()
 }
 
 export const sendBackwards = canvas => {
-  let selected = canvas.getActiveObject()
-  selected.sendBackwards()
+  let selected = canvas.getActiveObject() || canvas.getActiveGroup()
+
+  if (selected) {
+    selected.sendBackwards()
+    // selected.sentBack = true
+    // console.log('selected', selected)
+  }
   canvas.requestRenderAll()
 }
 
 export const deleteSelected = canvas => {
   let selected = canvas.getActiveObject()
   canvas.remove(selected)
-
   canvas.discardActiveObject()
   canvas.requestRenderAll()
 }
@@ -123,13 +131,15 @@ export const groupObjects = (canvas, group, shouldGroup) => {
   if (shouldGroup) {
     const objects = canvas.getObjects()
     group.val = new fabric.Group(objects)
-    clearCanvas(canvas, svgState)
+    // clearCanvas(canvas, svgState)
+    // socket.off('canvas add change')
     canvas.add(group.val)
     canvas.requestRenderAll()
   } else {
     group.val.destroy()
     const oldGroup = group.val.getObjects()
-    clearCanvas(canvas, svgState)
+    // clearCanvas(canvas, svgState)
+    // socket.off('canvas add change')
     canvas.add(...oldGroup)
     group.val = null
     canvas.requestRenderAll()

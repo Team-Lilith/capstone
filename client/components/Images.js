@@ -15,10 +15,8 @@ function Images(props) {
     () => {
       if (!allImages.length) {
         dispatch(getImages())
-        console.log('!all images - dispatch get images')
       } else {
         console.log(allImages)
-        console.log('allimages found = set as currentImages')
         const imageCopy = JSON.parse(JSON.stringify(allImages))
         setCurrentImages(imageCopy)
       }
@@ -45,7 +43,7 @@ function Images(props) {
     return (
       <>
         <div id="image-container-header">
-          <h2>Click an image to add it to your canvas!</h2>
+          <h3>Click an image to add it to your canvas!</h3>
           <select name="tags" id="tags" onChange={changeCategory}>
             <option>Pick an image category:</option>
             <option value="all">All Images</option>
