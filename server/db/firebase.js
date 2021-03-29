@@ -16,19 +16,23 @@ if (process.env.NODE_ENV === 'development') {
 
 firebase.default.initializeApp(firebaseConfig)
 
+// const provider = new firebase.default.auth.GoogleAuthProvider()
+
+// const signInWithGoogle = () => {
+//   firebase.default.auth.signInWithPopup(provider)
+// }
+
 const auth = firebase.default.auth()
-const provider = new firebase.default.auth.GoogleAuthProvider()
 const firestore = firebase.default.firestore()
-const signInWithGoogle = () => {
-  firebase.default.auth.signInWithPopup(provider)
-}
+const google = new firebase.default.auth.GoogleAuthProvider()
 const realtimeDB = firebase.default.database()
 
 module.exports = {
   firebase,
   auth,
-  provider,
+  google,
   firestore,
-  realtimeDB,
-  signInWithGoogle
+  realtimeDB
+  // provider,
+  // signInWithGoogle
 }
