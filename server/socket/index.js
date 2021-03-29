@@ -1,8 +1,15 @@
-module.exports = io => {
+module.exports = (io, realtimeDB) => {
   io.on('connection', socket => {
     // A client has made a connection to this server
     // "socket" refers to the particular client socket connection
     console.log(`A socket connection to the server has been made: ${socket.id}`)
+
+    // room is deleted from realtimeDB 30min after being created
+    function deleteRoom(roomId) {
+      setTimeout(function() {
+        realtimeDB.ref(roomId).remove()
+      }, 1800000)
+    }
 
     // Each socket can join a room by emitting the room name in a 'join' event
     // The server will listen to the 'join' event and attach that socket to the room
@@ -27,12 +34,16 @@ module.exports = io => {
 
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
+      console.log('in server create room listener')
       const room = io.of('/').adapter.rooms.get(roomId)
       console.log('socket attempting to create room:', roomId)
       if (!room) {
         console.log('room does not exist - creating')
         socket.join(roomId)
-        io.to(socket.id).emit('join successful', roomId)
+        console.log('room =>', io.of('/').adapter.rooms.get(roomId))
+        io.to(socket.id).emit('create successful', roomId)
+        // delete room info from db after 30min
+        deleteRoom(roomId)
       } else {
         io.to(socket.id).emit('no room')
         console.log(
@@ -43,22 +54,17 @@ module.exports = io => {
       }
     })
 
-    // when a client emits an 'add-image' event, broadcast it
     socket.on('add-image', data => {
       socket.to(data.room).emit('add-image', data)
     })
 
-    // this is where object added sync starts
-    // we are emiting canvas add change
     socket.on('object added', data => {
-      console.log('here @ object added, room: ', data.room)
-      // socket.broadcast.emit('canvas add change', data)
+      console.log('server emitting object added event to room')
       socket.to(data.room).emit('canvas add change', data)
     })
 
-    // when the client emits an 'object-modified' event, broadcast a 'new-modification' event to room
     socket.on('object-modified', data => {
-      console.log('here @ object modified, room: ', data.room)
+      console.log('server broadcasting new-modification event')
       socket.broadcast.emit('new-modification', data)
       // socket.to(data.room).emit('add-image', data)
     })
@@ -70,6 +76,7 @@ module.exports = io => {
 
     // when a client emits a 'message' event, broadcast it
     socket.on('message', msg => {
+      console.log('server emitting message event to room')
       socket.to(msg.room).emit('message', msg)
     })
 

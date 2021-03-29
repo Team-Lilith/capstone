@@ -5,6 +5,7 @@ import {
   emitCreateRoom,
   emitJoinRoom,
   joinSuccess,
+  createSuccess,
   receiveNoRoom,
   receiveFullRoom
 } from '../socket'
@@ -14,6 +15,7 @@ function Join() {
   const [roomId, setRoomId] = useState('')
   const dispatch = useDispatch()
   joinSuccess(dispatch)
+  createSuccess(dispatch)
   receiveNoRoom()
   receiveFullRoom()
 

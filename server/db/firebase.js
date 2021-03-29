@@ -1,6 +1,7 @@
-import firebase from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+const firebase = require('firebase')
+require('firebase/auth')
+require('firebase/firestore')
+require('firebase/database')
 
 var FIREBASE_CONFIG = require('./fbconfig.json')
 
@@ -8,13 +9,30 @@ if (process.env.NODE_ENV === 'development') {
   var firebaseConfig = FIREBASE_CONFIG
 }
 
-firebase.initializeApp(firebaseConfig)
+// Your web app's Firebase configuration
+// if (process.env.NODE_ENV === 'development') {
+//   var firebaseConfig = FIREBASE_CONFIG
+// }
 
-const auth = firebase.auth()
+firebase.default.initializeApp(firebaseConfig)
 
-// Set authentication Provider to Google Auth
-export const google = new firebase.auth.GoogleAuthProvider()
+// const provider = new firebase.default.auth.GoogleAuthProvider()
 
-const firestore = firebase.firestore()
+// const signInWithGoogle = () => {
+//   firebase.default.auth.signInWithPopup(provider)
+// }
 
-export {firebase, auth, firestore}
+const auth = firebase.default.auth()
+const firestore = firebase.default.firestore()
+const google = new firebase.default.auth.GoogleAuthProvider()
+const realtimeDB = firebase.default.database()
+
+module.exports = {
+  firebase,
+  auth,
+  google,
+  firestore,
+  realtimeDB
+  // provider,
+  // signInWithGoogle
+}

@@ -3,6 +3,7 @@ import {fabric} from 'fabric'
 import {fullRoom} from './store'
 import {setCurrentRoom} from './store'
 import history from './history'
+import {realtimeDB} from '../server/db'
 
 //CONNECTION
 
@@ -15,8 +16,32 @@ socket.on('connect', () => {
 })
 
 //EMITTERS
-export const sendMessage = message => {
-  socket.emit('message', message)
+
+const updateRoomMessages = (roomId, msg) => {
+  let messages = realtimeDB.ref(roomId).child('messages')
+  messages
+    .get()
+    .then(function(snapshot) {
+      if (snapshot.exists()) {
+        let updatedMsgs = [...snapshot.val(), msg]
+        messages.set(updatedMsgs)
+        console.log('setting updated messages')
+      } else {
+        messages.set([msg])
+        console.log('no messages yet - setting')
+      }
+    })
+    .catch(function(error) {
+      console.error(error)
+    })
+}
+
+export const sendMessage = data => {
+  socket.emit('message', data)
+  const user = data.user || 'none'
+  const room = data.room
+  const sendData = {msg: data.msg, user: user, room: room, id: data.id}
+  updateRoomMessages(room, sendData)
 }
 
 export const emitImage = imageObjWithId => {
@@ -189,6 +214,21 @@ export const joinSuccess = dispatch => {
   socket.on('join successful', roomId => {
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
+  })
+}
+
+//user successfully creates room => is routed to room
+export const createSuccess = dispatch => {
+  socket.off('create successful')
+  socket.on('create successful', roomId => {
+    console.log('in create successful listener')
+    dispatch(setCurrentRoom(roomId))
+    history.push(`/room/${roomId}`)
+    realtimeDB.ref(roomId).set({
+      canvas: '',
+      messages: [],
+      users: ['user name here']
+    })
   })
 }
 

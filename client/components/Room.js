@@ -7,7 +7,8 @@ import {
   emitJoinRoom,
   receiveFullRoom,
   receiveNoRoom,
-  joinSuccess
+  joinSuccess,
+  createSuccess
 } from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
@@ -18,6 +19,7 @@ function Room() {
   const dispatch = useDispatch()
   let {id} = useParams()
   joinSuccess(dispatch)
+  createSuccess(dispatch)
   receiveFullRoom()
   receiveNoRoom()
 

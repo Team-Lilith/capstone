@@ -6,8 +6,9 @@ import user from './user'
 import images from './images'
 import room from './room'
 import gallery from './gallery'
+import chat from './chat'
 
-const reducer = combineReducers({user, images, room, gallery})
+const reducer = combineReducers({user, images, room, gallery, chat})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -18,3 +19,4 @@ export * from './user'
 export * from './images'
 export * from './room'
 export * from './gallery'
+export * from './chat'

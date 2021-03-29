@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Login, Register, Gallery} from './index'
 import {Link} from 'react-router-dom'
+import {signInWithGoogle} from '../../server/db/'
+import GoogleButton from 'react-google-button'
 import Guest from './Guest'
 
 function Home(props) {

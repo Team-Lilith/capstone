@@ -1,35 +1,33 @@
+import {realtimeDB} from '../../server/db'
+
 //action types
-const STORE_MESSAGE = 'STORE_MESSAGE'
+const SET_INITIAL_CHAT = 'SET_INITIAL_CHAT'
 
 //action creators
-const storeMessage = message => ({
-  type: STORE_MESSAGE,
-  message
+const setInitialChat = messages => ({
+  type: SET_INITIAL_CHAT,
+  messages
 })
 
 //thunks
-export const getImages = () => async dispatch => {
-  try {
-    let images = []
-    await firestore
-      .collection('images')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          images.push({
-            url: doc.data().url,
-            tags: doc.data().tags
-          })
-        })
-      })
-      .catch(error => {
-        console.log('Error getting documents: ', error)
-      })
-    const imagesCopy = JSON.parse(JSON.stringify(images))
-    dispatch(gotImages(imagesCopy))
-  } catch (error) {
-    console.error(error)
-  }
+export const getInitialChat = roomId => dispatch => {
+  console.log('in chat thunk')
+  let messages = realtimeDB.ref(roomId).child('messages')
+
+  messages
+    .get()
+    .then(function(snapshot) {
+      console.log(snapshot)
+      if (snapshot.exists()) {
+        console.log('snapshot in chat thunk =>', snapshot.val())
+        dispatch(setInitialChat(snapshot.val()))
+      } else {
+        dispatch(setInitialChat([]))
+      }
+    })
+    .catch(function(error) {
+      console.error(error)
+    })
 }
 
 const initialState = []
@@ -37,8 +35,8 @@ const initialState = []
 //reducer
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GOT_IMAGES:
-      return action.images
+    case SET_INITIAL_CHAT:
+      return action.messages
     default:
       return state
   }
