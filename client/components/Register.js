@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
-import {google} from '../../server/db/firebase'
-import GoogleButton from 'react-google-button'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -11,11 +9,11 @@ const Register = () => {
   const [nickname, setnickName] = useState('')
   const [user, setUser] = useState({})
 
-  const registerUser = async ({nickname, email, password}) => {
+  const registerUser = ({nickname, email, password}) => {
     console.log('email:', email)
     console.log('pas:', password)
 
-    await firestore
+    firestore
       .auth()
       .createUserWithEmailAndPassword(email, password)
       //.then((data) => data.json())
@@ -28,9 +26,9 @@ const Register = () => {
             // Update successful.
             console.log('then')
           })
-          .catch(function(error) {
+          .catch(function() {
             // An error happened.
-            console.log(error)
+            console.log('catch')
           })
 
         setUser(res.user)
@@ -41,25 +39,6 @@ const Register = () => {
           return toast.warning(
             'This email is already in use, Please login or continue with another email'
           )
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  }
-
-  const registerWithGoogle = () => {
-    firestore
-      .auth()
-      .signInWithPopup(google)
-      .then(res => {
-        console.log(res.user)
-        dispatch(getUser(res.user))
-      })
-      .catch(err => {
-        if (err.code === 'auth/wrong-password') {
-          return toast.error('Email or password is incorrect')
-        } else if (err.code === 'auth/user-not-found') {
-          return toast.error('Email or password is invalid')
         } else {
           return toast.error('Something went wrong')
         }
@@ -86,9 +65,9 @@ const Register = () => {
   }
 
   return (
-    <div className="column register-container">
+    <div className="column">
       <form onSubmit={handleSubmit}>
-        <h2>Sign Up</h2>
+        <h1>Sign Up</h1>
         <input
           type="nickname"
           placeholder="Nickname"
@@ -96,7 +75,6 @@ const Register = () => {
           value={nickname}
           onChange={e => setnickName(e.target.value)}
         />
-        <br />
         <input
           type="email"
           placeholder="Email"
@@ -104,7 +82,6 @@ const Register = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <br />
         <input
           type="password"
           placeholder="Password"
@@ -117,23 +94,6 @@ const Register = () => {
           Sign Up
         </button>
       </form>
-      <div className="login-divider">
-        <div className="divider" />
-        <div className="or-divider">or</div>
-        <div className="divider" />
-      </div>
-
-      <div className="google-btn">
-        <GoogleButton
-          type="light"
-          onClick={registerWithGoogle}
-          label="Sign up with Google"
-        />
-      </div>
-
-      <Link to="/login">
-        <div className="link-to-signup">Have an account? Log in Here</div>
-      </Link>
     </div>
   )
 }
