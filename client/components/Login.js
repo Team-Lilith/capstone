@@ -2,10 +2,9 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
+import {signInWithGoogle} from '../../server/db/firebase'
 import {getUser} from '../store'
 import {useSelector, useDispatch} from 'react-redux'
-import {google} from '../../server/db/firebase'
-import GoogleButton from 'react-google-button'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -14,31 +13,12 @@ const Login = () => {
   // const [isUserLoggedIn, setUserAuthStatus] = useState(false)
   const dispatch = useDispatch()
 
-  const loginUser = async ({email, password}) => {
+  const loginUser = ({email, password}) => {
     console.log('logging in user')
     console.log(email, password)
-    await firestore
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        dispatch(getUser(res.user))
-      })
-      .catch(err => {
-        console.log(err)
-        if (err.code === 'auth/wrong-password') {
-          return toast.error('Email or password is incorrect')
-        } else if (err.code === 'auth/user-not-found') {
-          return toast.error('Email or password is invalid')
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  }
-
-  const signInWithGoogle = () => {
     firestore
       .auth()
-      .signInWithPopup(google)
+      .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res.user)
         dispatch(getUser(res.user))
@@ -70,7 +50,7 @@ const Login = () => {
   return (
     <div className="column">
       <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h1>Login</h1>
         <input
           type="email"
           placeholder="Email"
@@ -78,7 +58,6 @@ const Login = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <br />
         <input
           type="password"
           placeholder="Password"
@@ -86,23 +65,17 @@ const Login = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+
         <br />
+
         <button className="login-btn" type="submit">
           Login
         </button>
-
         {/* <h3>or...</h3> */}
         {/* <button className="login-input" type="button" onClick={signInWithGoogle}>
           Sign in With Google
         </button> */}
       </form>
-      <div className="google-btn">
-        <GoogleButton
-          type="light"
-          onClick={signInWithGoogle}
-          label="Login with Google"
-        />
-      </div>
     </div>
   )
 }
