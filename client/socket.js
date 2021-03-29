@@ -4,6 +4,9 @@ import {fullRoom} from './store'
 import {setCurrentRoom} from './store'
 import history from './history'
 
+fabric.Object.prototype.getZIndex = function() {
+  return this.canvas.getObjects().indexOf(this)
+}
 //CONNECTION
 
 //establishes socket connection upon landing on webpage
@@ -37,7 +40,7 @@ export const emitModifiedCanvasObject = objWithId => {
 
 // here we emit object added socket and send back object newly added
 export const emitAddedToCanvas = objectAdded => {
-  console.log('emit object', objectAdded)
+  console.log('emit object added', objectAdded)
   socket.emit('object added', objectAdded)
 }
 
@@ -55,6 +58,7 @@ export const modifyCanvasObject = canvas => {
       if (object.id === data.id) {
         //finds obj on canvas by id + sets modified obj to that obj to update it
         object.set(data.obj)
+        object.getZIndex()
         //set Coords allows obj to be remodified after updating
         object.setCoords()
         canvas.renderAll()
