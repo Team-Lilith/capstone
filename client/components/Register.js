@@ -23,11 +23,10 @@ const Register = () => {
             displayName: nickname
           })
           .then(function() {
-            // Update successful.
+            console.log('Update successful.')
           })
-          .catch(function() {
-            // An error happened.
-            console.log('catch')
+          .catch(function(error) {
+            console.log(error)
           })
 
         setUser(res.user)
