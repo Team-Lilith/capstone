@@ -2,52 +2,19 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
+import {google} from '../../server/db/firebase'
+import GoogleButton from 'react-google-button'
+import {registerWithGoogle, registerUser} from '../store'
+import {useDispatch} from 'react-redux'
 
 const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [nickname, setnickName] = useState('')
   const [user, setUser] = useState({})
-
-  const registerUser = ({nickname, email, password}) => {
-    console.log('email:', email)
-    console.log('pas:', password)
-
-    firestore
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      //.then((data) => data.json())
-      .then(res => {
-        res.user
-          .updateProfile({
-            displayName: nickname
-          })
-          .then(function() {
-            // Update successful.
-            console.log('then')
-          })
-          .catch(function() {
-            // An error happened.
-            console.log('catch')
-          })
-
-        setUser(res.user)
-        console.log('setting user')
-      })
-      .catch(err => {
-        if (err.code === 'auth/email-already-in-use') {
-          return toast.warning(
-            'This email is already in use, Please login or continue with another email'
-          )
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  }
+  const dispatch = useDispatch()
 
   const handleSubmit = e => {
-    console.log('handling submit')
-    console.log(e.target)
     e.preventDefault()
     if (!email || !password) {
       return toast.error('Please enter your email and password')
@@ -61,13 +28,13 @@ const Register = () => {
       email,
       password
     }
-    registerUser(data)
+    dispatch(registerUser(data))
   }
 
   return (
-    <div className="column">
+    <div className="column register-container">
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h2>Sign Up</h2>
         <input
           type="nickname"
           placeholder="Nickname"
@@ -75,6 +42,7 @@ const Register = () => {
           value={nickname}
           onChange={e => setnickName(e.target.value)}
         />
+        <br />
         <input
           type="email"
           placeholder="Email"
@@ -82,6 +50,7 @@ const Register = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
+        <br />
         <input
           type="password"
           placeholder="Password"
@@ -94,6 +63,23 @@ const Register = () => {
           Sign Up
         </button>
       </form>
+      <div className="login-divider">
+        <div className="divider" />
+        <div className="or-divider">or</div>
+        <div className="divider" />
+      </div>
+
+      <div className="google-btn">
+        <GoogleButton
+          type="light"
+          onClick={() => dispatch(registerWithGoogle())}
+          label="Sign up with Google"
+        />
+      </div>
+
+      <Link to="/login">
+        <div className="link-to-signup">Have an account? Log in Here</div>
+      </Link>
     </div>
   )
 }

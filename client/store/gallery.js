@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import {firestore} from '../../server/db'
+import history from '../history'
 
 //action types
 const SET_GALLERY = 'GET_GALLERY'
@@ -24,13 +25,11 @@ export const fetchGallery = () => async dispatch => {
             data: doc.data(),
             id: doc.id
           })
-          console.log(`${doc.id} => ${doc.data()}`)
         })
-        console.log('got gallery')
         dispatch(setGallery(gallery))
       })
   } catch (error) {
-    console.log('error fetching gallery', error)
+    console.log('Error fetching gallery', error)
   }
 }
 
@@ -51,8 +50,9 @@ export const saveCanvas = (canvas, users = null) => {
       .catch(error => {
         console.error('Error adding document: ', error)
       })
+    history.push('/gallery')
   } catch (error) {
-    console.log('error saving canvas to db', error)
+    console.log('Error saving canvas to db', error)
   }
 }
 

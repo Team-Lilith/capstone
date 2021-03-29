@@ -4,10 +4,9 @@ import {Login, Register, Gallery} from './index'
 import {Link} from 'react-router-dom'
 import {signInWithGoogle} from '../../server/db/'
 import GoogleButton from 'react-google-button'
+import Guest from './Guest'
 
 function Home(props) {
-  console.log('logged in?', props.isLoggedIn)
-
   return (
     <div>
       {!props.isLoggedIn ? (
@@ -15,26 +14,17 @@ function Home(props) {
           <div id="auth-container">
             <Login />
 
-            <Link to="/signup">
-              <div className="link-to-signup">New? Sign Up Here</div>
-            </Link>
-
             <div className="login-divider">
               <div className="divider" />
               <div className="or-divider">or</div>
               <div className="divider" />
             </div>
 
-            {/* <button className="google-btn" type="button" onClick={signInWithGoogle}>
-              Sign in With Google
-            </button> */}
-            <div className="google-btn">
-              <GoogleButton
-                type="light"
-                onClick={signInWithGoogle}
-                label="Sign in with Google"
-              />
-            </div>
+            <Guest />
+
+            <Link to="/signup">
+              <p className="link-to-signup">New? Sign Up Here</p>
+            </Link>
           </div>
 
           <div id="gallery-container">

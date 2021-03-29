@@ -57,22 +57,28 @@ export const emitJoinRoom = id => {
 }
 
 export const emitModifiedCanvasObject = objWithId => {
-  console.log('modified', objWithId)
   socket.emit('object-modified', objWithId)
 }
 
 // here we emit object added socket and send back object newly added
 export const emitAddedToCanvas = objectAdded => {
-  console.log('emit object', objectAdded)
+  console.log('emit object added', objectAdded)
   socket.emit('object added', objectAdded)
+}
+
+export const emitCanvasRemoveChange = objectRemoved => {
+  console.log('emit object removed', objectRemoved)
+  socket.emit('object removed', objectRemoved)
 }
 
 //LISTENERS
 export const modifyCanvasObject = canvas => {
   //listens for object modified
   socket.on('new-modification', data => {
+    console.log('looking for object that changed layer', data)
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
+        // canvas.getObjects().indexOf(data.obj)
         //finds obj on canvas by id + sets modified obj to that obj to update it
         object.set(data.obj)
         //set Coords allows obj to be remodified after updating
@@ -109,15 +115,6 @@ export const receiveAddedObject = canvas => {
   socket.on('canvas add change', data => {
     console.log('receive object', data)
     const {obj, id} = data
-    // const object = new fabric.Object()
-    // object.set(data)
-    // object.emit = false;
-    // canvas.add(object)
-    // const rect = new fabric.Rect({
-    //   height: data.height,
-    //   width: data.width,
-    //   fill: data.fill,
-    // })
     let object
     if (obj.type === 'rect') {
       object = new fabric.Rect({
@@ -146,7 +143,13 @@ export const receiveAddedObject = canvas => {
     } else if (obj.type === 'path') {
       object = new fabric.Path(obj.path)
       object.set(obj)
-      console.log('yup', object)
+    } else if (obj.type === 'image') {
+      socket.off('add-image')
+      let image = document.createElement('img')
+      image.setAttribute('src', obj.src)
+      console.log('IMAGE', image)
+      object = new fabric.Image(image, obj)
+      console.log('IMAGE OBJ', object)
     } else {
       return
     }
@@ -155,6 +158,20 @@ export const receiveAddedObject = canvas => {
     canvas.add(object)
     object.setCoords()
     canvas.requestRenderAll()
+  })
+}
+
+export const receiveRemovedObject = canvas => {
+  socket.on('canvas remove change', data => {
+    console.log('receive object to delete', data)
+
+    canvas.getObjects().forEach(object => {
+      if (object.id === data.id) {
+        canvas.remove(object)
+        canvas.discardActiveObject()
+        canvas.requestRenderAll()
+      }
+    })
   })
 }
 
@@ -168,6 +185,7 @@ export const receiveMessageAndUpdateState = (setState, prevState) => {
 export const receiveImage = (addToCanvas, canvas, roomId) => {
   socket.off('add-image')
   socket.on('add-image', image => {
+    console.log('imageeee', image)
     addToCanvas(canvas, image, true, roomId)
   })
 }
@@ -175,7 +193,7 @@ export const receiveImage = (addToCanvas, canvas, roomId) => {
 export const receiveFullRoom = () => {
   socket.off('full room')
   socket.on('full room', () => {
-    history.push('/')
+    history.push('/join')
     console.log('room is full!')
     // toast notification ?
   })
@@ -184,7 +202,7 @@ export const receiveFullRoom = () => {
 export const receiveNoRoom = () => {
   socket.off('no room')
   socket.on('no room', () => {
-    history.push('/')
+    history.push('/join')
     console.log('no such room!')
     // toast notification ?
   })
