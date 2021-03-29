@@ -13,7 +13,7 @@ function Save(props) {
   const canvas = props.canvas
   return (
     <div>
-      <Tooltip title="Save Canvas" arrow>
+      <Tooltip title="Save Canvas and Finish" arrow>
         <img
           type="submit"
           src="/images/diskette.png"

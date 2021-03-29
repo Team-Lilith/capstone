@@ -4,8 +4,6 @@
 
 body {
   background-color: deepskyblue;
-  margin: 0;
-  padding: 0;
 }
 
 form input {
@@ -13,6 +11,8 @@ form input {
 }
 
 #body {
+  z-index: -3;
+  padding-top: 12vh;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -71,7 +71,7 @@ a:hover {
   margin: 15px;
   /* max-width: 350px; */
   width: 25%;
-  overflow-y: auto;
+  overflow-y: hidden;
   height: 100%;
   border-radius: 50px;
   background: #00bfff;
@@ -79,7 +79,15 @@ a:hover {
 }
 
 .canvas-container {
-  width: 50%;
+  margin: 1em;
+}
+.gallery-element {
+  padding: 0px;
+  margin: 15px;
+  width: 25%;
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
 #canvas-div {
@@ -141,8 +149,14 @@ a:hover {
 }
 
 .message-input {
+  padding: 2vh;
   text-align: center;
   width: 100%;
+}
+.message-bubble {
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 20px;
 }
 
 .message-input input[type='text'] {
@@ -166,7 +180,7 @@ a:hover {
   border-radius: 50px;
   background: #00bfff;
   box-shadow: inset 20px 20px 60px #00a2d9, inset -20px -20px 60px #00dcff;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .image-bar-image {
@@ -220,7 +234,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   width: 40vw;
   height: 80vh;
@@ -233,7 +247,7 @@ a:hover {
 }
 
 #gallery-container h1 {
-  margin: 10px;
+  margin: 15px;
 }
 
 #gallery-container h3 {
@@ -282,8 +296,12 @@ hr {
 }
 
 #nav-container {
+  z-index: 3;
+  height: 10vh;
+  position: fixed;
   display: flex;
   justify-content: space-between;
+  transition: top 0.5s;
   padding-top: 10px;
   height: 8vh;
 }
@@ -595,7 +613,8 @@ input[type='nickname'] {
 .canvases-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
+  cursor: auto;
 }
 
 .canvases-container div {

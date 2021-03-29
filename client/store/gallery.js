@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import {firestore} from '../../server/db'
+import history from '../history'
 
 //action types
 const SET_GALLERY = 'GET_GALLERY'
@@ -51,6 +52,7 @@ export const saveCanvas = (canvas, users = null) => {
       .catch(error => {
         console.error('Error adding document: ', error)
       })
+    history.push('/gallery')
   } catch (error) {
     console.log('error saving canvas to db', error)
   }
