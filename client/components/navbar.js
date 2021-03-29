@@ -23,7 +23,7 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => (
             </Link>
 
             <Link to="/gallery">
-              <div className="nav-button">
+              <div className="nav-hover-button">
                 <h3>Gallery</h3>
               </div>
             </Link>

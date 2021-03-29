@@ -6,7 +6,6 @@ import '../index.css'
 
 export default function Chat(props) {
   const [messages, setMessages] = useState([])
-  // const userId = 100 // get userId from Auth
   const roomId = props.roomId // user id passed down from room component
   const userId = useSelector(state => state.user)
   const dispatch = useDispatch()
