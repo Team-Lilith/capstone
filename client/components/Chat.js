@@ -11,7 +11,7 @@ export default function Chat(props) {
   const userId = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  useEffect(() => {}, [userId])
+  useEffect(() => {}, [userId]) // is this needed?
 
   const handleSubmit = e => {
     e.preventDefault()

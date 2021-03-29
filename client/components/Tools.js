@@ -21,7 +21,7 @@ import {
   deleteSelected,
   bringForward,
   sendBackwards
-} from './FabricUtils'
+} from './FabricUtils' // in cases like these it may be easier to import the whole object then dot off the properties / functions needed
 import Save from './Save'
 
 function Tools(props) {

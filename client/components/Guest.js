@@ -11,6 +11,7 @@ const Guest = () => {
 
   const dispatch = useDispatch()
 
+  // consider refactoring to use async / await
   const loginGuest = ({nickname}) => {
     console.log('logging in guest')
     console.log(nickname)

@@ -1,3 +1,5 @@
+<!-- Don't forget to update the README with a description of your own project -->
+
 # Boilermaker
 
 _Good things come in pairs_

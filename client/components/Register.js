@@ -13,6 +13,8 @@ const Register = () => {
     console.log('email:', email)
     console.log('pas:', password)
 
+    // mixing async / await with .then is a little misleading
+    // try to convert to using one or the other
     await firestore
       .auth()
       .createUserWithEmailAndPassword(email, password)

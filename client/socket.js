@@ -4,6 +4,8 @@ import {fullRoom} from './store'
 import {setCurrentRoom} from './store'
 import history from './history'
 
+// very nicely detailed comments
+
 //CONNECTION
 
 //establishes socket connection upon landing on webpage

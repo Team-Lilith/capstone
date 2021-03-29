@@ -13,6 +13,8 @@ const Login = () => {
   // const [isUserLoggedIn, setUserAuthStatus] = useState(false)
   const dispatch = useDispatch()
 
+  // same note as other file on mixing async with .then
+  // other note: these also could be abstracted into a utils file
   const loginUser = async ({email, password}) => {
     console.log('logging in user')
     console.log(email, password)

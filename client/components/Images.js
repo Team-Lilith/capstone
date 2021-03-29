@@ -40,6 +40,7 @@ function Images(props) {
   }
 
   if (allImages.length) {
+    // you may want to render these options in a map or loop of some sort
     return (
       <>
         <div id="image-container-header">

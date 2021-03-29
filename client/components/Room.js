@@ -21,13 +21,16 @@ function Room() {
   receiveFullRoom()
   receiveNoRoom()
 
-  const initCanvas = () =>
+  // this could potentially be another util function
+  const initCanvas = () => {
     // create new canvas
     new fabric.Canvas('canvas', {
       height: 625,
       width: 625,
       backgroundColor: 'white'
     })
+
+  }
 
   useEffect(() => {
     // initialize canvas to newly created canvas

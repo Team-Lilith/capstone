@@ -2,6 +2,8 @@ import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
 import socket, {emitImage} from '../socket'
 
+// You may want to move this file out of the components folder
+
 // TOOLS
 // we are giving ids to be able to identify each object
 // it was prev comming undefined

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import firebase from 'firebase/app'
 import {auth} from '../../server/db'
 
+// Sub-directories can help you organize the components folder
+
 function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
