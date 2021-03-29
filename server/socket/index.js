@@ -43,8 +43,8 @@ module.exports = (io, realtimeDB) => {
         socket.join(roomId)
         console.log('room =>', io.of('/').adapter.rooms.get(roomId))
         io.to(socket.id).emit('create successful', roomId)
-        // delete room info from db after 30min =>
-        // deleteRoom(roomId)
+        // delete room info from db after 30min
+        deleteRoom(roomId)
       } else {
         io.to(socket.id).emit('no room')
         console.log(
