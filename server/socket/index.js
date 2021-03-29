@@ -35,12 +35,14 @@ module.exports = (io, realtimeDB) => {
 
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
+      console.log('in server create room listener')
       const room = io.of('/').adapter.rooms.get(roomId)
       console.log('socket attempting to create room #', roomId)
       if (!room) {
         console.log('room does not exist - creating')
         socket.join(roomId)
-        io.to(socket.id).emit('join successful', roomId)
+        console.log('room =>', io.of('/').adapter.rooms.get(roomId))
+        io.to(socket.id).emit('create successful', roomId)
         // delete room info from db after 30min =>
         // deleteRoom(roomId)
       } else {

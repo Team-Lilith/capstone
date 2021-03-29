@@ -11,12 +11,16 @@ const setInitialChat = messages => ({
 
 //thunks
 export const getInitialChat = roomId => dispatch => {
+  console.log('in chat thunk')
   let messages = realtimeDB.ref(roomId).child('messages')
+
   messages
     .get()
     .then(function(snapshot) {
+      console.log(snapshot)
       if (snapshot.exists()) {
-        dispatch(setInitialChat(snapshot))
+        console.log('snapshot in chat thunk =>', snapshot.val())
+        dispatch(setInitialChat(snapshot.val()))
       } else {
         dispatch(setInitialChat([]))
       }

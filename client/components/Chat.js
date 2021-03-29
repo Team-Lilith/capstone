@@ -13,13 +13,21 @@ export default function Chat(props) {
 
   useEffect(() => {}, [userId])
 
-  useEffect(() => {
-    dispatch(getInitialChat(roomId))
-  }, [])
+  useEffect(
+    () => {
+      console.log('in roomId useEffect')
+      if (roomId) {
+        dispatch(getInitialChat(roomId))
+      }
+    },
+    [roomId]
+  )
 
   useEffect(
     () => {
+      console.log('in initialChat useEffect')
       if (initialChat.length) {
+        console.log('initial chat has messages, setting')
         setMessages(initialChat)
       }
     },

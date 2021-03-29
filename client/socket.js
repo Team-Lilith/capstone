@@ -25,8 +25,10 @@ const updateRoomMessages = (roomId, msg) => {
       if (snapshot.exists()) {
         let updatedMsgs = [...snapshot.val(), msg]
         messages.set(updatedMsgs)
+        console.log('setting updated messages')
       } else {
         messages.set([msg])
+        console.log('no messages yet - setting')
       }
     })
     .catch(function(error) {
@@ -192,6 +194,16 @@ export const receiveNoRoom = () => {
 export const joinSuccess = dispatch => {
   socket.off('join successful')
   socket.on('join successful', roomId => {
+    dispatch(setCurrentRoom(roomId))
+    history.push(`/room/${roomId}`)
+  })
+}
+
+//user successfully creates room => is routed to room
+export const createSuccess = dispatch => {
+  socket.off('create successful')
+  socket.on('create successful', roomId => {
+    console.log('in create successful listener')
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
     realtimeDB.ref(roomId).set({
