@@ -12,6 +12,10 @@ import {
 } from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
+import {ToastContainer} from 'react-toastify'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {showToast} from '../toasty'
 
 function Room() {
   const roomId = useSelector(state => state.room)
@@ -66,6 +70,7 @@ function Room() {
       </div>
 
       <Canvas canvas={canvas} />
+      <ToastContainer />
     </div>
   )
 }

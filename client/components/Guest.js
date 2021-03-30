@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import {toast} from 'react-toastify'
+import {toast, ToastContainer} from 'react-toastify'
 import firestore from 'firebase'
 import {loginGuest} from '../store'
 import {useDispatch} from 'react-redux'
+import {showToast} from '../toasty'
 
 const Guest = () => {
   const [nickname, setNickname] = useState('')
@@ -12,7 +13,7 @@ const Guest = () => {
   const handleSubmit = e => {
     e.preventDefault()
     if (!nickname) {
-      return toast.error('Please enter a nickname')
+      return showToast('Please enter a nickname')
     }
 
     const data = {nickname}
@@ -35,6 +36,7 @@ const Guest = () => {
           Let's Go!
         </button>
       </form>
+      <ToastContainer />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import {toast} from 'react-toastify'
 import firestore from 'firebase'
 import {google} from '../../server/db/firebase'
 import history from '../history'
+import {showToast} from '../toasty'
 /**
  * ACTION TYPES
  */
@@ -23,10 +24,8 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
-export const loginGuest = ({nickname}) => async dispatch => {
-  console.log('logging in guest')
-  console.log(nickname)
-  await firestore
+export const loginGuest = ({nickname}) => dispatch => {
+  firestore
     .auth()
     .signInAnonymously()
     .then(res => {
@@ -41,120 +40,104 @@ export const loginGuest = ({nickname}) => async dispatch => {
         })
       history.push('/join')
       dispatch(setUser(res.user))
+      showToast(`Welcome 💖 \nEnter a room name to start Collaballaging!`)
     })
     .catch(err => {
-      console.log('error', err)
-      if (err.code === 'auth/wrong-password') {
-        return toast.error('Email or password is incorrect')
-      } else if (err.code === 'auth/user-not-found') {
-        return toast.error('Email or password is invalid')
-      } else {
-        return toast.error('Something went wrong')
-      }
+      console.log('error: ', err)
+      showToast(
+        'We are having trouble signing you in as a guest 😿 \nPlease try logging in or signing up instead.'
+      )
     })
 }
 
-export const registerWithGoogle = () => async dispatch => {
-  await firestore
-    .auth()
-    .signInWithPopup(google)
-    .then(res => {
-      console.log(res.user)
-      dispatch(setUser(res.user))
-    })
-    .catch(err => {
-      if (err.code === 'auth/wrong-password') {
-        return toast.error('Email or password is incorrect')
-      } else if (err.code === 'auth/user-not-found') {
-        return toast.error('Email or password is invalid')
-      } else {
-        return toast.error('Something went wrong')
-      }
-    })
-}
-
-export const registerUser = ({nickname, email, password}) => async dispatch => {
-  console.log('email:', email)
-  console.log('pas:', password)
-
-  await firestore
+export const registerUser = ({nickname, email, password}) => dispatch => {
+  firestore
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    //.then((data) => data.json())
     .then(res => {
-      res.user
-        .updateProfile({
-          displayName: nickname
-        })
-        .then(function() {
-          // Update successful.
-        })
-        .catch(function(error) {
-          // An error happened.
-          console.log(error)
-        })
+      console.log('user', res.user)
+      res.user.updateProfile({
+        displayName: nickname
+      })
+
+      console.log('isthisthingon')
+      showToast('hellooo')
       history.push('/join')
+      showToast(
+        `Welcome ${
+          res.user.displayName
+        } 💖 \nEnter a room name to start Collaballaging!`
+      )
       dispatch(setUser(res.user))
     })
     .catch(err => {
       console.log(err)
       if (err.code === 'auth/email-already-in-use') {
-        return toast.warning(
-          'This email is already in use, Please login or continue with another email'
+        showToast(
+          'This email is already in use! Please login or continue with a different email.'
+        )
+      } else if (err.code === 'auth/invalid-email') {
+        showToast(
+          'Invalid email address. Please make sure you have filled out the form correctly.'
         )
       } else {
-        return toast.error('Something went wrong')
+        showToast(
+          'We are having trouble registering you 😿 \n Please make sure you have filled out the form correctly.'
+        )
       }
     })
 }
 
-export const loginUser = ({email, password}) => async dispatch => {
-  console.log('logging in user')
-  console.log(email, password)
-  let user = {}
-  await firestore
+export const loginUser = ({email, password}) => dispatch => {
+  firestore
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(res => {
-      user = res.user
-      console.log(res.user)
       history.push('/join')
+      dispatch(setUser(res.user))
+      showToast(
+        `Welcome ${
+          res.user.displayName
+        } 💖 \nEnter a room name to start Collaballaging!`
+      )
     })
     .catch(err => {
-      //console.log(err)
+      console.log('Error logging in user...', err)
       if (err.code === 'auth/wrong-password') {
-        return toast.error('Email or password is incorrect')
+        showToast('Email or password is incorrect 😿')
       } else if (err.code === 'auth/user-not-found') {
-        return toast.error('Email or password is invalid')
+        showToast('No user associated with that email 😿')
       } else {
-        return toast.error('Something went wrong')
+        showToast(
+          'Something went wrong and we could not log you in 😿\n Please try again.'
+        )
       }
     })
-  dispatch(setUser(user))
 }
 
-export const signInWithGoogle = () => async dispatch => {
-  try {
-    await firestore
-      .auth()
-      .signInWithPopup(google)
-      .then(res => {
-        console.log(res.user)
-        history.push('/join')
-        dispatch(setUser(res.user))
-      })
-      .catch(err => {
-        if (err.code === 'auth/wrong-password') {
-          return toast.error('Email or password is incorrect')
-        } else if (err.code === 'auth/user-not-found') {
-          return toast.error('Email or password is invalid')
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  } catch (error) {
-    console.log(error)
-  }
+export const signInWithGoogle = () => dispatch => {
+  firestore
+    .auth()
+    .signInWithPopup(google)
+    .then(res => {
+      console.log(res.user)
+      history.push('/join')
+      dispatch(setUser(res.user))
+      showToast(
+        `Welcome ${
+          res.user.displayName
+        } 💖 \n Enter a room name to start Collaballaging!`
+      )
+    })
+    .catch(err => {
+      if (err.code === 'auth/wrong-password') {
+        showToast('Email or password is incorrect 😿')
+      } else if (err.code === 'auth/user-not-found') {
+        showToast('Email or password is invalid 😿')
+      } else {
+        showToast('Something went wrong 😿')
+      }
+    })
 }
 
 export const me = () => async dispatch => {

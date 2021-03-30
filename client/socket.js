@@ -4,6 +4,7 @@ import {fullRoom} from './store'
 import {setCurrentRoom} from './store'
 import history from './history'
 import {realtimeDB} from '../server/db'
+import {toast} from 'react-toastify'
 
 //CONNECTION
 
@@ -201,7 +202,9 @@ export const receiveFullRoom = () => {
   socket.off('full room')
   socket.on('full room', () => {
     history.push('/join')
-    // toast notification ?
+    toast(
+      'Room is full... Please create a new room or join a different one. <3'
+    )
   })
 }
 //user tried to join a nonexistent room => is routed back to home
@@ -209,7 +212,19 @@ export const receiveNoRoom = () => {
   socket.off('no room')
   socket.on('no room', () => {
     history.push('/join')
-    // toast notification ?
+    toast(
+      'The room does not exist... Please create a new room or join an existing one. <3'
+    )
+  })
+}
+//user tried to create existing room => is routed back to home
+export const receiveExistingRoom = () => {
+  socket.off('existing room')
+  socket.on('existing room', () => {
+    history.push('/join')
+    toast(
+      'The room already exists... Please join the room or create a room with a new name. <3'
+    )
   })
 }
 
@@ -219,6 +234,7 @@ export const joinSuccess = dispatch => {
   socket.on('join successful', roomId => {
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
+    toast(`Joined room ${roomId}`)
   })
 }
 
@@ -234,6 +250,7 @@ export const createSuccess = dispatch => {
       messages: [],
       users: ['user name here']
     })
+    toast(`Created room ${roomId}`)
   })
 }
 
