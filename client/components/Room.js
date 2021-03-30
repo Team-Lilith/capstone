@@ -12,11 +12,12 @@ import {
 } from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
-import {getInitialCanvas} from '../store'
+import {getInitialCanvas, getInitialObjects} from '../store'
 
 function Room() {
   const roomId = useSelector(state => state.room)
   const initialCanvas = useSelector(state => state.canvas)
+  const initialObjects = useSelector(state => state.objects)
   const [canvas, setCanvas] = useState('')
   const dispatch = useDispatch()
   let {id} = useParams()
@@ -44,6 +45,8 @@ function Room() {
       if (!roomId) {
         emitJoinRoom(id)
       } else {
+        // if we have a roomId, check if their is an existing canvas & objects in the DB
+        dispatch(getInitialObjects(roomId))
         dispatch(getInitialCanvas(roomId))
       }
     },
@@ -52,9 +55,18 @@ function Room() {
 
   useEffect(
     () => {
-      if (initialCanvas) {
-        console.log('loading inital canvas')
-        canvas.loadFromJSON(initialCanvas)
+      if (initialCanvas && canvas) {
+        // if our thunk retrieved an existing canvas for this room, check if it has any objects
+        let startingCanvas = initialCanvas
+        if (startingCanvas.objects) {
+          for (let i = 0; i < initialObjects.length; i++) {
+            // update each object on the canvas with the matching id from our array of all obj ids
+            startingCanvas.objects[i].id = initialObjects[i]
+            startingCanvas.objects[i].emit = false
+          }
+        }
+        // load canvas with objects
+        canvas.loadFromJSON(startingCanvas)
       }
     },
     [initialCanvas]

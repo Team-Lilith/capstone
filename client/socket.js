@@ -1,7 +1,6 @@
 import io from 'socket.io-client'
 import {fabric} from 'fabric'
-import {fullRoom} from './store'
-import {setCurrentRoom} from './store'
+import {fullRoom, setCurrentRoom} from './store'
 import history from './history'
 import {realtimeDB} from '../server/db'
 
@@ -17,6 +16,7 @@ socket.on('connect', () => {
 
 // HELPERS
 
+// update our messages stored in the DB when a message is added
 const updateRoomMessages = (roomId, msg) => {
   let messages = realtimeDB.ref(roomId).child('messages')
   messages
@@ -25,10 +25,8 @@ const updateRoomMessages = (roomId, msg) => {
       if (snapshot.exists()) {
         let updatedMsgs = [...snapshot.val(), msg]
         messages.set(updatedMsgs)
-        console.log('setting updated messages')
       } else {
         messages.set([msg])
-        console.log('no messages yet - setting')
       }
     })
     .catch(function(error) {
@@ -36,12 +34,31 @@ const updateRoomMessages = (roomId, msg) => {
     })
 }
 
+// update our current canvas in the DB with modifications
 const updateRoomCanvas = (roomId, canvas) => {
   let canvasJSON = canvas.toDatalessJSON()
   let dbCanvas = realtimeDB.ref(roomId).child('canvas')
   dbCanvas.set(canvasJSON).catch(function(error) {
     console.error(error)
   })
+}
+
+// update our array of object ids in DB when adding a new object
+const updateObjIds = (roomId, objId) => {
+  let ids = realtimeDB.ref(roomId).child('objectIds')
+  ids
+    .get()
+    .then(function(snapshot) {
+      if (snapshot.exists()) {
+        let updatedIds = [...snapshot.val(), objId]
+        ids.set(updatedIds)
+      } else {
+        ids.set([objId])
+      }
+    })
+    .catch(function(error) {
+      console.error(error)
+    })
 }
 
 //EMITTERS
@@ -51,6 +68,7 @@ export const sendMessage = data => {
   const user = data.user || 'none'
   const room = data.room
   const sendData = {msg: data.msg, user: user, room: room, id: data.id}
+  // update realtimeDB with the new message
   updateRoomMessages(room, sendData)
 }
 
@@ -67,15 +85,18 @@ export const emitJoinRoom = id => {
 }
 
 export const emitModifiedCanvasObject = (objWithId, roomId) => {
-  console.log('modified', objWithId, roomId)
   socket.emit('object-modified', objWithId)
+  // update realtimeDB with updated canvas
   updateRoomCanvas(roomId, objWithId.obj.canvas)
 }
 
 // here we emit object added socket and send back object newly added
 export const emitAddedToCanvas = objectAdded => {
   socket.emit('object added', objectAdded)
+  // update realtimeDB with updated canvas
   updateRoomCanvas(objectAdded.room, objectAdded.obj.canvas)
+  // update realtimeDB with new object's id
+  updateObjIds(objectAdded.room, objectAdded.id)
 }
 
 export const emitCanvasRemoveChange = objectRemoved => {
@@ -239,7 +260,6 @@ export const joinSuccess = dispatch => {
 export const createSuccess = dispatch => {
   socket.off('create successful')
   socket.on('create successful', roomId => {
-    console.log('in create successful listener')
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
     realtimeDB.ref(roomId).set({

@@ -1,24 +1,24 @@
 import {realtimeDB} from '../../server/db'
 
 //action types
-const SET_INITIAL_CANVAS = 'SET_INITIAL_CANVAS'
+const SET_INITIAL_OBJECTS = 'SET_INITIAL_OBJECTS'
 
 //action creators
-const setInitialCanvas = canvas => ({
-  type: SET_INITIAL_CANVAS,
-  canvas
+const setInitialObjects = objects => ({
+  type: SET_INITIAL_OBJECTS,
+  objects
 })
 
 //thunks
-export const getInitialCanvas = roomId => dispatch => {
-  let canvas = realtimeDB.ref(roomId).child('canvas')
-  canvas
+export const getInitialObjects = roomId => dispatch => {
+  let objIds = realtimeDB.ref(roomId).child('objectIds')
+  objIds
     .get()
     .then(function(snapshot) {
       if (snapshot.exists()) {
-        dispatch(setInitialCanvas(snapshot.val()))
+        dispatch(setInitialObjects(snapshot.val()))
       } else {
-        console.log('canvas not found')
+        console.log('objects not found')
       }
     })
     .catch(function(error) {
@@ -31,8 +31,8 @@ const initialState = ''
 //reducer
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SET_INITIAL_CANVAS:
-      return action.canvas
+    case SET_INITIAL_OBJECTS:
+      return action.objects
     default:
       return state
   }
