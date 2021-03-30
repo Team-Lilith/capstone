@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import {toast} from 'react-toastify'
+import {toast, ToastContainer} from 'react-toastify'
 import firestore from 'firebase'
 import {google} from '../../server/db/firebase'
 import GoogleButton from 'react-google-button'
-import {registerWithGoogle, registerUser} from '../store'
+import {signInWithGoogle, registerUser} from '../store'
 import {useDispatch} from 'react-redux'
+import {showToast} from '../toasty'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -16,11 +17,14 @@ const Register = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (!email || !password) {
-      return toast.error('Please enter your email and password')
+    if (!email || !password || !nickname) {
+      return showToast('Please enter an email, password and nickname!')
+    }
+    if (!validateEmail(email)) {
+      return showToast('You have entered an invalid email address!')
     }
     if (password.length < 6) {
-      return toast.error('Password must be 6 characters or more')
+      return showToast('Password must be 6 characters or more')
     }
 
     const data = {
@@ -29,6 +33,17 @@ const Register = () => {
       password
     }
     dispatch(registerUser(data))
+  }
+
+  const validateEmail = mail => {
+    if (
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        mail
+      )
+    ) {
+      return true
+    }
+    return false
   }
 
   return (
@@ -72,7 +87,7 @@ const Register = () => {
       <div className="google-btn">
         <GoogleButton
           type="light"
-          onClick={() => dispatch(registerWithGoogle())}
+          onClick={() => dispatch(signInWithGoogle())}
           label="Sign up with Google"
         />
       </div>
@@ -80,6 +95,7 @@ const Register = () => {
       <Link to="/login">
         <div className="link-to-signup">Have an account? Log in Here</div>
       </Link>
+      <ToastContainer />
     </div>
   )
 }
