@@ -14,6 +14,10 @@ function Home(props) {
           <div id="auth-container">
             <Login />
 
+            <Link to="/signup">
+              <p className="link-to-signup">New? Sign Up Here</p>
+            </Link>
+
             <div className="login-divider">
               <div className="divider" />
               <div className="or-divider">or</div>
@@ -21,10 +25,6 @@ function Home(props) {
             </div>
 
             <Guest />
-
-            <Link to="/signup">
-              <p className="link-to-signup">New? Sign Up Here</p>
-            </Link>
           </div>
 
           <div id="gallery-container">

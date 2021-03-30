@@ -16,7 +16,6 @@ socket.on('connect', () => {
 })
 
 //EMITTERS
-
 const updateRoomMessages = (roomId, msg) => {
   let messages = realtimeDB.ref(roomId).child('messages')
   messages

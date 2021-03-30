@@ -63,6 +63,11 @@ const Register = () => {
           Sign Up
         </button>
       </form>
+
+      <Link to="/login">
+        <div className="link-to-signup">Have an account? Log in Here</div>
+      </Link>
+
       <div className="login-divider">
         <div className="divider" />
         <div className="or-divider">or</div>
@@ -76,10 +81,6 @@ const Register = () => {
           label="Sign up with Google"
         />
       </div>
-
-      <Link to="/login">
-        <div className="link-to-signup">Have an account? Log in Here</div>
-      </Link>
     </div>
   )
 }
