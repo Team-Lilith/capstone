@@ -4,7 +4,8 @@ import {
   modifyCanvasObject,
   receiveImage,
   receiveAddedObject,
-  receiveRemovedObject
+  receiveRemovedObject,
+  modifyIndex
 } from '../socket'
 import {fabric} from 'fabric'
 import {addImage, setCanvasBackground} from './FabricUtils'
@@ -19,6 +20,7 @@ function Canvas(props) {
     receiveImage(addImage, canvas, roomId)
     receiveAddedObject(canvas)
     receiveRemovedObject(canvas)
+    modifyIndex(canvas)
     // setCanvasBackground(image, canvas)
   }
 
