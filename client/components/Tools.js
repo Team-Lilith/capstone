@@ -147,7 +147,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/rectangle.png"
-            onClick={() => addRect(canvas)}
+            onClick={() => addRect(color, canvas)}
           />
         </Tooltip>
 
@@ -155,7 +155,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/dry-clean.png"
-            onClick={() => addCirc(canvas)}
+            onClick={() => addCirc(color, canvas)}
           />
         </Tooltip>
 
@@ -163,7 +163,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/up-arrow (2).png"
-            onClick={() => addTri(canvas)}
+            onClick={() => addTri(color, canvas)}
           />
         </Tooltip>
 
@@ -171,7 +171,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/font.png"
-            onClick={() => addText(canvas)}
+            onClick={() => addText(color, canvas)}
           />
         </Tooltip>
 

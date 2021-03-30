@@ -7,44 +7,48 @@ import socket, {emitImage, emitIndexChange} from '../socket'
 // it was prev comming undefined
 // and once object:moves triggered it merged the objects
 // instead of moving each one separately
-export const addRect = canvas => {
+export const addRect = (color, canvas) => {
   const rect = new fabric.Rect({
     height: 100,
     width: 500,
     fill: 'black'
   })
   rect.id = uuid()
+  rect.set('fill', color)
   canvas.add(rect)
   canvas.renderAll()
 }
 
-export const addCirc = canvas => {
+export const addCirc = (color, canvas) => {
   const circle = new fabric.Circle({
     radius: 100,
     fill: 'black'
   })
   circle.id = uuid()
+  circle.set('fill', color)
   canvas.add(circle)
   canvas.renderAll()
 }
 
-export const addTri = canvas => {
+export const addTri = (color, canvas) => {
   const triangle = new fabric.Triangle({
     width: 80,
     height: 100,
     fill: 'black'
   })
   triangle.id = uuid()
+  triangle.set('fill', color)
   canvas.add(triangle)
   canvas.renderAll()
 }
 
-export const addText = canvas => {
+export const addText = (color, canvas) => {
   var text = new fabric.IText('Your thoughts here...', {
     left: 40,
     top: 50
   })
   text.id = uuid()
+  text.set('fill', color)
   text.hasRotatingPoint = true
   canvas.add(text).setActiveObject(text)
   text.enterEditing()
