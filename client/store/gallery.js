@@ -45,7 +45,7 @@ export const saveCanvas = (canvas, users = null) => {
         users: users
       })
       .then(docRef => {
-        console.log('Canvas written with ID: ', docRef.id)
+        //Canvas written with ID: docRef.id
       })
       .catch(error => {
         console.error('Error adding document: ', error)

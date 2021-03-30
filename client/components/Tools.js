@@ -5,7 +5,8 @@ import {Tooltip} from '@material-ui/core'
 import socket, {
   emitModifiedCanvasObject,
   emitAddedToCanvas,
-  emitCanvasRemoveChange
+  emitCanvasRemoveChange,
+  emitImage
 } from '../socket'
 import {
   addRect,
@@ -206,7 +207,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/up-arrow.png"
-            onClick={() => bringForward(canvas)}
+            onClick={() => bringForward(canvas, roomId)}
           />
         </Tooltip>
 
@@ -214,7 +215,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/down-arrow.png"
-            onClick={() => sendBackwards(canvas)}
+            onClick={() => sendBackwards(canvas, roomId)}
           />
         </Tooltip>
 

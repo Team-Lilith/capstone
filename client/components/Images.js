@@ -102,7 +102,7 @@ function Images(props) {
       </>
     )
   } else {
-    return 'No images.'
+    return 'Loading...'
   }
 }
 

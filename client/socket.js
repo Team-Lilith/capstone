@@ -74,21 +74,22 @@ export const emitModifiedCanvasObject = (objWithId, roomId) => {
 
 // here we emit object added socket and send back object newly added
 export const emitAddedToCanvas = objectAdded => {
-  console.log('emit object added', objectAdded)
   socket.emit('object added', objectAdded)
   updateRoomCanvas(objectAdded.room, objectAdded.obj.canvas)
 }
 
 export const emitCanvasRemoveChange = objectRemoved => {
-  console.log('emit object removed', objectRemoved)
   socket.emit('object removed', objectRemoved)
+}
+
+export const emitIndexChange = objectWithZChange => {
+  socket.emit('index modification', objectWithZChange)
 }
 
 //LISTENERS
 export const modifyCanvasObject = canvas => {
   //listens for object modified
   socket.on('new-modification', data => {
-    console.log('looking for object that changed layer', data)
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
         // canvas.getObjects().indexOf(data.obj)
@@ -102,10 +103,42 @@ export const modifyCanvasObject = canvas => {
   })
 }
 
+export const modifyIndex = canvas => {
+  socket.on('index change', data => {
+    const {id, newIndex} = data
+    canvas.getObjects().forEach(object => {
+      if (object.id === id) {
+        canvas.moveTo(object, newIndex)
+        canvas.requestRenderAll()
+      }
+    })
+  })
+}
+
+// here we listen to canvas add change
+// we turn it off (socket.off) to remove duplicates
+// we extract obj and id from data
+// data => options.target (obj) and options.target.id (id)
+// we define empty object that will be filled with the if that runs
+// had to be hard coded in this particular way
+// because the other ways i tried to add the new object with
+// were giving me back the object but transparent
+// and also it was messing up with the images (sending a transparent image doble)
+// so, depending on the type of the object that the second user receives
+// this is the same object that will send back
+// with the same specifications that we created them in fabric utils
+// we then change the emiting to false to not trigger another add
+// change the object and insert that into the other users canvas
+// the else is to take the case of the images because they have a DB id
+// to be able to sync the drawing we use the path object and sent back the
+// coordinates of the object that the user that drew emits
+// so we can give that back to the second user
+// if not done this way the only way two users could see the same
+// was if both users added the same thing individually
+
 export const receiveAddedObject = canvas => {
   socket.off('canvas add change')
   socket.on('canvas add change', data => {
-    console.log('receive object', data)
     const {obj, id} = data
     let object
     if (obj.type === 'rect') {
@@ -139,9 +172,7 @@ export const receiveAddedObject = canvas => {
       socket.off('add-image')
       let image = document.createElement('img')
       image.setAttribute('src', obj.src)
-      console.log('IMAGE', image)
       object = new fabric.Image(image, obj)
-      console.log('IMAGE OBJ', object)
     } else {
       return
     }
@@ -155,8 +186,6 @@ export const receiveAddedObject = canvas => {
 
 export const receiveRemovedObject = canvas => {
   socket.on('canvas remove change', data => {
-    console.log('receive object to delete', data)
-
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
         canvas.remove(object)
@@ -177,7 +206,6 @@ export const receiveMessageAndUpdateState = (setState, prevState) => {
 export const receiveImage = (addToCanvas, canvas, roomId) => {
   socket.off('add-image')
   socket.on('add-image', image => {
-    console.log('imageeee', image)
     addToCanvas(canvas, image, true, roomId)
   })
 }
@@ -186,7 +214,6 @@ export const receiveFullRoom = () => {
   socket.off('full room')
   socket.on('full room', () => {
     history.push('/join')
-    console.log('room is full!')
     // toast notification ?
   })
 }
@@ -195,7 +222,6 @@ export const receiveNoRoom = () => {
   socket.off('no room')
   socket.on('no room', () => {
     history.push('/join')
-    console.log('no such room!')
     // toast notification ?
   })
 }
