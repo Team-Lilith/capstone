@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Login, Register, Gallery} from './index'
 import {Link} from 'react-router-dom'
-import {signInWithGoogle} from '../../server/db/firebase'
+import {signInWithGoogle} from '../../server/db/'
 import GoogleButton from 'react-google-button'
 
 function HomeSignUp(props) {
@@ -12,23 +12,6 @@ function HomeSignUp(props) {
         <div id="home">
           <div id="auth-container">
             <Register />
-
-            <div className="login-divider">
-              <div className="divider" />
-              <div className="or-divider">or</div>
-              <div className="divider" />
-            </div>
-
-            {/* <button className="google-btn" type="button" onClick={signInWithGoogle}>
-              Sign in With Google
-            </button> */}
-            <div className="google-btn">
-              <GoogleButton
-                type="light"
-                onClick={signInWithGoogle}
-                label="Sign up with Google"
-              />
-            </div>
           </div>
 
           <div id="gallery-container">

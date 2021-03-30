@@ -1,41 +1,13 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import firestore from 'firebase'
-import {signInWithGoogle} from '../../server/db/firebase'
-import {getUser} from '../store'
-import {useSelector, useDispatch} from 'react-redux'
+import {loginGuest} from '../store'
+import {useDispatch} from 'react-redux'
 
 const Guest = () => {
   const [nickname, setNickname] = useState('')
 
   const dispatch = useDispatch()
-
-  const loginGuest = ({nickname}) => {
-    firestore
-      .auth()
-      .signInAnonymously()
-      .then(res => {
-        res.user
-          .updateProfile({
-            displayName: nickname
-          })
-          .catch(function(error) {
-            console.log(error)
-          })
-        dispatch(getUser(res.user))
-      })
-      .catch(err => {
-        console.log('error', err)
-        if (err.code === 'auth/wrong-password') {
-          return toast.error('Email or password is incorrect')
-        } else if (err.code === 'auth/user-not-found') {
-          return toast.error('Email or password is invalid')
-        } else {
-          return toast.error('Something went wrong')
-        }
-      })
-  }
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -44,7 +16,7 @@ const Guest = () => {
     }
 
     const data = {nickname}
-    loginGuest(data)
+    dispatch(loginGuest(data))
   }
 
   return (
