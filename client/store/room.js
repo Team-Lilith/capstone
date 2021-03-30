@@ -1,21 +1,8 @@
-// import axios from 'axios'
-// import history from '../history'
-
 const SET_CURRENT_ROOM = 'SET_CURRENT_ROOM'
 const CLEAR_ROOM = 'CLEAR_ROOM'
 
 export const setCurrentRoom = roomId => ({type: SET_CURRENT_ROOM, roomId})
 export const clearRoom = () => ({type: CLEAR_ROOM})
-
-// export const joinRoom = roomId => dispatch => {
-// dispatch(setCurrentRoom(roomId))
-// history.push(`/room/${roomId}`)
-// }
-
-// export const fullRoom = () => dispatch => {
-//   dispatch(clearRoom())
-//   history.push('/')
-// }
 
 let initialState = ''
 

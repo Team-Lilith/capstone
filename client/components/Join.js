@@ -7,9 +7,14 @@ import {
   joinSuccess,
   createSuccess,
   receiveNoRoom,
-  receiveFullRoom
+  receiveFullRoom,
+  receiveExistingRoom
 } from '../socket'
 import '../index.css'
+import {ToastContainer} from 'react-toastify'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {showToast} from '../toasty'
 
 function Join() {
   const [roomId, setRoomId] = useState('')
@@ -18,13 +23,16 @@ function Join() {
   createSuccess(dispatch)
   receiveNoRoom()
   receiveFullRoom()
+  receiveExistingRoom()
 
   function createRoom() {
     const id = roomId || uuid()
+    showToast()
     emitCreateRoom(id)
   }
 
   const joinRoom = () => {
+    showToast()
     emitJoinRoom(roomId)
   }
 
@@ -52,6 +60,7 @@ function Join() {
           <div className="nav-button" onClick={() => joinRoom()}>
             <h3>Join an Existing Room</h3>
           </div>
+          <ToastContainer />
         </div>
       </div>
     </div>

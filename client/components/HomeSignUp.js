@@ -4,6 +4,7 @@ import {Login, Register, Gallery} from './index'
 import {Link} from 'react-router-dom'
 import {signInWithGoogle} from '../../server/db/'
 import GoogleButton from 'react-google-button'
+import {ToastContainer} from 'react-toastify'
 
 function HomeSignUp(props) {
   return (
@@ -22,6 +23,7 @@ function HomeSignUp(props) {
               </div>
             </Link>
           </div>
+          <ToastContainer />
         </div>
       ) : (
         <div>

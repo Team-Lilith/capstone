@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {signInWithGoogle} from '../../server/db/'
 import GoogleButton from 'react-google-button'
 import Guest from './Guest'
+import {ToastContainer} from 'react-toastify'
 
 function Home(props) {
   return (
@@ -35,6 +36,7 @@ function Home(props) {
               </div>
             </Link>
           </div>
+          <ToastContainer />
         </div>
       ) : (
         <div>

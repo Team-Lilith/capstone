@@ -3,6 +3,7 @@ import {toast} from 'react-toastify'
 import {useDispatch} from 'react-redux'
 import {loginUser, signInWithGoogle} from '../store'
 import GoogleButton from 'react-google-button'
+import {showToast} from '../toasty'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -13,7 +14,7 @@ const Login = () => {
     console.log('submitting')
     e.preventDefault()
     if (!email || !password) {
-      return toast.error('Please enter your email and password')
+      return showToast('Please enter your email and password')
     }
 
     const data = {
