@@ -62,6 +62,24 @@ const updateObjIds = (roomId, objId) => {
     })
 }
 
+// update our array of object ids in DB when removing an object
+const removeObjId = (roomId, objId) => {
+  let ids = realtimeDB.ref(roomId).child('objectIds')
+  ids
+    .get()
+    .then(function(snapshot) {
+      if (snapshot.exists()) {
+        let idArray = snapshot.val()
+        let updatedIds = idArray.filter(elem => elem !== objId)
+        ids.set(updatedIds)
+      }
+    })
+    .catch(function(error) {
+      console.error(error)
+    })
+  // }
+}
+
 //EMITTERS
 
 export const sendMessage = data => {
@@ -101,11 +119,17 @@ export const emitAddedToCanvas = objectAdded => {
 }
 
 export const emitCanvasRemoveChange = objectRemoved => {
+  console.log('object removed =>', objectRemoved)
   socket.emit('object removed', objectRemoved)
+  // update realtimeDB with updated canvas
+  updateRoomCanvas(objectRemoved.room, objectRemoved.obj.canvas)
+  // remove obj id from array in DB
+  removeObjId(objectRemoved.room, objectRemoved.obj.id)
 }
 
 export const emitIndexChange = objectWithZChange => {
   socket.emit('index modification', objectWithZChange)
+  updateRoomCanvas(objectWithZChange.room, objectWithZChange.obj.canvas)
 }
 
 //LISTENERS
