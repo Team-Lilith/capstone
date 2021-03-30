@@ -10,9 +10,6 @@ const Register = () => {
   const [user, setUser] = useState({})
 
   const registerUser = async ({nickname, email, password}) => {
-    console.log('email:', email)
-    console.log('pas:', password)
-
     await firestore
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -23,7 +20,7 @@ const Register = () => {
             displayName: nickname
           })
           .then(function() {
-            console.log('Update successful.')
+            //Update succesfull.
           })
           .catch(function(error) {
             console.log(error)

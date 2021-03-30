@@ -1,6 +1,6 @@
 import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
-import socket, {emitImage} from '../socket'
+import socket, {emitImage, emitIndexChange} from '../socket'
 
 // TOOLS
 // we are giving ids to be able to identify each object
@@ -55,24 +55,28 @@ export const deselect = canvas => {
   canvas.requestRenderAll()
 }
 
-export const bringForward = canvas => {
-  let selected = canvas.getActiveObject() || canvas.getActiveGroup()
+export const bringForward = (canvas, roomId) => {
+  let selected = canvas.getActiveObject()
+  // canvas.moveTo(selected, objects.indexOf(selected) + 1)
+  //last in array => frontest
+  //first in array => backest
 
   if (selected) {
     selected.bringForward()
-    // selected.sentFront = true
-    // console.log('selected', selected)
+    let newIndex = canvas.getObjects().indexOf(selected)
+    emitIndexChange({obj: selected, newIndex, id: selected.id, room: roomId})
   }
   canvas.requestRenderAll()
 }
 
-export const sendBackwards = canvas => {
-  let selected = canvas.getActiveObject() || canvas.getActiveGroup()
+export const sendBackwards = (canvas, roomId) => {
+  //|| canvas.getActiveGroup() for groups add this to selected (?)
+  let selected = canvas.getActiveObject()
 
   if (selected) {
     selected.sendBackwards()
-    // selected.sentBack = true
-    // console.log('selected', selected)
+    let newIndex = canvas.getObjects().indexOf(selected)
+    emitIndexChange({obj: selected, newIndex, id: selected.id, room: roomId})
   }
   canvas.requestRenderAll()
 }
@@ -131,21 +135,13 @@ export const groupObjects = (canvas, group, shouldGroup) => {
   if (shouldGroup) {
     const objects = canvas.getObjects()
     group.val = new fabric.Group(objects)
-    // objects.forEach(obj => {
-    //   canvas.remove(obj)
-    // })
     // clearCanvas(canvas, svgState)
-    // socket.off('canvas add change')
     canvas.add(group.val)
     canvas.requestRenderAll()
   } else {
     group.val.destroy()
     const oldGroup = group.val.getObjects()
-    // objects.forEach(obj => {
-    //   canvas.remove(obj)
-    // })
     // clearCanvas(canvas, svgState)
-    // socket.off('canvas add change')
     canvas.add(...oldGroup)
     group.val = null
     canvas.requestRenderAll()

@@ -14,13 +14,10 @@ const Login = () => {
   const dispatch = useDispatch()
 
   const loginUser = async ({email, password}) => {
-    console.log('logging in user')
-    console.log(email, password)
     await firestore
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
-        console.log(res.user)
         dispatch(getUser(res.user))
       })
       .catch(err => {
@@ -40,7 +37,6 @@ const Login = () => {
       .auth()
       .signInWithPopup(google)
       .then(res => {
-        console.log(res.user)
         dispatch(getUser(res.user))
       })
       .catch(err => {

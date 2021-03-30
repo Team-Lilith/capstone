@@ -12,19 +12,15 @@ const Guest = () => {
   const dispatch = useDispatch()
 
   const loginGuest = ({nickname}) => {
-    console.log('logging in guest')
-    console.log(nickname)
     firestore
       .auth()
       .signInAnonymously()
       .then(res => {
-        console.log(res.user)
         res.user
           .updateProfile({
             displayName: nickname
           })
           .catch(function(error) {
-            // An error happened.
             console.log(error)
           })
         dispatch(getUser(res.user))

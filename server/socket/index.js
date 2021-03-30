@@ -8,7 +8,6 @@ module.exports = io => {
     // The server will listen to the 'join' event and attach that socket to the room
     socket.on('join room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
-      console.log('ROOMS => ', io.of('/').adapter.rooms)
       if (room) {
         if (room.size < 2) {
           console.log(`Socket ${socket.id} is joining room ${roomId}`)
@@ -28,9 +27,9 @@ module.exports = io => {
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
       const room = io.of('/').adapter.rooms.get(roomId)
-      console.log('socket attempting to create room:', roomId)
+      console.log('Socket attempting to create room:', roomId)
       if (!room) {
-        console.log('room does not exist - creating')
+        console.log('Room does not exist - creating')
         socket.join(roomId)
         io.to(socket.id).emit('join successful', roomId)
       } else {
@@ -51,21 +50,21 @@ module.exports = io => {
     // this is where object added sync starts
     // we are emiting canvas add change
     socket.on('object added', data => {
-      console.log('here @ object added, room: ', data.room)
-      // socket.broadcast.emit('canvas add change', data)
       socket.to(data.room).emit('canvas add change', data)
     })
 
     // when the client emits an 'object-modified' event, broadcast a 'new-modification' event to room
     socket.on('object-modified', data => {
-      console.log('here @ object modified, room: ', data.room)
       socket.broadcast.emit('new-modification', data)
       // socket.to(data.room).emit('add-image', data)
     })
 
     socket.on('object removed', data => {
-      console.log('here @ object removed, room: ', data.room)
       socket.to(data.room).emit('canvas remove change', data)
+    })
+
+    socket.on('index modification', data => {
+      socket.to(data.room).emit('index change', data)
     })
 
     // when a client emits a 'message' event, broadcast it

@@ -69,8 +69,8 @@ a:hover {
 #images {
   padding: 15px;
   margin: 15px;
-  max-width: 500px;
-  /* width: 600px; */
+  max-width: 600px;
+  width: 370px;
   overflow-y: auto;
   height: 100%;
   border-radius: 50px;
