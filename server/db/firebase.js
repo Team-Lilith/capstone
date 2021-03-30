@@ -5,8 +5,12 @@ require('firebase/database')
 
 var FIREBASE_CONFIG = require('./fbconfig.json')
 
+let firebaseConfig
+
 if (process.env.NODE_ENV === 'development') {
-  var firebaseConfig = FIREBASE_CONFIG
+  firebaseConfig = FIREBASE_CONFIG
+} else {
+  firebaseConfig = process.env.FIREBASE_CONFIG
 }
 
 // Your web app's Firebase configuration
