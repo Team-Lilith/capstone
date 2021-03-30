@@ -32,7 +32,8 @@ function Room() {
     new fabric.Canvas('canvas', {
       height: 625,
       width: 625,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      controlsAboveOverlay: true
     })
 
   useEffect(() => {
