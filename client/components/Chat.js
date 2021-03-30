@@ -15,7 +15,6 @@ export default function Chat(props) {
 
   useEffect(
     () => {
-      console.log('in roomId useEffect')
       if (roomId) {
         dispatch(getInitialChat(roomId))
       }
@@ -25,9 +24,7 @@ export default function Chat(props) {
 
   useEffect(
     () => {
-      console.log('in initialChat useEffect')
       if (initialChat.length) {
-        console.log('initial chat has messages, setting')
         setMessages(initialChat)
       }
     },

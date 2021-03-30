@@ -45,7 +45,7 @@ function Tools(props) {
               obj: options.target,
               id: options.target.id
             }
-            emitModifiedCanvasObject(objModified)
+            emitModifiedCanvasObject(objModified, roomId)
           }
         })
         // this canvas event listens to objects moving
@@ -58,10 +58,14 @@ function Tools(props) {
               obj: options.target,
               id: options.target.id
             }
-            emitModifiedCanvasObject(objModified)
+            emitModifiedCanvasObject(objModified, roomId)
           }
         })
         canvas.on('object:added', function(options) {
+          console.log(
+            'canvas listener object added, emit?',
+            options.target.emit
+          )
           if (!options.target.id) options.target.id = uuid()
           // same with images we are having a bool
           // to dictate to emit or not
