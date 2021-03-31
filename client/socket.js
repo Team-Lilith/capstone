@@ -120,7 +120,6 @@ export const emitAddedToCanvas = objectAdded => {
 }
 
 export const emitCanvasRemoveChange = objectRemoved => {
-  console.log('object removed =>', objectRemoved)
   socket.emit('object removed', objectRemoved)
   // update realtimeDB with updated canvas
   updateRoomCanvas(objectRemoved.room, objectRemoved.obj.canvas)

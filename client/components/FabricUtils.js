@@ -169,11 +169,6 @@ export const clearCanvas = (canvas, svg) => {
 
 export const restoreCanvas = (canvas, svg) => {
   if (svg.val) {
-    // fabric.loadSVGFromString(svg.val, objects => {
-    //   console.log(objects)
-    //   canvas.add(...objects)
-    //   canvas.requestRenderAll()
-    // })
     canvas.loadFromJSON(svg.val, canvas.renderAll.bind(canvas))
   }
 }

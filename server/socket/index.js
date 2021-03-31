@@ -17,7 +17,7 @@ module.exports = (io, realtimeDB) => {
       const room = io.of('/').adapter.rooms.get(roomId)
       if (room) {
         if (room.size < 2) {
-          console.log(`Socket ${socket.id} is joining room ${roomId}`)
+          console.log(`Socket ${socket.id} is joining room: ${roomId}`)
           socket.join(roomId)
           io.to(socket.id).emit('join successful', roomId)
         } else {
@@ -33,13 +33,11 @@ module.exports = (io, realtimeDB) => {
 
     // when a client emits a 'create room' event, join the socket to that room
     socket.on('create room', roomId => {
-      console.log('in server create room listener')
       const room = io.of('/').adapter.rooms.get(roomId)
       console.log('Socket attempting to create room:', roomId)
       if (!room) {
         console.log('Room does not exist - creating')
         socket.join(roomId)
-        console.log('room =>', io.of('/').adapter.rooms.get(roomId))
         io.to(socket.id).emit('create successful', roomId)
         // delete room info from db after 30min
         deleteRoom(roomId)
@@ -58,12 +56,12 @@ module.exports = (io, realtimeDB) => {
     })
 
     socket.on('object added', data => {
-      console.log('server emitting object added event to room')
+      console.log('Server emitting object added event to room')
       socket.to(data.room).emit('canvas add change', data)
     })
 
     socket.on('object-modified', data => {
-      console.log('server broadcasting new-modification event')
+      console.log('Server broadcasting new-modification event')
       socket.broadcast.emit('new-modification', data)
       // socket.to(data.room).emit('add-image', data)
     })
@@ -78,7 +76,7 @@ module.exports = (io, realtimeDB) => {
 
     // when a client emits a 'message' event, broadcast it
     socket.on('message', msg => {
-      console.log('server emitting message event to room')
+      console.log('Server emitting message event to room')
       socket.to(msg.room).emit('message', msg)
     })
 

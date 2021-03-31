@@ -35,7 +35,6 @@ export const loginGuest = ({nickname}) => dispatch => {
           displayName: nickname
         })
         .catch(function(error) {
-          // An error happened.
           console.log(error)
         })
       history.push('/join')
@@ -55,13 +54,10 @@ export const registerUser = ({nickname, email, password}) => dispatch => {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(res => {
-      console.log('user', res.user)
       res.user.updateProfile({
         displayName: nickname
       })
-
-      console.log('isthisthingon')
-      showToast('hellooo')
+      showToast('Hello!')
       history.push('/join')
       showToast(
         `Welcome ${
@@ -120,7 +116,6 @@ export const signInWithGoogle = () => dispatch => {
     .auth()
     .signInWithPopup(google)
     .then(res => {
-      console.log(res.user)
       history.push('/join')
       dispatch(setUser(res.user))
       showToast(
