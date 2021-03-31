@@ -15,6 +15,7 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
+//EMITTERS
 // HELPERS
 
 // update our messages stored in the DB when a message is added
@@ -207,7 +208,9 @@ export const receiveAddedObject = canvas => {
     } else if (obj.type === 'i-text') {
       object = new fabric.IText('Your thoughts here...', {
         left: obj.left,
-        top: obj.top
+        top: obj.top,
+        fill: obj.fill,
+        fontFamily: obj.fontFamily
       })
       object.enterEditing()
       canvas.setActiveObject(object)

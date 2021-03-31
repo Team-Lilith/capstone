@@ -69,15 +69,19 @@ a:hover {
 #images {
   padding: 15px;
   margin: 15px;
-  <<<<<<<headmax-width: 600px;
+  max-width: 600px;
   width: 370px;
-  =======max-width: 25vw;
+  max-width: 25vw;
   /* width: 600px; */
-  >>>>>>>masteroverflow-y: auto;
+  overflow-y: auto;
   height: 100vh;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+}
+
+.MuiInputBase-root MuiInput-root MuiInput-underline {
+  width: 5px;
 }
 
 .canvas-container {

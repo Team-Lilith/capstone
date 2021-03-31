@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {HuePicker} from 'react-color'
+import {MenuItem, Select} from '@material-ui/core'
 import {v1 as uuid} from 'uuid'
 import {Tooltip} from '@material-ui/core'
 import socket, {
@@ -21,7 +22,8 @@ import {
   setPanEvents,
   deleteSelected,
   bringForward,
-  sendBackwards
+  sendBackwards,
+  changeFont
 } from './FabricUtils'
 import Save from './Save'
 
@@ -34,7 +36,9 @@ function Tools(props) {
     pan: 'pan',
     drawing: 'drawing'
   }
+  // const fonts = ['Arial', 'Times New Roman', 'Times', 'Courier New', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Tahoma', 'Trebuchet MS', 'Arial Black', 'Impact', 'Comic Sans MS']
   const [color, setColor] = React.useState('fff')
+  const [font, setFont] = React.useState('')
 
   useEffect(
     () => {
@@ -108,6 +112,10 @@ function Tools(props) {
     setColor(color.hex)
   }
 
+  // const handleFontChange = font => {
+  //   setFont(font)
+  // }
+
   const handleImageUpload = event => {
     const reader = new FileReader()
     const imageToUpload = event.target.files[0]
@@ -151,7 +159,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/rectangle.png"
-            onClick={() => addRect(canvas)}
+            onClick={() => addRect(color, canvas)}
           />
         </Tooltip>
 
@@ -159,7 +167,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/dry-clean.png"
-            onClick={() => addCirc(canvas)}
+            onClick={() => addCirc(color, canvas)}
           />
         </Tooltip>
 
@@ -167,7 +175,7 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/up-arrow (2).png"
-            onClick={() => addTri(canvas)}
+            onClick={() => addTri(color, canvas)}
           />
         </Tooltip>
 
@@ -175,8 +183,35 @@ function Tools(props) {
           <img
             className="nav-button"
             src="/images/font.png"
-            onClick={() => addText(canvas)}
+            onClick={() => addText(color, canvas)}
           />
+        </Tooltip>
+
+        <Tooltip title="Change Font" arrow>
+          <Select
+            className="nav-button"
+            value=""
+            onChange={event => {
+              setFont(event.target.value)
+              changeFont(canvas, event.target.value)
+            }}
+          >
+            <MenuItem value="Arial">Arial</MenuItem>
+            <MenuItem value="Times New Roman">Times New Roman</MenuItem>
+            <MenuItem value="Times">Times</MenuItem>
+            <MenuItem value="Courier New">Courier New</MenuItem>
+            <MenuItem value="Courier">Courier</MenuItem>
+            <MenuItem value="Verdana">Verdana</MenuItem>
+            <MenuItem value="Georgia">Georgia</MenuItem>
+            <MenuItem value="Palatino">Palatino</MenuItem>
+            <MenuItem value="Garamond">Garamond</MenuItem>
+            <MenuItem value="Bookman">Bookman</MenuItem>
+            <MenuItem value="Tahoma">Tahoma</MenuItem>
+            <MenuItem value="Trebuchet MS">Trebuchet MS</MenuItem>
+            <MenuItem value="Arial Black">Arial Black</MenuItem>
+            <MenuItem value="Impact">Impact</MenuItem>
+            <MenuItem value="Comic Sans MS">Comic Sans MS</MenuItem>
+          </Select>
         </Tooltip>
 
         <Tooltip title="Upload Image" arrow>
