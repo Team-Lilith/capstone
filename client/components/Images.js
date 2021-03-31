@@ -7,7 +7,7 @@ import {addImage} from './FabricUtils'
 function Images(props) {
   const dispatch = useDispatch()
   const allImages = useSelector(state => state.images)
-  //dummy image data to avoid excessive calls to db when testing non-image features
+  // dummy image data to avoid excessive calls to db when testing non-image features
   // const allImages = [
   //   {
   //     url:
@@ -41,6 +41,7 @@ function Images(props) {
       }
     },
     [allImages]
+    // []
   )
 
   const changeCategory = e => {
