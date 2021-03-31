@@ -1,4 +1,5 @@
-import {firestore} from '../../server/db'
+import {firestore, storage} from '../../server/db'
+import firebase from 'firebase'
 
 //action types
 const GOT_IMAGES = 'GOT_IMAGES'
@@ -13,22 +14,23 @@ const gotImages = images => ({
 export const getImages = () => async dispatch => {
   try {
     let images = []
-    await firestore
-      .collection('images')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          images.push({
-            url: doc.data().url,
-            tags: doc.data().tags
-          })
+    var storageRef = firebase.storage().ref()
+
+    await storageRef
+      .listAll()
+      .then(res => {
+        res.items.forEach(async ref => {
+          let imgurl = await ref.getDownloadURL()
+
+          console.log('url', imgurl)
+          images.push({url: imgurl})
         })
       })
-      .catch(error => {
-        console.log('Error getting documents: ', error)
+      .catch(err => {
+        console.log(err)
       })
-    const imagesCopy = JSON.parse(JSON.stringify(images))
-    dispatch(gotImages(imagesCopy))
+
+    dispatch(gotImages(images))
   } catch (error) {
     console.error(error)
   }

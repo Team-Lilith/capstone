@@ -7,25 +7,6 @@ import {addImage} from './FabricUtils'
 function Images(props) {
   const dispatch = useDispatch()
   const allImages = useSelector(state => state.images)
-  // dummy image data to avoid excessive calls to db when testing non-image features
-  // const allImages = [
-  //   {
-  //     url:
-  //       'https://firebasestorage.googleapis.com/v0/b/capstone-e6ea2.appspot.com/o/5a00520e092a74e5b928e76a.png?alt=media&token=8a9cc950-779a-4bd6-b6c6-1b4e01c34906'
-  //   },
-  //   {
-  //     url:
-  //       'https://firebasestorage.googleapis.com/v0/b/capstone-e6ea2.appspot.com/o/Cute-Pug-PNG-File.png?alt=media&token=4066c001-8fa0-4a8a-95c4-0fc69a28c43c'
-  //   },
-  //   {
-  //     url:
-  //       'https://firebasestorage.googleapis.com/v0/b/capstone-e6ea2.appspot.com/o/chih.png?alt=media&token=1a838809-b790-40b0-9c54-3009a424ba03'
-  //   },
-  //   {
-  //     url:
-  //       'https://firebasestorage.googleapis.com/v0/b/capstone-e6ea2.appspot.com/o/corgi.png?alt=media&token=f31a77df-2170-43ff-8909-531b00f55086'
-  //   }
-  // ]
   const roomId = useSelector(state => state.room)
   const [currentImages, setCurrentImages] = useState([])
   let canvas = props.canvas
@@ -36,13 +17,21 @@ function Images(props) {
         dispatch(getImages())
       } else {
         console.log(allImages)
-        const imageCopy = JSON.parse(JSON.stringify(allImages))
-        setCurrentImages(imageCopy)
+        //const imageCopy = JSON.parse(JSON.stringify(allImages))
+        setCurrentImages(allImages)
       }
     },
     [allImages]
     // []
   )
+
+  // useEffect(()=> {
+  //   if(!allImages.length){
+
+  //     dispatch(getImages())
+  //     console.log('getting images in component useeffect')
+  //   }
+  // },[allImages])
 
   const changeCategory = e => {
     let cat = e.target.value
@@ -88,7 +77,7 @@ function Images(props) {
           </select>
         </div>
         <div className="img-container">
-          {currentImages.map(image => {
+          {allImages.map(image => {
             let url = image.url
             return (
               <img
