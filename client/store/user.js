@@ -29,6 +29,7 @@ export const loginGuest = ({nickname}) => async dispatch => {
   await firestore
     .auth()
     .signInAnonymously()
+    .setPersistence(firestore.auth.Auth.Persistence.LOCAL)
     .then(res => {
       console.log(res.user)
       res.user
@@ -58,6 +59,7 @@ export const registerWithGoogle = () => async dispatch => {
   await firestore
     .auth()
     .signInWithPopup(google)
+    .setPersistence(firestore.auth.Auth.Persistence.LOCAL)
     .then(res => {
       console.log(res.user)
       dispatch(setUser(res.user))
@@ -115,6 +117,7 @@ export const loginUser = ({email, password}) => async dispatch => {
   await firestore
     .auth()
     .signInWithEmailAndPassword(email, password)
+    //.setPersistence(firestore.auth.Auth.Persistence.LOCAL)
     .then(res => {
       user = res.user
       console.log(res.user)
@@ -138,6 +141,7 @@ export const signInWithGoogle = () => async dispatch => {
     await firestore
       .auth()
       .signInWithPopup(google)
+      //.setPersistence(firestore.auth.Auth.Persistence.LOCAL)
       .then(res => {
         console.log(res.user)
         history.push('/join')

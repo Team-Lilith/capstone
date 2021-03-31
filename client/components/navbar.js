@@ -2,87 +2,122 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+//import {logout} from '../store'
+import {auth, firestore, firebase} from '../../server/db/firebase'
 
-const Navbar = ({handleClick, isLoggedIn, roomId}) => (
-  <div id="nav-container">
-    <div id="nav-left">
-      <img
-        src="https://i.pinimg.com/originals/c9/f1/58/c9f1585926ebc34913646266212c1310.png"
-        id="logo"
-      />
-      <h1 id="title">COLLABALLAGE</h1>
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">
-              <div className="nav-hover-button">
-                <h3>Home</h3>
-              </div>
-            </Link>
+const Navbar = ({handleClick, isLoggedIn, roomId}) => {
+  handleClick = e => {
+    e.preventDefault()
+    auth.signOut()
+    console.log('User signed out!')
+  }
 
-            <Link to="/gallery">
-              <div className="nav-hover-button">
-                <h3>Gallery</h3>
-              </div>
-            </Link>
+  const setPersistenceSession = () => {
+    var email = '...'
+    var password = '...'
 
-            <Link to="/join">
-              <div className="nav-hover-button">
-                <h3>Create</h3>
-              </div>
-            </Link>
+    firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        return firebase.auth().signInWithEmailAndPassword(email, password)
+      })
+      .catch(error => {
+        var errorCode = error.code
+        var errorMessage = error.message
+      })
+  }
 
-            <Link to="/profile">
-              <div className="nav-hover-button">
-                <h3>Profile</h3>
-              </div>
-            </Link>
+  return (
+    <div id="nav-container">
+      <div id="nav-left">
+        <img
+          src="https://i.pinimg.com/originals/c9/f1/58/c9f1585926ebc34913646266212c1310.png"
+          id="logo"
+        />
+        <h1 id="title">COLLABALLAGE</h1>
+        <nav>
+          {isLoggedIn ? (
+            //setPersistenceSession()
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Link to="/home">
+                <div className="nav-hover-button">
+                  <h3>Home</h3>
+                </div>
+              </Link>
 
-            <a href="#" onClick={handleClick}>
-              <div className="nav-hover-button">
-                <h3>Logout</h3>
-              </div>
-            </a>
-          </div>
+              <Link to="/gallery">
+                <div className="nav-hover-button">
+                  <h3>Gallery</h3>
+                </div>
+              </Link>
+
+              <Link to="/join">
+                <div className="nav-hover-button">
+                  <h3>Create</h3>
+                </div>
+              </Link>
+
+              <Link to="/profile">
+                <div className="nav-hover-button">
+                  <h3>Profile</h3>
+                </div>
+              </Link>
+
+              <a href="#" onClick={handleClick}>
+                <div className="nav-hover-button">
+                  <button type="submit" onClick={() => app.auth().signOut()}>
+                    Logout
+                  </button>
+                </div>
+              </a>
+            </div>
+          ) : (
+            <div>
+              {/* The navbar will show these links before you log in */}
+
+              <Link to="/">
+                <div className="nav-hover-button">
+                  <h3>Home</h3>
+                </div>
+              </Link>
+
+              <Link to="/gallery">
+                <div className="nav-hover-button">
+                  <h3>Gallery</h3>
+                </div>
+              </Link>
+            </div>
+          )}
+        </nav>
+      </div>
+      <div id="nav-right">
+        <h2>Current Room:</h2>{' '}
+        {roomId ? (
+          <Link to={`/room/${roomId}`}>
+            <div className="nav-button">
+              <h3>{roomId}</h3>
+            </div>
+          </Link>
         ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-
-            <Link to="/">
-              <div className="nav-hover-button">
-                <h3>Home</h3>
-              </div>
-            </Link>
-
-            <Link to="/gallery">
-              <div className="nav-hover-button">
-                <h3>Gallery</h3>
-              </div>
-            </Link>
-          </div>
+          <h2>none</h2>
         )}
-      </nav>
+      </div>
     </div>
-    <div id="nav-right">
-      <h2>Current Room:</h2>{' '}
-      {roomId ? (
-        <Link to={`/room/${roomId}`}>
-          <div className="nav-button">
-            <h3>{roomId}</h3>
-          </div>
-        </Link>
-      ) : (
-        <h2>none</h2>
-      )}
-    </div>
-  </div>
-)
+  )
+}
 
 /**
  * CONTAINER
  */
+
+const logout = e => {
+  e.preventDefault()
+  auth.signOut()
+  console.log('User signed out!')
+}
+
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.uid,
@@ -98,8 +133,6 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
-
 /**
  * PROP TYPES
  */
@@ -107,3 +140,5 @@ Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
+
+export default connect(mapState, mapDispatch)(Navbar)
