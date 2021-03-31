@@ -37,7 +37,6 @@ export const fetchGallery = () => async dispatch => {
 export const saveCanvas = (canvas, users = null) => {
   try {
     const canvasObj = JSON.stringify(canvas.toDatalessJSON())
-    console.log(canvasObj)
     firestore
       .collection('gallery')
       .add({

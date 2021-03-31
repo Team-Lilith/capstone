@@ -11,7 +11,6 @@ const Login = () => {
   const dispatch = useDispatch()
 
   const handleSubmit = e => {
-    console.log('submitting')
     e.preventDefault()
     if (!email || !password) {
       return showToast('Please enter your email and password')

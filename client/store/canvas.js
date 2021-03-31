@@ -18,7 +18,7 @@ export const getInitialCanvas = roomId => dispatch => {
       if (snapshot.exists()) {
         dispatch(setInitialCanvas(snapshot.val()))
       } else {
-        console.log('canvas not found')
+        console.log('Canvas not found.')
       }
     })
     .catch(function(error) {

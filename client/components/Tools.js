@@ -66,10 +66,6 @@ function Tools(props) {
           }
         })
         canvas.on('object:added', function(options) {
-          console.log(
-            'canvas listener object added, emit?',
-            options.target.emit
-          )
           if (!options.target.id) options.target.id = uuid()
           // same with images we are having a bool
           // to dictate to emit or not
@@ -255,22 +251,6 @@ function Tools(props) {
             className="nav-button"
             src="/images/down-arrow.png"
             onClick={() => sendBackwards(canvas, roomId)}
-          />
-        </Tooltip>
-
-        <Tooltip title="Group All" arrow>
-          <img
-            className="nav-button"
-            src="/images/object.png"
-            onClick={() => groupObjects(canvas, group, true)}
-          />
-        </Tooltip>
-
-        <Tooltip title="Ungroup" arrow>
-          <img
-            className="nav-button"
-            src="/images/ungroup.png"
-            onClick={() => groupObjects(canvas, group, false)}
           />
         </Tooltip>
 
