@@ -28,48 +28,64 @@ export const loginGuest = ({nickname}) => async dispatch => {
   console.log(nickname)
   await firestore
     .auth()
-    .signInAnonymously()
-    .then(res => {
-      console.log(res.user)
-      res.user
-        .updateProfile({
-          displayName: nickname
+    .setPersistence(firestore.auth.Auth.Persistence.SESSION)
+    .then(() => {
+      firestore
+        .auth()
+        .signInAnonymously()
+        .then(res => {
+          console.log(res.user)
+          res.user
+            .updateProfile({
+              displayName: nickname
+            })
+            .catch(function(error) {
+              // An error happened.
+              console.log(error)
+            })
+          history.push('/join')
+          dispatch(setUser(res.user))
         })
-        .catch(function(error) {
-          // An error happened.
-          console.log(error)
+        .catch(err => {
+          console.log('error', err)
+          if (err.code === 'auth/wrong-password') {
+            return toast.error('Email or password is incorrect')
+          } else if (err.code === 'auth/user-not-found') {
+            return toast.error('Email or password is invalid')
+          } else {
+            return toast.error('Something went wrong')
+          }
         })
-      history.push('/join')
-      dispatch(setUser(res.user))
     })
     .catch(err => {
-      console.log('error', err)
-      if (err.code === 'auth/wrong-password') {
-        return toast.error('Email or password is incorrect')
-      } else if (err.code === 'auth/user-not-found') {
-        return toast.error('Email or password is invalid')
-      } else {
-        return toast.error('Something went wrong')
-      }
+      console.log(err)
     })
 }
 
 export const registerWithGoogle = () => async dispatch => {
   await firestore
     .auth()
-    .signInWithPopup(google)
-    .then(res => {
-      console.log(res.user)
-      dispatch(setUser(res.user))
+    .setPersistence(firestore.auth.Auth.Persistence.SESSION)
+    .then(() => {
+      firestore
+        .auth()
+        .signInWithPopup(google)
+        .then(res => {
+          console.log(res.user)
+          dispatch(setUser(res.user))
+        })
+        .catch(err => {
+          if (err.code === 'auth/wrong-password') {
+            return toast.error('Email or password is incorrect')
+          } else if (err.code === 'auth/user-not-found') {
+            return toast.error('Email or password is invalid')
+          } else {
+            return toast.error('Something went wrong')
+          }
+        })
     })
     .catch(err => {
-      if (err.code === 'auth/wrong-password') {
-        return toast.error('Email or password is incorrect')
-      } else if (err.code === 'auth/user-not-found') {
-        return toast.error('Email or password is invalid')
-      } else {
-        return toast.error('Something went wrong')
-      }
+      console.log(err)
     })
 }
 
@@ -79,32 +95,40 @@ export const registerUser = ({nickname, email, password}) => async dispatch => {
 
   await firestore
     .auth()
-    .createUserWithEmailAndPassword(email, password)
-    //.then((data) => data.json())
-    .then(res => {
-      res.user
-        .updateProfile({
-          displayName: nickname
+    .setPersistence(firestore.auth.Auth.Persistence.SESSION)
+    .then(() => {
+      firestore
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        //.then((data) => data.json())
+        .then(res => {
+          res.user
+            .updateProfile({
+              displayName: nickname
+            })
+            .then(function() {
+              // Update successful.
+            })
+            .catch(function(error) {
+              // An error happened.
+              console.log(error)
+            })
+          history.push('/join')
+          dispatch(setUser(res.user))
         })
-        .then(function() {
-          // Update successful.
+        .catch(err => {
+          console.log(err)
+          if (err.code === 'auth/email-already-in-use') {
+            return toast.warning(
+              'This email is already in use, Please login or continue with another email'
+            )
+          } else {
+            return toast.error('Something went wrong')
+          }
         })
-        .catch(function(error) {
-          // An error happened.
-          console.log(error)
-        })
-      history.push('/join')
-      dispatch(setUser(res.user))
     })
     .catch(err => {
       console.log(err)
-      if (err.code === 'auth/email-already-in-use') {
-        return toast.warning(
-          'This email is already in use, Please login or continue with another email'
-        )
-      } else {
-        return toast.error('Something went wrong')
-      }
     })
 }
 
@@ -114,29 +138,38 @@ export const loginUser = ({email, password}) => async dispatch => {
   let user = {}
   await firestore
     .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(res => {
-      user = res.user
-      console.log(res.user)
-      history.push('/join')
+    .setPersistence(firestore.auth.Auth.Persistence.SESSION)
+    .then(() => {
+      firestore
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(res => {
+          user = res.user
+          console.log(res.user)
+          history.push('/join')
+          dispatch(setUser(user))
+        })
+        .catch(err => {
+          //console.log(err)
+          if (err.code === 'auth/wrong-password') {
+            return toast.error('Email or password is incorrect')
+          } else if (err.code === 'auth/user-not-found') {
+            return toast.error('Email or password is invalid')
+          } else {
+            return toast.error('Something went wrong')
+          }
+        })
     })
     .catch(err => {
-      //console.log(err)
-      if (err.code === 'auth/wrong-password') {
-        return toast.error('Email or password is incorrect')
-      } else if (err.code === 'auth/user-not-found') {
-        return toast.error('Email or password is invalid')
-      } else {
-        return toast.error('Something went wrong')
-      }
+      console.log(err)
     })
-  dispatch(setUser(user))
 }
 
 export const signInWithGoogle = () => async dispatch => {
   try {
     await firestore
       .auth()
+      .setPersistence(firestore.auth.Auth.Persistence.SESSION)
       .signInWithPopup(google)
       .then(res => {
         console.log(res.user)
@@ -159,8 +192,19 @@ export const signInWithGoogle = () => async dispatch => {
 
 export const me = () => async dispatch => {
   try {
-    const res = await axios.get('/auth/me')
-    dispatch(setUser(res.data || defaultUser))
+    var user = firestore.auth().currentUser
+    console.log('in me', user)
+
+    if (user) {
+      console.log('signed in', user)
+      dispatch(setUser(user))
+      // User is signed in.
+    } else {
+      console.log('nobody signed in ')
+      dispatch(setUser(defaultUser))
+      // No user is signed in.
+    }
+    dispatch(setUser(user))
   } catch (err) {
     console.error(err)
   }

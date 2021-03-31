@@ -45,7 +45,7 @@ function Home(props) {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.uid
+    isLoggedIn: !!state.user
   }
 }
 
