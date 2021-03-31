@@ -56,8 +56,9 @@ export const saveCanvas = (canvas, users = null) => {
   }
 }
 
-export const saveToPng = canvas => {
-  canvas.toBlob(function(blob) {
+export const saveToPng = () => {
+  var canv = document.getElementById('canvas')
+  canv.toBlob(function(blob) {
     saveAs(blob, 'myIMG.png')
   })
 }

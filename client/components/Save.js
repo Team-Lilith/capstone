@@ -21,9 +21,9 @@ function Save(props) {
           onClick={() => saveCanvas(canvas)}
         />
       </Tooltip>
-      {/* <button type="submit" onClick={() => saveToPng(canvas)}>
+      <button type="submit" onClick={() => saveToPng(canvas)}>
         Save to Computer!
-      </button> */}
+      </button>
     </div>
   )
 }
