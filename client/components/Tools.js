@@ -210,12 +210,6 @@ function Tools(props) {
           </Select>
         </Tooltip>
 
-        {/* <Tooltip title="Change Font" arrow>
-          <img className="nav-button"
-            src="/images/font (1).png"
-            onClick={() => changeFont(canvas, font)}/>
-        </Tooltip> */}
-
         <Tooltip title="Upload Image" arrow>
           <div>
             <img
