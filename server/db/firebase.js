@@ -7,7 +7,7 @@ require('firebase/database')
 
 let firebaseConfig = {
   apiKey: 'AIzaSyCpJMMeWhHixunuu6h_5BF7Xo7V6z1AnRI',
-  authDomain: 'collaballage.herokuapp.com',
+  authDomain: 'capstone-e6ea2.firebaseapp.com',
   databaseURL: 'https://capstone-e6ea2-default-rtdb.firebaseio.com',
   projectId: 'capstone-e6ea2',
   storageBucket: 'capstone-e6ea2.appspot.com',
