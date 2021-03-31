@@ -54,6 +54,14 @@ export const addText = (color, canvas) => {
   text.enterEditing()
 }
 
+export const changeFont = (canvas, font) => {
+  var text = canvas.getActiveObject()
+  text.set({
+    fontFamily: font
+  })
+  canvas.renderAll()
+}
+
 export const deselect = canvas => {
   canvas.discardActiveObject()
   canvas.requestRenderAll()
