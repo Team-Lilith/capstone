@@ -258,22 +258,6 @@ function Tools(props) {
           />
         </Tooltip>
 
-        <Tooltip title="Group All" arrow>
-          <img
-            className="nav-button"
-            src="/images/object.png"
-            onClick={() => groupObjects(canvas, group, true)}
-          />
-        </Tooltip>
-
-        <Tooltip title="Ungroup" arrow>
-          <img
-            className="nav-button"
-            src="/images/ungroup.png"
-            onClick={() => groupObjects(canvas, group, false)}
-          />
-        </Tooltip>
-
         <Tooltip title="Clear Canvas" arrow>
           <img
             className="nav-button"
