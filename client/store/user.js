@@ -130,6 +130,7 @@ export const signInWithGoogle = () => dispatch => {
       )
     })
     .catch(err => {
+      console.log(err)
       if (err.code === 'auth/wrong-password') {
         showToast('Email or password is incorrect 😿')
       } else if (err.code === 'auth/user-not-found') {
