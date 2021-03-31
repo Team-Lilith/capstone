@@ -161,18 +161,20 @@ export const groupObjects = (canvas, group, shouldGroup) => {
 }
 
 export const clearCanvas = (canvas, svg) => {
-  svg.val = canvas.toSVG()
+  svg.val = canvas.toJSON()
   canvas.getObjects().forEach(obj => {
-    if (obj !== canvas.backgroundImage) canvas.remove(obj)
+    canvas.remove(obj)
   })
 }
 
 export const restoreCanvas = (canvas, svg) => {
   if (svg.val) {
-    fabric.loadSVGFromString(svg.val, objects => {
-      canvas.add(...objects)
-      canvas.requestRenderAll()
-    })
+    // fabric.loadSVGFromString(svg.val, objects => {
+    //   console.log(objects)
+    //   canvas.add(...objects)
+    //   canvas.requestRenderAll()
+    // })
+    canvas.loadFromJSON(svg.val, canvas.renderAll.bind(canvas))
   }
 }
 
