@@ -3,29 +3,13 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 //import {logout} from '../store'
-import {auth, firestore, firebase} from '../../server/db/firebase'
+import {auth, firebase} from '../../server/db/firebase'
 
 const Navbar = ({handleClick, isLoggedIn, roomId}) => {
   handleClick = e => {
     e.preventDefault()
     auth.signOut()
     console.log('User signed out!')
-  }
-
-  const setPersistenceSession = () => {
-    var email = '...'
-    var password = '...'
-
-    firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-      .then(() => {
-        return firebase.auth().signInWithEmailAndPassword(email, password)
-      })
-      .catch(error => {
-        var errorCode = error.code
-        var errorMessage = error.message
-      })
   }
 
   return (
@@ -67,7 +51,10 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
 
               <a href="#" onClick={handleClick}>
                 <div className="nav-hover-button">
-                  <button type="submit" onClick={() => app.auth().signOut()}>
+                  <button
+                    type="submit"
+                    onClick={() => firebase.auth().signOut()}
+                  >
                     Logout
                   </button>
                 </div>
