@@ -193,19 +193,29 @@ export const signInWithGoogle = () => async dispatch => {
 
 export const me = () => async dispatch => {
   try {
-    var user = firestore.auth().currentUser
-    console.log('in me', user)
+    firestore.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log(user, 'signed in')
+        dispatch(setUser(user))
+        // User is signed in.
+      } else {
+        console.log('noone signed in')
+        // No user is signed in.
+      }
+    })
+    // var user = firestore.auth().currentUser
+    // console.log('in me', user)
 
-    if (user) {
-      console.log('signed in', user)
-      dispatch(setUser(user))
-      // User is signed in.
-    } else {
-      console.log('nobody signed in ')
-      dispatch(setUser(defaultUser))
-      // No user is signed in.
-    }
-    dispatch(setUser(user))
+    // if (user) {
+    //   console.log('signed in', user)
+    //   dispatch(setUser(user))
+    // User is signed in.
+    // } else {
+    //   console.log('nobody signed in ')
+    //   dispatch(setUser(defaultUser))
+    //   // No user is signed in.
+    // }
+    // dispatch(setUser(user))
   } catch (err) {
     console.error(err)
   }
