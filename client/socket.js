@@ -313,7 +313,7 @@ export const joinSuccess = dispatch => {
   socket.on('join successful', roomId => {
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
-    toast(`Joined room ${roomId}`)
+    toast(`Joined room: ${roomId}`)
   })
 }
 
@@ -328,7 +328,7 @@ export const createSuccess = dispatch => {
       messages: [],
       users: ['user name here']
     })
-    toast(`Created room ${roomId}`)
+    toast(`Created room: ${roomId}`)
   })
 }
 
