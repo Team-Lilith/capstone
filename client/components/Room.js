@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Tools, Images, Chat} from './index'
 import {fabric} from 'fabric'
@@ -19,6 +19,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import {showToast} from '../toasty'
 
 function Room() {
+  const canvasRef = useRef(null)
   const roomId = useSelector(state => state.room)
   const initialCanvas = useSelector(state => state.canvas)
   const initialObjects = useSelector(state => state.objects)
@@ -76,6 +77,31 @@ function Room() {
     [initialCanvas]
   )
 
+  useEffect(
+    () => {
+      if (canvasRef.current && canvas) {
+        const canvasElement = canvasRef.current
+        // console.log("canvas element", canvasElement)
+        canvasElement.addEventListener(
+          'drop',
+          e => {
+            const imgBeingDragged = document.getElementsByClassName(
+              'image-being-dragged'
+            )[0]
+            const newImage = new fabric.Image(imgBeingDragged, {
+              left: e.layerX - 50,
+              top: e.layerY - 50
+            })
+            newImage.scale(0.25)
+            canvas.add(newImage)
+          },
+          false
+        )
+      }
+    },
+    [canvasRef, canvas]
+  )
+
   return (
     <div id="room">
       <div id="room-top-container">
@@ -83,7 +109,7 @@ function Room() {
           <Images canvas={canvas} />
         </div>
 
-        <div id="canvas-div">
+        <div id="canvas-div" ref={canvasRef}>
           <div id="tools">
             <Tools canvas={canvas} roomId={id} />
           </div>

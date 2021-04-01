@@ -199,11 +199,10 @@ function Tools(props) {
             <MenuItem value="Courier">Courier</MenuItem>
             <MenuItem value="Verdana">Verdana</MenuItem>
             <MenuItem value="Georgia">Georgia</MenuItem>
-            <MenuItem value="Palatino">Palatino</MenuItem>
-            <MenuItem value="Garamond">Garamond</MenuItem>
-            <MenuItem value="Bookman">Bookman</MenuItem>
+            <MenuItem value="Monospace">Monospace</MenuItem>
+            <MenuItem value="Cursive">Cursive</MenuItem>
+            <MenuItem value="Fantasy">Fantasy</MenuItem>
             <MenuItem value="Tahoma">Tahoma</MenuItem>
-            <MenuItem value="Trebuchet MS">Trebuchet MS</MenuItem>
             <MenuItem value="Arial Black">Arial Black</MenuItem>
             <MenuItem value="Impact">Impact</MenuItem>
             <MenuItem value="Comic Sans MS">Comic Sans MS</MenuItem>
