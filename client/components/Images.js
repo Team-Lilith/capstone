@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {receiveImage} from '../socket'
 import {getImages} from '../store/images'
 import {addImage} from './FabricUtils'
 

@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import {toast, ToastContainer} from 'react-toastify'
-import firestore from 'firebase'
+import {ToastContainer} from 'react-toastify'
 import {loginGuest} from '../store'
 import {useDispatch} from 'react-redux'
 import {showToast} from '../toasty'

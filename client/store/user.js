@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {toast} from 'react-toastify'
 import firestore from 'firebase'
 import {google} from '../../server/db/firebase'
 import history from '../history'

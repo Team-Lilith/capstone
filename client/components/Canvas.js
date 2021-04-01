@@ -7,13 +7,11 @@ import {
   receiveRemovedObject,
   modifyIndex
 } from '../socket'
-import {fabric} from 'fabric'
-import {addImage, setCanvasBackground} from './FabricUtils'
+import {addImage} from './FabricUtils'
 
 function Canvas(props) {
   const canvas = props.canvas
   const roomId = useSelector(state => state.room)
-  let image
 
   if (canvas) {
     modifyCanvasObject(canvas)
@@ -21,7 +19,6 @@ function Canvas(props) {
     receiveAddedObject(canvas)
     receiveRemovedObject(canvas)
     modifyIndex(canvas)
-    // setCanvasBackground(image, canvas)
   }
 
   return <></>

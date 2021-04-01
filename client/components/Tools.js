@@ -3,11 +3,10 @@ import {HuePicker} from 'react-color'
 import {MenuItem, Select} from '@material-ui/core'
 import {v1 as uuid} from 'uuid'
 import {Tooltip} from '@material-ui/core'
-import socket, {
+import {
   emitModifiedCanvasObject,
   emitAddedToCanvas,
-  emitCanvasRemoveChange,
-  emitImage
+  emitCanvasRemoveChange
 } from '../socket'
 import {
   addRect,
@@ -15,7 +14,6 @@ import {
   addTri,
   addText,
   deselect,
-  groupObjects,
   toggleMode,
   clearCanvas,
   restoreCanvas,
@@ -30,7 +28,7 @@ import Save from './Save'
 function Tools(props) {
   const canvas = props.canvas
   const roomId = props.roomId
-  const group = {}
+  // const group = {}
   const svgState = {}
   const modes = {
     pan: 'pan',
