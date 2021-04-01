@@ -14,7 +14,7 @@ export const getImages = () => async dispatch => {
   try {
     let images = []
     await firestore
-      .collection('images')
+      .collection('image-store')
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
