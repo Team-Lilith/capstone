@@ -44,14 +44,14 @@ export const loginGuest = ({nickname}) => dispatch => {
           showToast(`Welcome 💖 \nEnter a room name to start Collaballaging!`)
         })
         .catch(err => {
-          console.log('error: ', err)
+          console.log('Guest error ', err)
           showToast(
             'We are having trouble signing you in as a guest 😿 \nPlease try logging in or signing up instead.'
           )
         })
     })
     .catch(err => {
-      console.log(err, 'error persisting user')
+      console.log(err, 'Error persisting user')
     })
 }
 
@@ -94,7 +94,7 @@ export const registerUser = ({nickname, email, password}) => dispatch => {
         })
     })
     .catch(err => {
-      console.log(err, 'error persisting user')
+      console.log(err, 'Error persisting user')
     })
 }
 
@@ -116,7 +116,7 @@ export const loginUser = ({email, password}) => dispatch => {
           )
         })
         .catch(err => {
-          console.log('Error logging in user...', err)
+          console.log('Error logging in user', err)
           if (err.code === 'auth/wrong-password') {
             showToast('Email or password is incorrect 😿')
           } else if (err.code === 'auth/user-not-found') {
@@ -129,7 +129,7 @@ export const loginUser = ({email, password}) => dispatch => {
         })
     })
     .catch(err => {
-      console.log(err, 'error persisting user')
+      console.log(err, 'Error persisting user')
     })
 }
 
@@ -162,7 +162,7 @@ export const signInWithGoogle = () => dispatch => {
         })
     })
     .catch(err => {
-      console.log(err, 'error persisting user')
+      console.log(err, 'Error persisting user')
     })
 }
 
@@ -171,10 +171,9 @@ export const me = () => async dispatch => {
     firestore.auth().onAuthStateChanged(function(user) {
       if (user) {
         dispatch(setUser(user))
-        console.log('user logged in in me')
         // User is signed in.
       } else {
-        console.log('no user in me')
+        console.log("There's no user")
         // No user is signed in.
       }
     })
@@ -211,7 +210,7 @@ export const logout = () => async dispatch => {
         // Sign-out successful.
       })
       .catch(error => {
-        console.log(error, 'error logging out user')
+        console.log(error, 'Error logging out user')
         // An error happened.
       })
   } catch (err) {

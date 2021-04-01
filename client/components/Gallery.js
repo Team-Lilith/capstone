@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchGallery} from '../store'
 import {fabric} from 'fabric'
 
@@ -39,14 +40,11 @@ function Gallery(props) {
       <div className="canvases-container">
         {gallery.map(el => {
           return (
-            <div key={el.id}>
-              <canvas
-                id={el.id}
-                // width="625px"
-                // height="625px"
-                className="gallery-element"
-              />
-            </div>
+            <Link to={`/gallery/${el.id}`}>
+              <div key={el.id}>
+                <canvas id={el.id} className="gallery-element" />
+              </div>
+            </Link>
           )
         })}
       </div>

@@ -43,11 +43,11 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">
+              {/* <Link to="/home">
                 <div className="nav-hover-button">
                   <h3>Home</h3>
                 </div>
-              </Link>
+              </Link> */}
 
               <Link to="/gallery">
                 <div className="nav-hover-button">
@@ -61,11 +61,11 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
                 </div>
               </Link>
 
-              <Link to="/profile">
+              {/* <Link to="/profile">
                 <div className="nav-hover-button">
                   <h3>Profile</h3>
                 </div>
-              </Link>
+              </Link> */}
 
               <a href="#" onClick={handleClick}>
                 <div className="nav-hover-button">

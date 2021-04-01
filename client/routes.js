@@ -37,9 +37,9 @@ class Routes extends Component {
           <Room />
         </Route>
         <Route path="/join" component={Join} />
-        <Route path="/gallery" component={Gallery} />
+        <Route exact path="/gallery" component={Gallery} />
         <Route path="/gallery/:id" component={SingleCanvas} />
-        <Route path="/profile" component={Profile} />
+        {/* <Route path="/profile" component={Profile} /> */}
         <Route path="/signup" component={HomeSignUp} />
         <Route path="/" component={Home} />
       </Switch>

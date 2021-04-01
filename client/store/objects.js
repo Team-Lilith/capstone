@@ -18,7 +18,7 @@ export const getInitialObjects = roomId => dispatch => {
       if (snapshot.exists()) {
         dispatch(setInitialObjects(snapshot.val()))
       } else {
-        console.log('Objects not found.')
+        console.log('Objects not found')
       }
     })
     .catch(function(error) {
