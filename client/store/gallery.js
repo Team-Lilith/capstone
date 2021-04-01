@@ -17,7 +17,8 @@ export const fetchGallery = () => async dispatch => {
   try {
     let gallery = []
     firestore
-      .collection('gallery')
+      // .collection('gallery')
+      .collection('new-gallery')
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -37,8 +38,10 @@ export const fetchGallery = () => async dispatch => {
 export const saveCanvas = (canvas, users = null) => {
   try {
     const canvasObj = JSON.stringify(canvas.toDatalessJSON())
+    // const canvasObj = canvas.toDatalessJSON()
     firestore
-      .collection('gallery')
+      // .collection('gallery')
+      .collection('new-gallery')
       .add({
         canvas: canvasObj,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
