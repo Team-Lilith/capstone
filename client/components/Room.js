@@ -86,8 +86,8 @@ function Room() {
               'image-being-dragged'
             )[0]
             const newImage = new fabric.Image(imgBeingDragged, {
-              left: e.layerX - 50,
-              top: e.layerY - 50
+              left: e.X - 50,
+              top: e.Y - 50
             })
             newImage.scale(0.25)
             canvas.add(newImage)

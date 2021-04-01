@@ -53,11 +53,6 @@ const Login = () => {
           onClick={() => dispatch(signInWithGoogle())}
           label="Login with Google"
         />
-        <button
-          type="button"
-          onClick={() => dispatch(signInWithGoogle())}
-          label="Login with Google"
-        />
       </div>
     </div>
   )
