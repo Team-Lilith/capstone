@@ -94,25 +94,27 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
       </div>
       <div id="nav-right">
         <h2>Current Room:</h2>{' '}
-        {roomId ? (
-          <div id="nav-right-inner">
-            <Tooltip title="Copy Room Link to Clipboard" arrow>
-              <button
-                className="copy-link-button"
-                onClick={() => copyTextToClipboard(window.location.href)}
-              >
-                <img src="/images/clipboard.png" />
-              </button>
-            </Tooltip>
-            <Link to={`/room/${roomId}`}>
-              <div className="nav-button">
-                <h3>{roomId}</h3>
-              </div>
-            </Link>
-          </div>
-        ) : (
-          <h2>None</h2>
-        )}
+        <div id="nav-room">
+          {roomId ? (
+            <div id="nav-right-inner">
+              <Link to={`/room/${roomId}`}>
+                <div className="nav-button">
+                  <h3>{roomId}</h3>
+                </div>
+              </Link>
+              <Tooltip title="Copy Room Link to Clipboard" arrow>
+                <button
+                  className="copy-link-button"
+                  onClick={() => copyTextToClipboard(window.location.href)}
+                >
+                  <img src="/images/clipboard.png" />
+                </button>
+              </Tooltip>
+            </div>
+          ) : (
+            <h2>None</h2>
+          )}
+        </div>
       </div>
     </div>
   )
