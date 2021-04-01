@@ -133,6 +133,15 @@ export const emitModifiedCanvasObject = (objWithId, roomId) => {
 export const emitAddedToCanvas = objectAdded => {
   socket.emit('object added', objectAdded)
   // update realtimeDB with updated canvas
+  if (objectAdded.obj.stroke) {
+    objectAdded.obj.fillRule = null
+    objectAdded.obj.paintFirst = 'stroke'
+  }
+  console.log(
+    'canvas objects in emitAddedToCanvas =>',
+    objectAdded.obj.canvas._objects
+  )
+
   updateRoomCanvas(objectAdded.room, objectAdded.obj.canvas)
   // update realtimeDB with new object's id
   updateObjIds(objectAdded.room, objectAdded.id)
