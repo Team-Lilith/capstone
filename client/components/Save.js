@@ -1,5 +1,5 @@
 import React from 'react'
-import {saveCanvas, saveToPng} from '../store'
+import {saveCanvas} from '../store'
 import {Tooltip} from '@material-ui/core'
 
 //should render a button

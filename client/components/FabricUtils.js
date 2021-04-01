@@ -1,6 +1,6 @@
 import {fabric} from 'fabric'
 import {v1 as uuid} from 'uuid'
-import socket, {emitImage, emitIndexChange} from '../socket'
+import {emitImage, emitIndexChange} from '../socket'
 
 // TOOLS
 // we are giving ids to be able to identify each object

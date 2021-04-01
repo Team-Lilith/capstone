@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {sendMessage, receiveMessageAndUpdateState} from '../socket'
-import {getUser, getInitialChat} from '../store'
+import {getInitialChat} from '../store'
 import '../index.css'
 
 export default function Chat(props) {
@@ -10,8 +10,6 @@ export default function Chat(props) {
   const userId = useSelector(state => state.user)
   const initialChat = useSelector(state => state.chat)
   const dispatch = useDispatch()
-
-  useEffect(() => {}, [userId])
 
   useEffect(
     () => {

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {receiveImage} from '../socket'
 import {getImages} from '../store/images'
 import {addImage} from './FabricUtils'
 
@@ -92,6 +91,16 @@ function Images(props) {
             let url = image.url
             return (
               <img
+                width={500}
+                draggable={true}
+                onDrag={function(e) {
+                  const imgObj = e.target
+                  imgObj.className = 'image-bar-image image-being-dragged'
+                }}
+                onDragEnd={function(e) {
+                  const imgObj = e.target
+                  imgObj.className = 'image-bar-image'
+                }}
                 src={url}
                 onClick={() => addImage(canvas, url, false, roomId)}
                 className="image-bar-image"

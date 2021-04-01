@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchGallery} from '../store'
 import {fabric} from 'fabric'
@@ -22,7 +22,6 @@ function Gallery(props) {
               object.set('selectable', false)
             }
           )
-          console.log('canv =>', canv)
           canv.hoverCursor = 'auto'
           canv.defaultCursor = 'pointer'
           canv.setZoom(0.5)

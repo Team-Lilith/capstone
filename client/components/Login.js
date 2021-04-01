@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {toast} from 'react-toastify'
 import {useDispatch} from 'react-redux'
 import {loginUser, signInWithGoogle} from '../store'
 import GoogleButton from 'react-google-button'

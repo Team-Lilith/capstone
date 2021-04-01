@@ -3,11 +3,10 @@ import {HuePicker} from 'react-color'
 import {MenuItem, Select} from '@material-ui/core'
 import {v1 as uuid} from 'uuid'
 import {Tooltip} from '@material-ui/core'
-import socket, {
+import {
   emitModifiedCanvasObject,
   emitAddedToCanvas,
-  emitCanvasRemoveChange,
-  emitImage
+  emitCanvasRemoveChange
 } from '../socket'
 import {
   addRect,
@@ -15,7 +14,6 @@ import {
   addTri,
   addText,
   deselect,
-  groupObjects,
   toggleMode,
   clearCanvas,
   restoreCanvas,
@@ -30,13 +28,12 @@ import Save from './Save'
 function Tools(props) {
   const canvas = props.canvas
   const roomId = props.roomId
-  const group = {}
   const svgState = {}
   const modes = {
     pan: 'pan',
     drawing: 'drawing'
   }
-  // const fonts = ['Arial', 'Times New Roman', 'Times', 'Courier New', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Tahoma', 'Trebuchet MS', 'Arial Black', 'Impact', 'Comic Sans MS']
+
   const [color, setColor] = React.useState('fff')
   const [font, setFont] = React.useState('')
 
@@ -199,11 +196,10 @@ function Tools(props) {
             <MenuItem value="Courier">Courier</MenuItem>
             <MenuItem value="Verdana">Verdana</MenuItem>
             <MenuItem value="Georgia">Georgia</MenuItem>
-            <MenuItem value="Palatino">Palatino</MenuItem>
-            <MenuItem value="Garamond">Garamond</MenuItem>
-            <MenuItem value="Bookman">Bookman</MenuItem>
+            <MenuItem value="Monospace">Monospace</MenuItem>
+            <MenuItem value="Cursive">Cursive</MenuItem>
+            <MenuItem value="Fantasy">Fantasy</MenuItem>
             <MenuItem value="Tahoma">Tahoma</MenuItem>
-            <MenuItem value="Trebuchet MS">Trebuchet MS</MenuItem>
             <MenuItem value="Arial Black">Arial Black</MenuItem>
             <MenuItem value="Impact">Impact</MenuItem>
             <MenuItem value="Comic Sans MS">Comic Sans MS</MenuItem>

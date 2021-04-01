@@ -12,7 +12,6 @@ import {
 } from '../socket'
 import '../index.css'
 import {ToastContainer} from 'react-toastify'
-import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {showToast} from '../toasty'
 
