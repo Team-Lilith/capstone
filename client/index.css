@@ -272,6 +272,19 @@ a:hover {
   font-family: 'Bangers', cursive;
 }
 
+.link-button {
+  border: 0;
+  border-radius: 9px;
+  background: #00bfff;
+  box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
+  padding: 10px;
+  font-family: 'Bangers', cursive;
+}
+
+.link-button img {
+  width: 13px !important;
+}
+
 .nav-button:hover {
   cursor: pointer;
 }
@@ -488,9 +501,29 @@ input[type='nickname'] {
   text-align: center;
 }
 
+#instructions {
+  margin-left: 50px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 300px;
+  margin-top: 70px;
+  padding: 20px;
+  border-radius: 50px;
+  background: #00bfff;
+  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  text-align: center;
+}
+
+#instructions p {
+  font-size: 15px;
+}
+
 #join {
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   width: 400px;
