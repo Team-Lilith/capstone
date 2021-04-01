@@ -132,6 +132,7 @@ export const emitModifiedCanvasObject = (objWithId, roomId) => {
 // here we emit object added socket and send back object newly added
 export const emitAddedToCanvas = objectAdded => {
   socket.emit('object added', objectAdded)
+  console.log(objectAdded.obj.path)
   // update realtimeDB with updated canvas
   if (objectAdded.obj.stroke) {
     objectAdded.obj.fillRule = null
@@ -243,6 +244,7 @@ export const receiveAddedObject = canvas => {
       canvas.setActiveObject(object)
     } else if (obj.type === 'path') {
       object = new fabric.Path(obj.path)
+      console.log(obj.path)
       object.set(obj)
     } else if (obj.type === 'image') {
       socket.off('add-image')
