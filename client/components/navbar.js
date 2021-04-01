@@ -115,13 +115,6 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
             <h2>None</h2>
           )}
         </div>
-        {roomId ? (
-          <div id="timer">
-            <h3>00:00</h3>
-          </div>
-        ) : (
-          ''
-        )}
       </div>
     </div>
   )

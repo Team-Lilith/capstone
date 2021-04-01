@@ -11,19 +11,19 @@ module.exports = (io, realtimeDB) => {
       }, 1800000)
     }
 
-    function timer(seconds, room) {
-      console.log('starting timer for ', room)
-      var remaningTime = seconds
-      let id = setInterval(function() {
-        if (remaningTime > 0) {
-          remaningTime--
-          console.log(remaningTime)
-        } else {
-          console.log('timer done')
-          clearInterval(id)
-        }
-      }, 1000)
-    }
+    // function timer(seconds, room) {
+    //   console.log('starting timer for ', room)
+    //   var remaningTime = seconds
+    //   let id = setInterval(function() {
+    //     if (remaningTime > 0) {
+    //       remaningTime--
+    //       console.log(remaningTime)
+    //     } else {
+    //       console.log('timer done')
+    //       clearInterval(id)
+    //     }
+    //   }, 1000)
+    // }
 
     // Each socket can join a room by emitting the room name in a 'join' event
     // The server will listen to the 'join' event and attach that socket to the room
@@ -55,7 +55,7 @@ module.exports = (io, realtimeDB) => {
         io.to(socket.id).emit('create successful', roomId)
         // delete room info from db after 30min
         deleteRoom(roomId)
-        timer(60, roomId)
+        // timer(60, roomId)
       } else {
         io.to(socket.id).emit('existing room')
         console.log(

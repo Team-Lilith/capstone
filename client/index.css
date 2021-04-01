@@ -70,7 +70,7 @@ a:hover {
 #images {
   padding: 15px;
   margin: 0px 15px 15px 25px;
-  height: 675px;
+  height: 740px;
   overflow-y: auto;
   border-radius: 50px;
   background: #00bfff;
@@ -117,7 +117,7 @@ a:hover {
 #chat {
   padding: 15px;
   margin: 0px 25px 15px 15px;
-  height: 675px;
+  height: 740px;
   width: 300px;
   border-radius: 50px;
   background: #00bfff;
@@ -179,7 +179,7 @@ a:hover {
 
 #home {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .register-container {
@@ -190,18 +190,16 @@ a:hover {
 }
 
 #auth-container {
-  height: 80vh;
   align-items: center;
   justify-content: space-evenly;
   display: flex;
   flex-direction: column;
-
   width: 40vw;
-  height: 80vh;
-  margin-top: 7vh;
+  margin: 40px 20px 20px 20px;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  padding: 20px;
 }
 
 .gallery {
@@ -222,14 +220,12 @@ a:hover {
 
 #gallery-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   width: 40vw;
-  height: 80vh;
-  margin-top: 7vh;
-  margin-bottom: 70px;
-  padding: 20px;
+  margin: 40px 20px 20px 20px;
+  padding: 20px 20px 40px 20px;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
@@ -343,6 +339,11 @@ hr {
 
 #nav-right h2 {
   margin: 0px 5px 0px 0px;
+  padding: 0px;
+}
+
+#nav-right div {
+  margin: 0px 10px 0px 5px;
   padding: 0px;
 }
 
