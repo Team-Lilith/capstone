@@ -82,11 +82,9 @@ const removeObjId = (roomId, objId) => {
 
 // update our array of obj ids in the DB when adjusting layers
 const updateObjIdxs = (roomId, canvas) => {
-  console.log('objects array in updateObjIdx', canvas._objects)
   let objs = canvas._objects
   let newIds = []
   for (let i = 0; i < objs.length; i++) {
-    console.log(objs[i].id)
     newIds.push(objs[i].id)
   }
   let ids = realtimeDB.ref(roomId).child('objectIds')
