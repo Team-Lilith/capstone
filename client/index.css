@@ -6,16 +6,19 @@ body {
   background-color: deepskyblue;
 }
 
+#app {
+  width: 100%;
+}
+
 form input {
   border-radius: 20px;
 }
 
-#body {
-  z-index: -3;
-  padding-top: 12vh;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+html,
+body {
+  margin: 0px;
+  padding-top: 0px;
+  width: 100%;
 }
 
 a:link {
@@ -36,22 +39,20 @@ a:hover {
   align-items: center;
   display: flex;
   flex-direction: column;
-  /* margin-top: 30px; */
+  width: 100%;
 }
 
 #room-top-container {
+  justify-content: center;
   display: flex;
-  justify-content: space-between;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   margin-bottom: 30px;
 }
 
 #images label {
-  /* margin-left: 8px; */
   margin-top: 5px;
   font-family: 'Bangers', cursive;
-  /* font-size: 20px; */
 }
 
 #images select {
@@ -68,16 +69,13 @@ a:hover {
 
 #images {
   padding: 15px;
-  margin: 15px;
-  max-width: 600px;
-  width: 370px;
-  max-width: 25vw;
-  /* width: 600px; */
+  margin: 0px 15px 15px 25px;
+  height: 740px;
   overflow-y: auto;
-  height: 100vh;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  width: 30%;
 }
 
 .MuiInputBase-root MuiInput-root MuiInput-underline {
@@ -97,43 +95,30 @@ a:hover {
 }
 
 #canvas-div {
-  /* flex: 1; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
-  /* padding: 25px;
-  margin: 15px; */
   height: 100%;
   align-items: center;
-  /* border-radius: 50px;
-  background: #00bfff;
-  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff; */
-}
-
-#canvas {
-  /* flex: 1; */
 }
 
 .img-container {
   overflow-y: auto;
-  height: 625px;
+  height: 570px;
 }
 
 #tools {
-  /* width: 600px; */
   height: 100px;
   padding: 25px;
-  margin: 15px;
-  border-radius: 50px;
+  border-radius: 35px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
 }
 
 #chat {
   padding: 15px;
-  margin: 15px;
-  height: 100vh;
+  margin: 0px 25px 15px 15px;
+  height: 740px;
+  width: 300px;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
@@ -194,7 +179,7 @@ a:hover {
 
 #home {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .register-container {
@@ -205,18 +190,16 @@ a:hover {
 }
 
 #auth-container {
-  height: 80vh;
   align-items: center;
   justify-content: space-evenly;
   display: flex;
   flex-direction: column;
-
   width: 40vw;
-  height: 80vh;
-  margin-top: 7vh;
+  margin: 40px 20px 20px 20px;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
+  padding: 20px;
 }
 
 .gallery {
@@ -237,15 +220,12 @@ a:hover {
 
 #gallery-container {
   display: flex;
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   width: 40vw;
-  height: 80vh;
-  margin-top: 7vh;
-  margin-bottom: 70px;
-  padding: 20px;
+  margin: 40px 20px 20px 20px;
+  padding: 20px 20px 40px 20px;
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
@@ -258,9 +238,6 @@ a:hover {
 #gallery-container h3 {
   margin: 10px;
   font-size: 25px;
-  /* background: linear-gradient(black, #00dcff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
 }
 
 .nav-button {
@@ -336,10 +313,9 @@ hr {
 }
 
 #nav-container {
-  z-index: 3;
-  height: 15vh;
-  width: 100vw;
-  position: fixed;
+  width: 100%;
+  margin: 0;
+  padding: 0px 10px 10px 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -349,35 +325,45 @@ hr {
   flex-wrap: wrap;
   display: flex;
   align-items: center;
-  /* flex-direction: column; */
+  padding: 0px;
+  margin: 0px;
 }
 
 #nav-right {
+  margin: 0px;
+  padding: 0px;
   padding: 1em;
-  margin-right: 1em;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  font-size: 0.8em;
-  width: 20vw;
+}
+
+#nav-right h2 {
+  margin: 0px 5px 0px 0px;
+  padding: 0px;
+}
+
+#nav-right div {
+  margin: 0px 10px 0px 5px;
+  padding: 0px;
 }
 
 #nav-right-inner {
+  margin: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+#nav-room {
+  display: flex;
+}
+
+#timer {
+  /* background-color: turquoise; */
+}
+
 #nav-right-inner button {
   margin-right: 10px;
-}
-
-#nav-right h2 {
-  padding: 5px;
-}
-
-#nav-right h2 {
-  margin: 5px;
 }
 
 #logo {
@@ -432,7 +418,6 @@ input[type='nickname'] {
   border: 0;
   border: 1px solid rgba(0, 0, 0, 0.09);
   margin-right: 8px;
-  /* text-align: center; */
 }
 
 .column form {
@@ -507,7 +492,6 @@ input[type='nickname'] {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
   width: 40%;
   margin-top: 30px;
   padding: 20px;
@@ -609,21 +593,11 @@ input[type='nickname'] {
 #tools-buttons {
   display: flex;
   align-items: flex-start;
-  /* flex-wrap: wrap; */
   flex: 1;
 }
 
 #tools-buttons img {
   width: 35px;
-}
-
-#profile-container {
-  /* width: 40%;
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 50px;
-  background: #00bfff;
-  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff; */
 }
 
 #profile-container div {
@@ -639,17 +613,9 @@ input[type='nickname'] {
 }
 
 #profile {
-  /* background-color: var(--background); */
   margin: auto;
-  /* margin-top: 50px; */
-  /* padding: 10px 30px; */
-  /* padding-top: 10px; */
-  /* padding-bottom: 0; */
-  /* th: 600px; */
-  /* height: 200px; */
   display: flex;
   flex-direction: column;
-
   width: 800px;
   margin-top: 30px;
   padding: 20px;
@@ -659,15 +625,6 @@ input[type='nickname'] {
 }
 
 #my-art-container {
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px;
-  border-radius: 1px;
-  background: #00bfff;
-  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff; */
-
   width: 100%;
   display: flex;
   flex-direction: column;
