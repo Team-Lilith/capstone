@@ -81,7 +81,6 @@ function Room() {
     () => {
       if (canvasRef.current && canvas) {
         const canvasElement = canvasRef.current
-        // console.log("canvas element", canvasElement)
         canvasElement.addEventListener(
           'drop',
           e => {

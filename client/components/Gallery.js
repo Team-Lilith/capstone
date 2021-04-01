@@ -22,7 +22,6 @@ function Gallery(props) {
               object.set('selectable', false)
             }
           )
-          console.log('canv =>', canv)
           canv.hoverCursor = 'auto'
           canv.defaultCursor = 'pointer'
           canv.setZoom(0.5)

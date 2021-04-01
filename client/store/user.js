@@ -29,7 +29,6 @@ export const loginGuest = ({nickname}) => dispatch => {
     .auth()
     .signInAnonymously()
     .then(res => {
-      console.log(res.user)
       res.user
         .updateProfile({
           displayName: nickname
