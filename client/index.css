@@ -75,7 +75,7 @@ a:hover {
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
-  width: 30%;
+  max-width: 300px;
 }
 
 .MuiInputBase-root MuiInput-root MuiInput-underline {
@@ -267,13 +267,13 @@ a:hover {
 }
 
 .copy-link-button {
-  height: 52px;
+  /* height: 52px; */
   border: 0;
-  border-radius: 9px;
+  /* border-radius: 9px; */
   background: #00bfff;
-  box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
+  /* box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
   padding: 10px;
-  font-family: 'Bangers', cursive;
+  font-family: 'Bangers', cursive; */
 }
 
 .copy-link-button img {
