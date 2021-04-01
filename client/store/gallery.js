@@ -35,7 +35,7 @@ export const fetchGallery = () => async dispatch => {
 }
 
 //SAVING CANVAS
-export const saveCanvas = (canvas, users = null) => {
+export const saveCanvas = (canvas, title, artists = null) => {
   try {
     const canvasObj = JSON.stringify(canvas.toDatalessJSON())
     // const canvasObj = canvas.toDatalessJSON()
@@ -44,8 +44,9 @@ export const saveCanvas = (canvas, users = null) => {
       .collection('new-gallery')
       .add({
         canvas: canvasObj,
+        title: title,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        users: users
+        artists: artists
       })
       .then(docRef => {
         //Canvas written with ID: docRef.id

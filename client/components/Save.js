@@ -10,7 +10,6 @@ import {Tooltip} from '@material-ui/core'
 //canvas + messages should be in local storage
 
 function Save(props) {
-  const canvas = props.canvas
   return (
     <div>
       <Tooltip title="Save Canvas and Finish" arrow>
@@ -18,7 +17,7 @@ function Save(props) {
           type="submit"
           src="/images/diskette.png"
           className="nav-button"
-          onClick={() => saveCanvas(canvas)}
+          onClick={props.toggleSaveForm}
         />
       </Tooltip>
       {/* <button type="submit" onClick={() => saveToPng(canvas)}>
