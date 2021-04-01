@@ -4,6 +4,12 @@ _Good things get created through collaboration_
 
 Looking to collaborate with peers to create collage art? Welcome to `Collabalage`!
 
+### Heroku
+
+For a demo, visit our deployed version:
+
+* `https://collaballage.herokuapp.com/`
+
 ## Setup
 
 * Run the following commands:
@@ -28,13 +34,7 @@ If you want to run the server and/or `webpack` separately, you can also
 
 From there, just follow your bliss.
 
-### Heroku
-
-For a demo, visit our deployed version:
-
-* `https://collaballage.herokuapp.com/`
-
-### Cody's own deploy script
+### Deployment script
 
 Your local copy of the application can be pushed up to Heroku at will,
 using our deployment script:
