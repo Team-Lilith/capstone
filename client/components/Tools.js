@@ -28,13 +28,12 @@ import Save from './Save'
 function Tools(props) {
   const canvas = props.canvas
   const roomId = props.roomId
-  // const group = {}
   const svgState = {}
   const modes = {
     pan: 'pan',
     drawing: 'drawing'
   }
-  // const fonts = ['Arial', 'Times New Roman', 'Times', 'Courier New', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Tahoma', 'Trebuchet MS', 'Arial Black', 'Impact', 'Comic Sans MS']
+
   const [color, setColor] = React.useState('fff')
   const [font, setFont] = React.useState('')
 
