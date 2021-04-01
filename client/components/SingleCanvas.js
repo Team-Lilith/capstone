@@ -7,10 +7,7 @@ import {fabric} from 'fabric'
 function SingleCanvas(props) {
   const dispatch = useDispatch()
   let {id} = useParams()
-  const singleCanvas = useSelector(state => state.gallery)(
-    'single canvas',
-    singleCanvas
-  )
+  const singleCanvas = useSelector(state => state.gallery)
 
   useEffect(
     () => {
