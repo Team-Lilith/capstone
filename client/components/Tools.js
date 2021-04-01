@@ -267,6 +267,10 @@ function Tools(props) {
         </Tooltip>
 
         <Save canvas={canvas} />
+
+        <Tooltip title="User Guide" arrow>
+          <img className="nav-button" src="/images/question.png" />
+        </Tooltip>
       </div>
       <div className="tools-colors">
         <Tooltip title="Drawing Color" arrow>

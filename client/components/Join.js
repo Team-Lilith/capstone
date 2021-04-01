@@ -14,6 +14,7 @@ import '../index.css'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {showToast} from '../toasty'
+import {Instructions} from './index'
 
 function Join() {
   const [roomId, setRoomId] = useState('')
@@ -62,6 +63,8 @@ function Join() {
           <ToastContainer />
         </div>
       </div>
+
+      <Instructions />
     </div>
   )
 }
