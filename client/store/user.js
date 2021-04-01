@@ -171,6 +171,7 @@ export const signInWithGoogle = () => async dispatch => {
       .auth()
       .setPersistence(firestore.auth.Auth.Persistence.SESSION)
       .signInWithPopup(google)
+      //.setPersistence(firestore.auth.Auth.Persistence.LOCAL)
       .then(res => {
         console.log(res.user)
         history.push('/join')
