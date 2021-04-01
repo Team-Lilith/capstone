@@ -15,7 +15,8 @@ import {
   Home,
   Gallery,
   Profile,
-  HomeSignUp
+  HomeSignUp,
+  SingleCanvas
 } from './components'
 import {me} from './store'
 
@@ -36,8 +37,9 @@ class Routes extends Component {
           <Room />
         </Route>
         <Route path="/join" component={Join} />
-        <Route path="/gallery" component={Gallery} />
-        <Route path="/profile" component={Profile} />
+        <Route exact path="/gallery" component={Gallery} />
+        {/* <Route path="/gallery/:id" component={SingleCanvas} /> */}
+        {/* <Route path="/profile" component={Profile} /> */}
         <Route path="/signup" component={HomeSignUp} />
         <Route path="/" component={Home} />
       </Switch>

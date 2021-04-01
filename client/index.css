@@ -660,3 +660,8 @@ input[type='nickname'] {
   font-size: 25px;
   margin-top: 15px;
 }
+
+.MuiInputBase-root {
+  width: 35px;
+  height: 36px;
+}

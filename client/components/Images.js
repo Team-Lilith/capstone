@@ -15,7 +15,6 @@ function Images(props) {
       if (!allImages.length) {
         dispatch(getImages())
       } else {
-        console.log(allImages)
         const imageCopy = JSON.parse(JSON.stringify(allImages))
         setCurrentImages(imageCopy)
       }
