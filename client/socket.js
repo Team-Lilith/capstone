@@ -78,7 +78,28 @@ const removeObjId = (roomId, objId) => {
     .catch(function(error) {
       console.error(error)
     })
-  // }
+}
+
+// update our array of obj ids in the DB when adjusting layers
+const updateObjIdxs = (roomId, canvas) => {
+  console.log('objects array in updateObjIdx', canvas._objects)
+  let objs = canvas._objects
+  let newIds = []
+  for (let i = 0; i < objs.length; i++) {
+    console.log(objs[i].id)
+    newIds.push(objs[i].id)
+  }
+  let ids = realtimeDB.ref(roomId).child('objectIds')
+  ids
+    .get()
+    .then(function(snapshot) {
+      if (snapshot.exists()) {
+        ids.set(newIds)
+      }
+    })
+    .catch(function(error) {
+      console.error(error)
+    })
 }
 
 //EMITTERS
@@ -130,6 +151,7 @@ export const emitCanvasRemoveChange = objectRemoved => {
 export const emitIndexChange = objectWithZChange => {
   socket.emit('index modification', objectWithZChange)
   updateRoomCanvas(objectWithZChange.room, objectWithZChange.obj.canvas)
+  updateObjIdxs(objectWithZChange.room, objectWithZChange.obj.canvas)
 }
 
 //LISTENERS
