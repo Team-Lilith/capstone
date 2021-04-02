@@ -9,6 +9,7 @@ function SingleCanvas(props) {
   let {id} = useParams()
   const singleCanvas = useSelector(state => state.singleCanvas)
   const [date, setDate] = useState('')
+  const [users, setUsers] = useState([])
 
   useEffect(
     () => {
@@ -48,6 +49,7 @@ function SingleCanvas(props) {
               singleCanvas[0].data.timestamp.seconds * 1000
             ).toLocaleDateString()
           )
+          // setUsers(singleCanvas[0].data.users)
         }
       }
     },
@@ -60,7 +62,8 @@ function SingleCanvas(props) {
       <div className="single-canvas-container">
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
-          <div>created on {date}</div>
+          <div>created on: {date}</div>
+          {/* <div>artists: {users}</div> */}
         </div>
       </div>
     </div>
