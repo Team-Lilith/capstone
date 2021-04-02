@@ -683,10 +683,11 @@ input[type='nickname'] {
 } */
 
 .single-canvas-container {
-  /* position: absolute;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
   border: 26px white solid;
@@ -701,9 +702,9 @@ input[type='nickname'] {
 }
 
 .canvas-frame {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   border-radius: 20px;
 }
 
