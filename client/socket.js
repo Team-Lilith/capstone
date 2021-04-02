@@ -123,6 +123,10 @@ export const emitJoinRoom = id => {
   socket.emit('join room', id)
 }
 
+export const emitRejoinRoom = id => {
+  socket.emit('rejoin room', id)
+}
+
 export const emitModifiedCanvasObject = (objWithId, roomId) => {
   socket.emit('object-modified', objWithId)
   // update realtimeDB with updated canvas
@@ -314,6 +318,14 @@ export const joinSuccess = dispatch => {
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
     toast(`Joined room: ${roomId}`)
+  })
+}
+
+// user successfully rejoins room
+export const rejoinSuccess = dispatch => {
+  socket.off('rejoin successful')
+  socket.on('rejoin successful', roomId => {
+    history.push(`/room/${roomId}`)
   })
 }
 
