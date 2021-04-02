@@ -64,7 +64,7 @@ const SaveForm = props => {
         <h2>Save Canvas</h2>
         <input
           type="text"
-          placeholder="title"
+          placeholder="Title"
           name="title"
           value={title}
           onChange={e => setTitle(e.target.value)}
@@ -79,7 +79,7 @@ const SaveForm = props => {
             <div key={idx}>
               <input
                 type="text"
-                placeholder="artist name"
+                placeholder="Artist Name"
                 name={idx}
                 value={artists[idx]}
                 onChange={handleArtistChange}

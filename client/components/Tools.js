@@ -47,7 +47,8 @@ function Tools(props) {
           if (options.target) {
             const objModified = {
               obj: options.target,
-              id: options.target.id
+              id: options.target.id,
+              room: roomId
             }
             emitModifiedCanvasObject(objModified, roomId)
           }
@@ -60,7 +61,8 @@ function Tools(props) {
           if (options.target) {
             const objModified = {
               obj: options.target,
-              id: options.target.id
+              id: options.target.id,
+              room: roomId
             }
             emitModifiedCanvasObject(objModified, roomId)
           }
@@ -269,9 +271,7 @@ function Tools(props) {
 
         <Tooltip title="Download Canvas" arrow>
           <button className="link-button" onClick={saveToPng}>
-            <img src="/images/direct-download.png" />
-          </button>
-        </Tooltip>
+
       </div>
       <div className="tools-colors">
         <Tooltip title="Drawing Color" arrow>
