@@ -1,5 +1,5 @@
 import React from 'react'
-import {saveCanvas} from '../store'
+import {saveCanvas, saveToPng} from '../store'
 import {Tooltip} from '@material-ui/core'
 
 //should render a button
@@ -10,6 +10,7 @@ import {Tooltip} from '@material-ui/core'
 //canvas + messages should be in local storage
 
 function Save(props) {
+  const canvasEl = document.getElementById('canvas')
   return (
     <div>
       <Tooltip title="Save Canvas and Finish" arrow>
@@ -20,9 +21,9 @@ function Save(props) {
           onClick={props.toggleSaveForm}
         />
       </Tooltip>
-      {/* <button type="submit" onClick={() => saveToPng(canvas)}>
+      <button type="submit" onClick={() => saveToPng(canvasEl)}>
         Save to Computer!
-      </button> */}
+      </button>
     </div>
   )
 }

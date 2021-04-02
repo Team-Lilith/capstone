@@ -212,21 +212,29 @@ export const setPanEvents = canvas => {
 export const addImage = (canvas, image, isReceived = false, roomId) => {
   //image being received
   if (isReceived) {
-    fabric.Image.fromURL(image.image.src, function(oImg) {
-      oImg.scale(0.25)
-      oImg.id = image.id
-      canvas.add(oImg)
-    })
+    fabric.Image.fromURL(
+      image.image.src,
+      function(oImg) {
+        oImg.scale(0.25)
+        oImg.id = image.id
+        canvas.add(oImg)
+      },
+      {crossOrigin: 'anonymous'}
+    )
   } else {
     //image being added and sent to room
     let id = uuid()
-    fabric.Image.fromURL(image, function(oImg) {
-      oImg.scale(0.25)
-      oImg.id = id
-      canvas.add(oImg)
-      //why do we need to define new obj?
-      emitImage({image: oImg, id: id, room: roomId})
-    })
+    fabric.Image.fromURL(
+      image,
+      function(oImg) {
+        oImg.scale(0.25)
+        oImg.id = id
+        canvas.add(oImg)
+
+        emitImage({image: oImg, id: id, room: roomId})
+      },
+      {crossOrigin: 'anonymous'}
+    )
   }
 }
 

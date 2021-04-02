@@ -264,7 +264,7 @@ function Tools(props) {
           />
         </Tooltip>
 
-        <Save toggleSaveForm={props.toggleSaveForm} />
+        <Save toggleSaveForm={props.toggleSaveForm} canvas={canvas} />
 
         <Tooltip title="Download Canvas" arrow>
           <button className="link-button">
