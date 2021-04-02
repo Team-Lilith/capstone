@@ -45,30 +45,55 @@ const SaveForm = props => {
     setFields(values)
   }
 
+  const addArtist = () => {
+    setArtists([...artists, ''])
+  }
+
+  const handleArtistChange = e => {
+    console.log(e.target.value, 'value')
+    console.log(e.target, 'target in change')
+    const updatedArtists = [...artists]
+    updatedArtists[Number(e.target.idx)] = e.target.value
+    console.log('updated artists', updatedArtists)
+    setArtists(updatedArtists)
+  }
+
   return (
     <div className="column">
       <button onClick={props.toggleSaveForm}>x</button>
       <form id="save-form" onSubmit={handleSubmit}>
         <h2>Save Canvas</h2>
         <input
-          type="title"
+          type="text"
           placeholder="title"
           name="title"
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
         <br />
-        <input
-          type="artists"
-          placeholder="artist"
-          name="artists"
-          value={artists}
-          onChange={e => setArtists(e.target.value)}
-        />
-        <br />
-        <button className="add-artist" type="button" onClick={createNewElement}>
+
+        <button className="add-artist" type="button" onClick={addArtist}>
           Add an artist
         </button>
+        {artists.map((artist, idx) => {
+          console.log(artists[idx], 'artist index')
+          console.log(idx, 'index')
+          let artistId = `artist-${artist}`
+          return (
+            <div>
+              <input
+                type="text"
+                placeholder="artist name"
+                name={artistId}
+                idx={idx}
+                id={artistId}
+                value={artists[idx]}
+                onChange={handleArtistChange}
+              />
+              <br />
+            </div>
+          )
+        })}
         <button className="save-btn" type="submit">
           Save to Gallery
         </button>
