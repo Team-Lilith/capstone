@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {HuePicker} from 'react-color'
 import {MenuItem, Select} from '@material-ui/core'
 import {v1 as uuid} from 'uuid'
@@ -106,10 +106,6 @@ function Tools(props) {
   const handleColorChange = color => {
     setColor(color.hex)
   }
-
-  // const handleFontChange = font => {
-  //   setFont(font)
-  // }
 
   const handleImageUpload = event => {
     const reader = new FileReader()
@@ -267,7 +263,14 @@ function Tools(props) {
             onClick={() => restoreCanvas(canvas, svgState)}
           />
         </Tooltip>
+
         <Save toggleSaveForm={props.toggleSaveForm} />
+
+        <Tooltip title="Download Canvas" arrow>
+          <button className="link-button">
+            <img src="/images/direct-download.png" />
+          </button>
+        </Tooltip>
       </div>
       <div className="tools-colors">
         <Tooltip title="Drawing Color" arrow>

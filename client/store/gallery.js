@@ -5,11 +5,17 @@ import history from '../history'
 //action types
 const SET_GALLERY = 'GET_GALLERY'
 const ADD_CANVAS = 'ADD_CANVAS'
+const SET_SINGLE_GALLERY = 'SET_SINGLE_GALLERY'
 
 //ACTION CREATORS
 const setGallery = gallery => ({
   type: SET_GALLERY,
   gallery
+})
+
+const setSingleGallery = singleCanvas => ({
+  type: SET_SINGLE_GALLERY,
+  singleCanvas
 })
 
 //THUNKS
@@ -31,6 +37,25 @@ export const fetchGallery = () => async dispatch => {
       })
   } catch (error) {
     console.log('Error fetching gallery', error)
+  }
+}
+
+export const fetchSingleCanvas = canvasId => async dispatch => {
+  try {
+    let singleCanvas = []
+    firestore
+      .collection('new-gallery')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          if (doc.id === canvasId) {
+            singleCanvas.push({data: doc.data(), id: doc.id})
+          }
+        })
+        dispatch(setSingleGallery(singleCanvas))
+      })
+  } catch (error) {
+    console.log('Error fetching canvas', error)
   }
 }
 
@@ -73,6 +98,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case SET_GALLERY:
       return action.gallery
+    case SET_SINGLE_GALLERY:
+      return action.singleCanvas
     default:
       return state
   }

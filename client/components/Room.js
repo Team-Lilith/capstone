@@ -65,9 +65,14 @@ function Room() {
         let startingCanvas = initialCanvas
         if (startingCanvas.objects) {
           for (let i = 0; i < initialObjects.length; i++) {
+            let currentObj = startingCanvas.objects[i]
             // update each object on the canvas with the matching id from our array of all obj ids
-            startingCanvas.objects[i].id = initialObjects[i]
-            startingCanvas.objects[i].emit = false
+            currentObj.id = initialObjects[i]
+            currentObj.emit = false
+            if (currentObj.type === 'path') {
+              currentObj.fill = null
+              currentObj.fillRule = null
+            }
           }
         }
         // load canvas with objects
@@ -88,8 +93,8 @@ function Room() {
               'image-being-dragged'
             )[0]
             const newImage = new fabric.Image(imgBeingDragged, {
-              left: e.layerX - 50,
-              top: e.layerY - 50
+              left: e.X - 50,
+              top: e.Y - 50
             })
             newImage.scale(0.25)
             canvas.add(newImage)
