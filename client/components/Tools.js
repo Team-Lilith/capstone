@@ -44,7 +44,8 @@ function Tools(props) {
           if (options.target) {
             const objModified = {
               obj: options.target,
-              id: options.target.id
+              id: options.target.id,
+              room: roomId
             }
             emitModifiedCanvasObject(objModified, roomId)
           }
@@ -57,7 +58,8 @@ function Tools(props) {
           if (options.target) {
             const objModified = {
               obj: options.target,
-              id: options.target.id
+              id: options.target.id,
+              room: roomId
             }
             emitModifiedCanvasObject(objModified, roomId)
           }
