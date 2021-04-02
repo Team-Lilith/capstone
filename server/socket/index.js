@@ -90,8 +90,7 @@ module.exports = (io, realtimeDB) => {
 
     socket.on('object-modified', data => {
       console.log('Server broadcasting new-modification event')
-      socket.broadcast.emit('new-modification', data)
-      // socket.to(data.room).emit('add-image', data)
+      socket.to(data.room).emit('new-modification', data)
     })
 
     socket.on('object removed', data => {

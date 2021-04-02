@@ -36,21 +36,23 @@ function Gallery(props) {
 
   return gallery ? (
     <div className="gallery">
-      <h1>Gallery</h1>
+      <h1>Art Gallery</h1>
       <div className="canvases-container">
         {gallery.map(el => {
           return (
-            // <Link to={`/gallery/${el.id}`}>
-            <div key={el.id}>
-              <canvas id={el.id} className="gallery-element" />
-            </div>
-            // </Link>
+            // <div className="canvases-inner-container">
+            <Link to={`/gallery/${el.id}`}>
+              <div key={el.id}>
+                <canvas id={el.id} className="gallery-element" />
+              </div>
+            </Link>
+            // </div>
           )
         })}
       </div>
     </div>
   ) : (
-    'Nothing here.'
+    'Loading...'
   )
 }
 

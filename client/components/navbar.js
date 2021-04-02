@@ -97,11 +97,13 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
         <div id="nav-room">
           {roomId ? (
             <div id="nav-right-inner">
-              <Link to={`/room/${roomId}`}>
-                <div className="nav-button">
-                  <h3>{roomId}</h3>
-                </div>
-              </Link>
+              <Tooltip title="Go Back to Room" arrow>
+                <Link to={`/room/${roomId}`}>
+                  <div className="nav-button">
+                    <h3>{roomId}</h3>
+                  </div>
+                </Link>
+              </Tooltip>
               <Tooltip title="Copy Room Link to Clipboard" arrow>
                 <button
                   className="copy-link-button"
