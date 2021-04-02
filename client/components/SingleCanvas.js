@@ -53,10 +53,10 @@ function SingleCanvas(props) {
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
         </div>
-        <div className="single-canvas-text">
-          <div>Created on: {date}</div>
-          <div>By: Anon</div>
-        </div>
+      </div>
+      <div className="single-canvas-text">
+        <div>Created on: {date}</div>
+        <div>By: Anon</div>
       </div>
     </div>
   ) : (
@@ -66,10 +66,10 @@ function SingleCanvas(props) {
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
         </div>
-        <div className="single-canvas-text">
-          <div>Created on: {date}</div>
-          <div>By: {users.length > 1 ? users.join(' and ') : users}</div>
-        </div>
+      </div>
+      <div className="single-canvas-text">
+        <div>Created on: {date}</div>
+        <div>By: {users.length > 1 ? users.join(' and ') : users}</div>
       </div>
     </div>
   )
