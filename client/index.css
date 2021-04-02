@@ -267,13 +267,8 @@ a:hover {
 }
 
 .copy-link-button {
-  /* height: 52px; */
   border: 0;
-  /* border-radius: 9px; */
   background: #00bfff;
-  /* box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
-  padding: 10px;
-  font-family: 'Bangers', cursive; */
 }
 
 .copy-link-button img {
@@ -654,10 +649,6 @@ input[type='nickname'] {
   cursor: pointer;
 }
 
-/* .canvases-container div {
-  padding: 15px;
-} */
-
 #my-art-container div {
   font-family: 'Bangers', cursive;
   text-align: center;
@@ -670,41 +661,14 @@ input[type='nickname'] {
   height: 36px;
 }
 
-/* .single-canvas-container {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  width: 800px;
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 50px;
-  background: #00bfff;
-  box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
-} */
-
 .single-canvas-container {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  border: 26px white solid;
-  background-color: white;
-  box-shadow: inset -16px 8px 20px rgb(163 155 139 / 36%),
-    inset -10px 0px 8px rgb(163 155 139 / 66%),
-    inset 3px 0px 8px rgb(163 155 139 / 12%),
-    inset 0px -8px 1px rgb(218 216 214 / 40%),
-    -28px -6px 60px rgb(163 155 139 / 46%),
-    -16px -4px 16px rgb(163 155 139 / 46%), 0px -4px 1px rgb(163 155 139 / 14%);
-  border-radius: 20px; */
 }
 
 .canvas-frame {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   border-radius: 20px;
 }
 

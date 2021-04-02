@@ -19,21 +19,20 @@ function SingleCanvas(props) {
         let singleCanvas = gallery.filter(canvas => canvas.id === id)
         console.log(singleCanvas, 'single canvas')
 
-        // for (let i = 0; i < gallery.length; i++) {
-        //   let canvas = new fabric.Canvas(singleCanvas[i].id)
+        let canvas = new fabric.Canvas(singleCanvas[0].id)
 
-        //   let newCanvas = canvas.loadFromJSON(
-        //     singleCanvas[i].data.canvas,
-        //     canvas.renderAll.bind(canvas),
-        //     function(o, object) {
-        //       object.set('selectable', false)
-        //     }
-        //   )
-        //   newCanvas.hoverCursor = 'auto'
-        //   newCanvas.defaultCursor = 'pointer'
-        //   newCanvas.setZoom(0.5)
-        //   newCanvas.setWidth(625 * newCanvas.getZoom())
-        //   newCanvas.setHeight(625 * newCanvas.getZoom())
+        let newCanvas = canvas.loadFromJSON(
+          singleCanvas[0].data.canvas,
+          canvas.renderAll.bind(canvas),
+          function(o, object) {
+            object.set('selectable', false)
+          }
+        )
+        newCanvas.hoverCursor = 'auto'
+        newCanvas.defaultCursor = 'pointer'
+        newCanvas.setZoom(0.9)
+        newCanvas.setWidth(625 * newCanvas.getZoom())
+        newCanvas.setHeight(625 * newCanvas.getZoom())
 
         setUsers(singleCanvas[0].data.users)
         setDate(
