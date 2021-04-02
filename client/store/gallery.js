@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import {firestore} from '../../server/db'
 import history from '../history'
+import {saveAs} from 'file-saver'
 
 //action types
 const SET_GALLERY = 'GET_GALLERY'
@@ -87,7 +88,7 @@ export const saveCanvas = (canvas, title, artists = null) => {
 
 export const saveToPng = canvas => {
   canvas.toBlob(function(blob) {
-    saveAs(blob, 'myIMG.png')
+    saveAs(blob, 'myCollaballage.png')
   })
 }
 
