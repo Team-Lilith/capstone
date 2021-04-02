@@ -15,12 +15,14 @@ import Canvas from './Canvas'
 import {getInitialCanvas, getInitialObjects} from '../store'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import SaveForm from './SaveForm'
 
 function Room() {
   const canvasRef = useRef(null)
   const roomId = useSelector(state => state.room)
   const initialCanvas = useSelector(state => state.canvas)
   const initialObjects = useSelector(state => state.objects)
+  const users = useSelector(state => state.user)
   const [canvas, setCanvas] = useState('')
   const dispatch = useDispatch()
   let {id} = useParams()
@@ -113,7 +115,11 @@ function Room() {
 
         <div id="canvas-div" ref={canvasRef}>
           <div id="tools">
-            <Tools canvas={canvas} roomId={id} />
+            <Tools
+              canvas={canvas}
+              roomId={id}
+              toggleSaveForm={toggleSaveForm}
+            />
           </div>
           <canvas id="canvas" />
         </div>
@@ -125,8 +131,25 @@ function Room() {
 
       <Canvas canvas={canvas} />
       <ToastContainer />
+      <div
+        id="save-component"
+        className="toggle-save hidden"
+        style={{display: 'none'}}
+      >
+        <SaveForm canvas={canvas} toggleSaveForm={toggleSaveForm} />
+      </div>
     </div>
   )
+}
+
+function toggleSaveForm() {
+  var saveForm = document.getElementById('save-component')
+  console.log(saveForm)
+  if (saveForm.style.display === 'none') {
+    saveForm.style.display = 'block'
+  } else {
+    saveForm.style.display = 'none'
+  }
 }
 
 export default Room

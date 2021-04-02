@@ -24,10 +24,12 @@ import {
   changeFont
 } from './FabricUtils'
 import Save from './Save'
+import {Link} from 'react-router-dom'
 
 function Tools(props) {
   const canvas = props.canvas
   const roomId = props.roomId
+  const users = props.users
   const svgState = {}
   const modes = {
     pan: 'pan',
@@ -264,7 +266,7 @@ function Tools(props) {
           />
         </Tooltip>
 
-        <Save canvas={canvas} />
+        <Save toggleSaveForm={props.toggleSaveForm} />
 
         {/* <Tooltip title="Download Canvas" arrow>
           <button className="link-button">
