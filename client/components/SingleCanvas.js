@@ -7,68 +7,78 @@ import {fabric} from 'fabric'
 function SingleCanvas(props) {
   const dispatch = useDispatch()
   let {id} = useParams()
-  const singleCanvas = useSelector(state => state.singleCanvas)
+  const gallery = useSelector(state => state.gallery)
   const [date, setDate] = useState('')
   const [users, setUsers] = useState([])
 
-  useEffect(
-    () => {
-      if (!singleCanvas.length) {
-        dispatch(fetchSingleCanvas(id))
-      } else {
-        for (let i = 0; i < singleCanvas.length; i++) {
-          let canvas = new fabric.Canvas(singleCanvas[i].id)
+  // useEffect(
+  //   () => {
+  //     if (!gallery.length) {
+  //       dispatch(fetchGallery())
+  //     } else {
 
-          let newCanvas = canvas.loadFromJSON(
-            singleCanvas[i].data.canvas,
-            canvas.renderAll.bind(canvas),
-            function(o, object) {
-              object.set('selectable', false)
-            }
-          )
-          newCanvas.hoverCursor = 'auto'
-          newCanvas.defaultCursor = 'pointer'
-          newCanvas.setZoom(0.5)
-          newCanvas.setWidth(625 * newCanvas.getZoom())
-          newCanvas.setHeight(625 * newCanvas.getZoom())
+  //       for (let i = 0; i < singleCanvas.length; i++) {
+  //         let canvas = new fabric.Canvas(singleCanvas[i].id)
 
-          console.log(
-            'Option one',
-            new Date(
-              singleCanvas[0].data.timestamp.seconds * 1000
-            ).toLocaleDateString()
-          )
-          console.log(
-            'Option two',
-            new Date(
-              singleCanvas[0].data.timestamp.seconds * 1000
-            ).toDateString()
-          )
-          setDate(
-            new Date(
-              singleCanvas[0].data.timestamp.seconds * 1000
-            ).toLocaleDateString()
-          )
-          // setUsers(singleCanvas[0].data.users)
-        }
-      }
-    },
-    [singleCanvas]
-  )
+  //         let newCanvas = canvas.loadFromJSON(
+  //           singleCanvas[i].data.canvas,
+  //           canvas.renderAll.bind(canvas),
+  //           function(o, object) {
+  //             object.set('selectable', false)
+  //           }
+  //         )
+  //         newCanvas.hoverCursor = 'auto'
+  //         newCanvas.defaultCursor = 'pointer'
+  //         newCanvas.setZoom(0.5)
+  //         newCanvas.setWidth(625 * newCanvas.getZoom())
+  //         newCanvas.setHeight(625 * newCanvas.getZoom())
 
-  return singleCanvas ? (
+  //         console.log(
+  //           'Option one',
+  //           new Date(
+  //             singleCanvas[0].data.timestamp.seconds * 1000
+  //           ).toLocaleDateString()
+  //         )
+  //         console.log(
+  //           'Option two',
+  //           new Date(
+  //             singleCanvas[0].data.timestamp.seconds * 1000
+  //           ).toDateString()
+  //         )
+  //         setDate(
+  //           new Date(
+  //             singleCanvas[0].data.timestamp.seconds * 1000
+  //           ).toLocaleDateString()
+  //         )
+  //         // setUsers(singleCanvas[0].data.users)
+  //       }
+  //     }
+  //   },
+  //   []
+  // )
+
+  return users ? (
     <div className="single-canvas-outter-container">
-      <h1>Work of Art</h1>
+      <h1>Title of canvas here.</h1>
       <div className="single-canvas-container">
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
-          <div>created on: {date}</div>
-          {/* <div>artists: {users}</div> */}
+          <div>Created on: {date}</div>
+          <div>By:</div>
         </div>
       </div>
     </div>
   ) : (
-    'Loading...'
+    <div className="single-canvas-outter-container">
+      <h1>Title of canvas here.</h1>
+      <div className="single-canvas-container">
+        <div className="canvas-frame">
+          <canvas className="canvas-frame" id={id} />
+          <div>Created on: {date}</div>
+          <div>By: Anon</div>
+        </div>
+      </div>
+    </div>
   )
 }
 
