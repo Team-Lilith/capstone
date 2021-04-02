@@ -96,7 +96,6 @@ function Room() {
             })
             newImage.scale(0.25)
             canvas.add(newImage)
-            console.log(e)
           },
           false
         )
