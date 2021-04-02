@@ -225,7 +225,7 @@ export const receiveAddedObject = canvas => {
       })
     } else if (obj.type === 'i-text') {
       object = new fabric.IText('Your thoughts here...', {
-        left: obj.left,
+        // left: obj.left,
         top: obj.top,
         fill: obj.fill,
         fontFamily: obj.fontFamily

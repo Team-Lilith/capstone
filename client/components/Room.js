@@ -93,8 +93,8 @@ function Room() {
               'image-being-dragged'
             )[0]
             const newImage = new fabric.Image(imgBeingDragged, {
-              left: e.X - 50,
-              top: e.Y - 50
+              // left: e.x,
+              // top: e.y
             })
             newImage.scale(0.25)
             canvas.add(newImage)
@@ -144,7 +144,6 @@ function Room() {
 
 function toggleSaveForm() {
   var saveForm = document.getElementById('save-component')
-  console.log(saveForm)
   if (saveForm.style.display === 'none') {
     saveForm.style.display = 'block'
   } else {
