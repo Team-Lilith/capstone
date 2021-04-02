@@ -4,6 +4,7 @@ import {v1 as uuid} from 'uuid'
 import {
   emitCreateRoom,
   emitJoinRoom,
+  emitRejoinRoom,
   joinSuccess,
   createSuccess,
   receiveNoRoom,

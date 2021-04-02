@@ -5,9 +5,11 @@ import {fabric} from 'fabric'
 import {useParams} from 'react-router'
 import {
   emitJoinRoom,
+  emitRejoinRoom,
   receiveFullRoom,
   receiveNoRoom,
   joinSuccess,
+  rejoinSuccess,
   createSuccess
 } from '../socket'
 import '../index.css'
@@ -27,6 +29,7 @@ function Room() {
   const dispatch = useDispatch()
   let {id} = useParams()
   joinSuccess(dispatch)
+  rejoinSuccess(dispatch)
   createSuccess(dispatch)
   receiveFullRoom()
   receiveNoRoom()
@@ -50,6 +53,8 @@ function Room() {
       if (!roomId) {
         emitJoinRoom(id)
       } else {
+        // still emit join room
+        emitRejoinRoom(id)
         // if we have a roomId, check if their is an existing canvas & objects in the DB
         dispatch(getInitialObjects(roomId))
         dispatch(getInitialCanvas(roomId))
@@ -92,10 +97,11 @@ function Room() {
             const imgBeingDragged = document.getElementsByClassName(
               'image-being-dragged'
             )[0]
-            const newImage = new fabric.Image(imgBeingDragged, {
-              // left: e.x,
-              // top: e.y
-            })
+            // const newImage = new fabric.Image(imgBeingDragged, {
+            //   left: e.x - 50,
+            //   top: e.y - 50
+            // })
+            const newImage = new fabric.Image(imgBeingDragged)
             newImage.scale(0.25)
             canvas.add(newImage)
           },
