@@ -144,7 +144,6 @@ function Room() {
 
 function toggleSaveForm() {
   var saveForm = document.getElementById('save-component')
-  console.log(saveForm)
   if (saveForm.style.display === 'none') {
     saveForm.style.display = 'block'
   } else {
