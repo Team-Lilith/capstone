@@ -10,6 +10,7 @@ function SingleCanvas(props) {
   const gallery = useSelector(state => state.gallery)
   const [date, setDate] = useState('')
   const [users, setUsers] = useState([])
+  const [title, setTitle] = useState('')
 
   useEffect(
     () => {
@@ -33,7 +34,8 @@ function SingleCanvas(props) {
         newCanvas.setWidth(625 * newCanvas.getZoom())
         newCanvas.setHeight(625 * newCanvas.getZoom())
 
-        setUsers(singleCanvas[0].data.users)
+        setTitle(singleCanvas[0].data.title)
+        setUsers(singleCanvas[0].data.artists)
         setDate(
           new Date(
             singleCanvas[0].data.timestamp.seconds * 1000
@@ -46,7 +48,7 @@ function SingleCanvas(props) {
 
   return users === null ? (
     <div className="single-canvas-outter-container">
-      <h1>Title</h1>
+      <h1>{title}</h1>
       <div className="single-canvas-container">
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
@@ -59,14 +61,14 @@ function SingleCanvas(props) {
     </div>
   ) : (
     <div className="single-canvas-outter-container">
-      <h1>Title</h1>
+      <h1>{title}</h1>
       <div className="single-canvas-container">
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
         </div>
         <div className="single-canvas-text">
           <div>Created on: {date}</div>
-          <div>By: {users.join(' and ')}</div>
+          <div>By: {users.length > 1 ? users.join(' and ') : users}</div>
         </div>
       </div>
     </div>
