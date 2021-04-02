@@ -264,11 +264,11 @@ function Tools(props) {
 
         <Save canvas={canvas} />
 
-        <Tooltip title="Download Canvas" arrow>
+        {/* <Tooltip title="Download Canvas" arrow>
           <button className="link-button">
             <img src="/images/direct-download.png" />
           </button>
-        </Tooltip>
+        </Tooltip> */}
       </div>
       <div className="tools-colors">
         <Tooltip title="Drawing Color" arrow>

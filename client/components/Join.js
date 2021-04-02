@@ -47,7 +47,7 @@ function Join() {
         <div id="join-input">
           <input
             type="text"
-            placeholder="Enter a room name..."
+            placeholder="Enter a room name"
             onChange={handleChange}
           />
         </div>

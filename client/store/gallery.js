@@ -5,7 +5,6 @@ import history from '../history'
 //action types
 const SET_GALLERY = 'GET_GALLERY'
 const ADD_CANVAS = 'ADD_CANVAS'
-const SET_SINGLE_GALLERY = 'SET_SINGLE_GALLERY'
 
 //ACTION CREATORS
 const setGallery = gallery => ({
@@ -13,17 +12,11 @@ const setGallery = gallery => ({
   gallery
 })
 
-const setSingleGallery = singleCanvas => ({
-  type: SET_SINGLE_GALLERY,
-  singleCanvas
-})
-
 //THUNKS
 export const fetchGallery = () => async dispatch => {
   try {
     let gallery = []
     firestore
-      // .collection('gallery')
       .collection('new-gallery')
       .get()
       .then(querySnapshot => {
@@ -40,41 +33,18 @@ export const fetchGallery = () => async dispatch => {
   }
 }
 
-export const fetchSingleCanvas = canvasId => async dispatch => {
-  try {
-    let singleCanvas = []
-    firestore
-      .collection('new-gallery')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          if (doc.id === canvasId) {
-            singleCanvas.push({data: doc.data(), id: doc.id})
-          }
-        })
-        dispatch(setSingleGallery(singleCanvas))
-      })
-  } catch (error) {
-    console.log('Error fetching canvas', error)
-  }
-}
-
 //SAVING CANVAS
 export const saveCanvas = (canvas, users = null) => {
   try {
     const canvasObj = JSON.stringify(canvas.toDatalessJSON())
-    // const canvasObj = canvas.toDatalessJSON()
     firestore
-      // .collection('gallery')
       .collection('new-gallery')
       .add({
         canvas: canvasObj,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         users: users
       })
-      .then(docRef => {
-        //Canvas written with ID: docRef.id
-      })
+      .then(docRef => {})
       .catch(error => {
         console.error('Error adding document: ', error)
       })
@@ -97,8 +67,6 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case SET_GALLERY:
       return action.gallery
-    case SET_SINGLE_GALLERY:
-      return action.singleCanvas
     default:
       return state
   }
