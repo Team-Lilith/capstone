@@ -21,9 +21,11 @@ function Save(props) {
           onClick={props.toggleSaveForm}
         />
       </Tooltip>
-      <button type="submit" onClick={() => saveToPng(canvasEl)}>
-        Save to Computer!
-      </button>
+      <Tooltip title="Download Canvas" arrow>
+        <button className="link-button" onClick={() => saveToPng(canvasEl)}>
+          <img src="/images/direct-download.png" />
+        </button>
+      </Tooltip>
     </div>
   )
 }

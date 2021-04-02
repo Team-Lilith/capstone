@@ -266,12 +266,6 @@ function Tools(props) {
         </Tooltip>
 
         <Save toggleSaveForm={props.toggleSaveForm} canvas={canvas} />
-
-        <Tooltip title="Download Canvas" arrow>
-          <button className="link-button" onClick={saveToPng}>
-            <img src="/images/direct-download.png" />
-          </button>
-        </Tooltip>
       </div>
       <div className="tools-colors">
         <Tooltip title="Drawing Color" arrow>
