@@ -91,13 +91,12 @@ function Room() {
               'image-being-dragged'
             )[0]
             const newImage = new fabric.Image(imgBeingDragged, {
-              // causes error with firebase, without left and top it positions
-              // images in the right top corner of the canvas
-              // left: e.X - 50,
-              // top: e.Y - 50
+              // left: e.x,
+              // top: e.y
             })
             newImage.scale(0.25)
             canvas.add(newImage)
+            console.log(e)
           },
           false
         )
