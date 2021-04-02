@@ -92,10 +92,11 @@ function Room() {
             const imgBeingDragged = document.getElementsByClassName(
               'image-being-dragged'
             )[0]
-            const newImage = new fabric.Image(imgBeingDragged, {
-              left: e.X - 50,
-              top: e.Y - 50
-            })
+            // const newImage = new fabric.Image(imgBeingDragged, {
+            //   left: e.X - 50,
+            //   top: e.Y - 50
+            // })
+            const newImage = new fabric.Image(imgBeingDragged)
             newImage.scale(0.25)
             canvas.add(newImage)
           },
