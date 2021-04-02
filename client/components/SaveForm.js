@@ -50,10 +50,9 @@ const SaveForm = props => {
   }
 
   const handleArtistChange = e => {
-    console.log(e.target.value, 'value')
-    console.log(e.target, 'target in change')
+    let idx = Number(e.target.name)
     const updatedArtists = [...artists]
-    updatedArtists[Number(e.target.idx)] = e.target.value
+    updatedArtists[idx] = e.target.value
     console.log('updated artists', updatedArtists)
     setArtists(updatedArtists)
   }
@@ -76,17 +75,12 @@ const SaveForm = props => {
           Add an artist
         </button>
         {artists.map((artist, idx) => {
-          console.log(artists[idx], 'artist index')
-          console.log(idx, 'index')
-          let artistId = `artist-${artist}`
           return (
-            <div>
+            <div key={idx}>
               <input
                 type="text"
                 placeholder="artist name"
-                name={artistId}
-                idx={idx}
-                id={artistId}
+                name={idx}
                 value={artists[idx]}
                 onChange={handleArtistChange}
               />
