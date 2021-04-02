@@ -17,8 +17,7 @@ function SingleCanvas(props) {
         dispatch(fetchGallery())
       } else {
         let singleCanvas = gallery.filter(canvas => canvas.id === id)
-        console.log(singleCanvas, 'single canvas')
-
+        console.log(singleCanvas)
         let canvas = new fabric.Canvas(singleCanvas[0].id)
 
         let newCanvas = canvas.loadFromJSON(
@@ -51,6 +50,8 @@ function SingleCanvas(props) {
       <div className="single-canvas-container">
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
+        </div>
+        <div className="single-canvas-text">
           <div>Created on: {date}</div>
           <div>By: Anon</div>
         </div>
@@ -62,8 +63,10 @@ function SingleCanvas(props) {
       <div className="single-canvas-container">
         <div className="canvas-frame">
           <canvas className="canvas-frame" id={id} />
+        </div>
+        <div className="single-canvas-text">
           <div>Created on: {date}</div>
-          <div>By: {users}</div>
+          <div>By: {users.join(' and ')}</div>
         </div>
       </div>
     </div>

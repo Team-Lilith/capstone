@@ -715,7 +715,19 @@ input[type='nickname'] {
   font-family: 'Bangers', cursive;
 }
 
+.single-canvas-outter-container h1 {
+  font-family: 'Bangers', cursive !important ;
+  font-size: 50px !important ;
+  margin-top: 25px !important ;
+  margin-bottom: 15px;
+}
+
 .single-favorite-container img {
   width: 25px;
   height: 25px;
+}
+
+.single-canvas-text {
+  font-family: 'Bangers', cursive;
+  font-size: 25px;
 }
