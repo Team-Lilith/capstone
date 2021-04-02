@@ -40,7 +40,7 @@ function SingleCanvas(props) {
       <h1>Work of Art</h1>
       <div className="single-canvas-container">
         <div className="canvas-frame">
-          <canvas id={id} />
+          <canvas className="canvas-frame" id={id} />
         </div>
       </div>
     </div>
