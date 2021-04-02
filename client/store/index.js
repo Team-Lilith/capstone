@@ -9,7 +9,6 @@ import gallery from './gallery'
 import chat from './chat'
 import canvas from './canvas'
 import objects from './objects'
-import singleCanvas from './singleCanvas'
 
 const reducer = combineReducers({
   user,
@@ -18,8 +17,7 @@ const reducer = combineReducers({
   gallery,
   chat,
   canvas,
-  objects,
-  singleCanvas
+  objects
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -34,4 +32,3 @@ export * from './gallery'
 export * from './chat'
 export * from './canvas'
 export * from './objects'
-export * from './singleCanvas'
