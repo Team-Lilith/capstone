@@ -683,7 +683,7 @@ input[type='nickname'] {
 } */
 
 .single-canvas-container {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -697,7 +697,7 @@ input[type='nickname'] {
     inset 0px -8px 1px rgb(218 216 214 / 40%),
     -28px -6px 60px rgb(163 155 139 / 46%),
     -16px -4px 16px rgb(163 155 139 / 46%), 0px -4px 1px rgb(163 155 139 / 14%);
-  border-radius: 20px;
+  border-radius: 20px; */
 }
 
 .canvas-frame {

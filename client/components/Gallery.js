@@ -40,13 +40,13 @@ function Gallery(props) {
       <div className="canvases-container">
         {gallery.map(el => {
           return (
-            <div className="canvases-inner-container">
-              <Link to={`/gallery/${el.id}`}>
-                <div key={el.id}>
-                  <canvas id={el.id} className="canvas-element" />
-                </div>
-              </Link>
-            </div>
+            // <div className="canvases-inner-container">
+            <Link to={`/gallery/${el.id}`}>
+              <div key={el.id}>
+                <canvas id={el.id} className="gallery-element" />
+              </div>
+            </Link>
+            // </div>
           )
         })}
       </div>
