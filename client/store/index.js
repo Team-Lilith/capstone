@@ -9,7 +9,9 @@ import gallery from './gallery'
 import chat from './chat'
 import canvas from './canvas'
 import objects from './objects'
+import {loadState, saveState} from './localStorage'
 
+const localState = loadState()
 const reducer = combineReducers({
   user,
   images,
@@ -22,7 +24,13 @@ const reducer = combineReducers({
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+const store = createStore(reducer, localState, middleware)
+store.subscribe(() => {
+  saveState({
+    room: store.getState().room,
+    images: store.getState().images
+  })
+})
 
 export default store
 export * from './user'
