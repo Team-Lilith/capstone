@@ -3,6 +3,11 @@ import {connect} from 'react-redux'
 
 function Profile(props) {
   const user = props.user
+  const gallery = props.gallery
+  console.log('user info', gallery)
+
+  useEffect(() => {}, [])
+
   return (
     <div id="profile">
       <div id="profile-container">
@@ -20,7 +25,8 @@ function Profile(props) {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    gallery: state.gallery
   }
 }
 

@@ -61,11 +61,11 @@ const Navbar = ({handleClick, isLoggedIn, roomId}) => {
                 </div>
               </Link>
 
-              {/* <Link to="/profile">
+              <Link to="/profile">
                 <div className="nav-hover-button">
                   <h3>Profile</h3>
                 </div>
-              </Link> */}
+              </Link>
 
               <a href="#" onClick={handleClick}>
                 <div className="nav-hover-button">
