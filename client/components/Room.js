@@ -50,15 +50,22 @@ function Room() {
 
   useEffect(
     () => {
+      console.log('in room - roomid use effect')
       if (!roomId) {
+        console.log('no room id')
         emitJoinRoom(id)
       } else {
+        console.log('yes room id')
         // still emit join room
         if (roomId !== id) {
-          emitRejoinRoom(id)
+          console.log('room id on state does not match params - joining')
+          emitJoinRoom(id)
           dispatch(setCurrentRoom(id))
+        } else {
+          console.log('room id on state does match params - rejoining')
+          emitRejoinRoom(id)
         }
-        // if we have a roomId, check if their is an existing canvas & objects in the DB
+        // if we have a roomId, check if there is an existing canvas & objects in the DB
         dispatch(getInitialObjects(roomId))
         dispatch(getInitialCanvas(roomId))
       }
