@@ -15,7 +15,6 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
-//EMITTERS
 // HELPERS
 
 // update our messages stored in the DB when a message is added
@@ -109,24 +108,34 @@ export const sendMessage = data => {
   const sendData = {msg: data.msg, user: user, room: room, id: data.id}
   // update realtimeDB with the new message
   updateRoomMessages(room, sendData)
+  console.log('emitting message')
 }
 
 export const emitImage = imageObjWithId => {
   socket.emit('add-image', imageObjWithId)
+  console.log('emitting add-image')
 }
 
 export const emitCreateRoom = id => {
   socket.emit('create room', id)
+  console.log('emitting create room')
 }
 
 export const emitJoinRoom = id => {
   socket.emit('join room', id)
+  console.log('emitting join room')
+}
+
+export const emitRejoinRoom = id => {
+  socket.emit('rejoin room', id)
+  console.log('emitting rejoin room')
 }
 
 export const emitModifiedCanvasObject = (objWithId, roomId) => {
   socket.emit('object-modified', objWithId)
   // update realtimeDB with updated canvas
   updateRoomCanvas(roomId, objWithId.obj.canvas)
+  console.log('emitting object-modified')
 }
 
 // here we emit object added socket and send back object newly added
@@ -136,6 +145,7 @@ export const emitAddedToCanvas = objectAdded => {
   updateRoomCanvas(objectAdded.room, objectAdded.obj.canvas)
   // update realtimeDB with new object's id
   updateObjIds(objectAdded.room, objectAdded.id)
+  console.log('emitting object added')
 }
 
 export const emitCanvasRemoveChange = objectRemoved => {
@@ -144,18 +154,21 @@ export const emitCanvasRemoveChange = objectRemoved => {
   updateRoomCanvas(objectRemoved.room, objectRemoved.obj.canvas)
   // remove obj id from array in DB
   removeObjId(objectRemoved.room, objectRemoved.obj.id)
+  console.log('emitting object removed')
 }
 
 export const emitIndexChange = objectWithZChange => {
   socket.emit('index modification', objectWithZChange)
   updateRoomCanvas(objectWithZChange.room, objectWithZChange.obj.canvas)
   updateObjIdxs(objectWithZChange.room, objectWithZChange.obj.canvas)
+  console.log('emitting index modification')
 }
 
 //LISTENERS
 export const modifyCanvasObject = canvas => {
   //listens for object modified
   socket.on('new-modification', data => {
+    console.log('heard new-modification')
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
         //finds obj on canvas by id + sets modified obj to that obj to update it
@@ -170,6 +183,7 @@ export const modifyCanvasObject = canvas => {
 
 export const modifyIndex = canvas => {
   socket.on('index change', data => {
+    console.log('heard index change')
     const {id, newIndex} = data
     canvas.getObjects().forEach(object => {
       if (object.id === id) {
@@ -204,6 +218,7 @@ export const modifyIndex = canvas => {
 export const receiveAddedObject = canvas => {
   socket.off('canvas add change')
   socket.on('canvas add change', data => {
+    console.log('heard canvas add change')
     const {obj, id} = data
     let object
     if (obj.type === 'rect') {
@@ -225,7 +240,7 @@ export const receiveAddedObject = canvas => {
       })
     } else if (obj.type === 'i-text') {
       object = new fabric.IText('Your thoughts here...', {
-        left: obj.left,
+        // left: obj.left,
         top: obj.top,
         fill: obj.fill,
         fontFamily: obj.fontFamily
@@ -253,6 +268,7 @@ export const receiveAddedObject = canvas => {
 
 export const receiveRemovedObject = canvas => {
   socket.on('canvas remove change', data => {
+    console.log('heard canvas remove change')
     canvas.getObjects().forEach(object => {
       if (object.id === data.id) {
         canvas.remove(object)
@@ -267,6 +283,7 @@ export const receiveRemovedObject = canvas => {
 export const receiveMessageAndUpdateState = (setState, prevState) => {
   socket.on('message', msg => {
     setState([...prevState, msg])
+    console.log('heard meassage')
   })
 }
 //takes in addImage func, canvas, passing isReceiving to addImage as true so it does not emit
@@ -274,12 +291,14 @@ export const receiveImage = (addToCanvas, canvas, roomId) => {
   socket.off('add-image')
   socket.on('add-image', image => {
     addToCanvas(canvas, image, true, roomId)
+    console.log('heard add-image')
   })
 }
 //user tried to join a full room => is routed back to home
 export const receiveFullRoom = () => {
   socket.off('full room')
   socket.on('full room', () => {
+    console.log('heard full room')
     history.push('/join')
     toast(
       'Room is full... Please create a new room or join a different one. <3'
@@ -290,6 +309,7 @@ export const receiveFullRoom = () => {
 export const receiveNoRoom = () => {
   socket.off('no room')
   socket.on('no room', () => {
+    console.log('heard no room')
     history.push('/join')
     toast(
       'The room does not exist... Please create a new room or join an existing one. <3'
@@ -300,6 +320,7 @@ export const receiveNoRoom = () => {
 export const receiveExistingRoom = () => {
   socket.off('existing room')
   socket.on('existing room', () => {
+    console.log('heard existing room')
     history.push('/join')
     toast(
       'The room already exists... Please join the room or create a room with a new name. <3'
@@ -311,9 +332,19 @@ export const receiveExistingRoom = () => {
 export const joinSuccess = dispatch => {
   socket.off('join successful')
   socket.on('join successful', roomId => {
+    console.log('heard join successful')
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
     toast(`Joined room: ${roomId}`)
+  })
+}
+
+// user successfully rejoins room
+export const rejoinSuccess = dispatch => {
+  socket.off('rejoin successful')
+  socket.on('rejoin successful', roomId => {
+    console.log('heard rejoin successful')
+    history.push(`/room/${roomId}`)
   })
 }
 
@@ -321,6 +352,7 @@ export const joinSuccess = dispatch => {
 export const createSuccess = dispatch => {
   socket.off('create successful')
   socket.on('create successful', roomId => {
+    console.log('heard create successful')
     dispatch(setCurrentRoom(roomId))
     history.push(`/room/${roomId}`)
     realtimeDB.ref(roomId).set({

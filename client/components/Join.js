@@ -4,6 +4,7 @@ import {v1 as uuid} from 'uuid'
 import {
   emitCreateRoom,
   emitJoinRoom,
+  emitRejoinRoom,
   joinSuccess,
   createSuccess,
   receiveNoRoom,
@@ -47,7 +48,7 @@ function Join() {
         <div id="join-input">
           <input
             type="text"
-            placeholder="Enter a room name..."
+            placeholder="Enter a room name"
             onChange={handleChange}
           />
         </div>

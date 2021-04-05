@@ -25,6 +25,7 @@ import {
 } from './FabricUtils'
 import Save from './Save'
 import {Link} from 'react-router-dom'
+import {saveToPng} from '../store'
 
 function Tools(props) {
   const canvas = props.canvas
@@ -46,7 +47,8 @@ function Tools(props) {
           if (options.target) {
             const objModified = {
               obj: options.target,
-              id: options.target.id
+              id: options.target.id,
+              room: roomId
             }
             emitModifiedCanvasObject(objModified, roomId)
           }
@@ -59,7 +61,8 @@ function Tools(props) {
           if (options.target) {
             const objModified = {
               obj: options.target,
-              id: options.target.id
+              id: options.target.id,
+              room: roomId
             }
             emitModifiedCanvasObject(objModified, roomId)
           }
@@ -264,13 +267,7 @@ function Tools(props) {
           />
         </Tooltip>
 
-        <Save toggleSaveForm={props.toggleSaveForm} />
-
-        <Tooltip title="Download Canvas" arrow>
-          <button className="link-button">
-            <img src="/images/direct-download.png" />
-          </button>
-        </Tooltip>
+        <Save toggleSaveForm={props.toggleSaveForm} canvas={canvas} />
       </div>
       <div className="tools-colors">
         <Tooltip title="Drawing Color" arrow>

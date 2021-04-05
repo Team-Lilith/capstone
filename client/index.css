@@ -75,7 +75,7 @@ a:hover {
   border-radius: 50px;
   background: #00bfff;
   box-shadow: 20px 20px 60px #00a2d9, -20px -20px 60px #00dcff;
-  width: 30%;
+  max-width: 300px;
 }
 
 .MuiInputBase-root MuiInput-root MuiInput-underline {
@@ -155,7 +155,7 @@ a:hover {
   box-sizing: border-box;
   border: 0;
   border: 1px solid rgba(0, 0, 0, 0.09);
-  border-radius: 2px;
+  border-radius: 20px;
   margin-right: 5px;
 }
 
@@ -267,13 +267,8 @@ a:hover {
 }
 
 .copy-link-button {
-  height: 52px;
   border: 0;
-  border-radius: 9px;
   background: #00bfff;
-  box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
-  padding: 10px;
-  font-family: 'Bangers', cursive;
 }
 
 .copy-link-button img {
@@ -578,7 +573,7 @@ input[type='nickname'] {
   box-sizing: border-box;
   border: 0;
   border: 1px solid rgba(0, 0, 0, 0.09);
-  border-radius: 2px;
+  border-radius: 20px;
   margin-right: 5px;
 }
 
@@ -650,8 +645,8 @@ input[type='nickname'] {
   cursor: auto;
 }
 
-.canvases-container div {
-  padding: 15px;
+.gallery-element:hover {
+  cursor: pointer;
 }
 
 #my-art-container div {
@@ -682,4 +677,75 @@ input[type='nickname'] {
 }
 #save-buttons > button {
   margin: 1em;
+  
+.single-canvas-container {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  text-align: center;
+}
+
+.canvas-frame {
+  border-radius: 20px;
+}
+
+.canvases-inner-container {
+  margin-top: 50px;
+  width: 400px;
+  height: 400px;
+  border: 26px white solid;
+  background-color: white;
+  box-shadow: inset -16px 8px 20px rgb(163 155 139 / 36%),
+    inset -10px 0px 8px rgb(163 155 139 / 66%),
+    inset 3px 0px 8px rgb(163 155 139 / 12%),
+    inset 0px -8px 1px rgb(218 216 214 / 40%),
+    -28px -6px 60px rgb(163 155 139 / 46%),
+    -16px -4px 16px rgb(163 155 139 / 46%), 0px -4px 1px rgb(163 155 139 / 14%);
+  border-radius: 20px;
+}
+
+.canvas-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-canvas-outter-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.single-favorite-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border: 0;
+  border-radius: 9px;
+  background: #00bfff;
+  box-shadow: 4px 4px 8px #00a2d9, -4px -4px 8px #00dcff;
+  padding: 10px;
+  font-family: 'Bangers', cursive;
+}
+
+.single-canvas-outter-container h1 {
+  font-family: 'Bangers', cursive !important ;
+  font-size: 50px !important ;
+  margin-top: 25px !important ;
+  margin-bottom: 15px;
+}
+
+.single-favorite-container img {
+  width: 25px;
+  height: 25px;
+}
+
+.single-canvas-text {
+  font-family: 'Bangers', cursive;
+  font-size: 25px;
+
 }
