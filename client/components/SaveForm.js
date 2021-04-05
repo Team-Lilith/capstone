@@ -5,7 +5,7 @@ import {showToast} from '../toasty'
 
 const SaveForm = props => {
   const [title, setTitle] = useState('')
-  const [artists, setArtists] = useState([])
+  const [artists, setArtists] = useState([''])
   const canvas = props.canvas
   const dispatch = useDispatch()
 
@@ -59,38 +59,44 @@ const SaveForm = props => {
 
   return (
     <div className="column">
-      <button onClick={props.toggleSaveForm}>x</button>
+      <button id="x-button" onClick={props.toggleSaveForm}>
+        x
+      </button>
       <form id="save-form" onSubmit={handleSubmit}>
         <h2>Save Canvas</h2>
-        <input
-          type="text"
-          placeholder="Title"
-          name="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <br />
+        <div id="save-inputs">
+          <input
+            type="text"
+            placeholder="title"
+            name="title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+          <br />
 
-        <button className="add-artist" type="button" onClick={addArtist}>
-          Add an artist
-        </button>
-        {artists.map((artist, idx) => {
-          return (
-            <div key={idx}>
-              <input
-                type="text"
-                placeholder="Artist Name"
-                name={idx}
-                value={artists[idx]}
-                onChange={handleArtistChange}
-              />
-              <br />
-            </div>
-          )
-        })}
-        <button className="save-btn" type="submit">
-          Save to Gallery
-        </button>
+          {artists.map((artist, idx) => {
+            return (
+              <div key={idx}>
+                <input
+                  type="text"
+                  placeholder="artist name"
+                  name={idx}
+                  value={artists[idx]}
+                  onChange={handleArtistChange}
+                />
+                <br />
+              </div>
+            )
+          })}
+        </div>
+        <div id="save-buttons">
+          <button className="add-artist" type="button" onClick={addArtist}>
+            Add Artist
+          </button>
+          <button className="save-btn" type="submit">
+            Save to Gallery
+          </button>
+        </div>
       </form>
     </div>
   )

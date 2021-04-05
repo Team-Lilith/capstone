@@ -661,6 +661,23 @@ input[type='nickname'] {
   height: 36px;
 }
 
+#save-component {
+  display: flex;
+  position: absolute;
+  height: fit-content;
+  width: 25vw;
+  background-color: #00bfff;
+  border-radius: 20px;
+  padding: 2em;
+  flex-direction: column;
+}
+
+#save-buttons {
+  display: flex;
+}
+#save-buttons > button {
+  margin: 1em;
+  
 .single-canvas-container {
   display: flex;
   /* flex-direction: column; */
@@ -730,4 +747,5 @@ input[type='nickname'] {
 .single-canvas-text {
   font-family: 'Bangers', cursive;
   font-size: 25px;
+
 }
