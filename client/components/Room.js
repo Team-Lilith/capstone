@@ -14,7 +14,7 @@ import {
 } from '../socket'
 import '../index.css'
 import Canvas from './Canvas'
-import {getInitialCanvas, getInitialObjects} from '../store'
+import {getInitialCanvas, getInitialObjects, setCurrentRoom} from '../store'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import SaveForm from './SaveForm'
@@ -54,7 +54,10 @@ function Room() {
         emitJoinRoom(id)
       } else {
         // still emit join room
-        emitRejoinRoom(id)
+        if (roomId !== id) {
+          emitRejoinRoom(id)
+          dispatch(setCurrentRoom(id))
+        }
         // if we have a roomId, check if their is an existing canvas & objects in the DB
         dispatch(getInitialObjects(roomId))
         dispatch(getInitialCanvas(roomId))
