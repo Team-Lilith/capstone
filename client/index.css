@@ -677,7 +677,8 @@ input[type='nickname'] {
 }
 #save-buttons > button {
   margin: 1em;
-  
+}
+
 .single-canvas-container {
   display: flex;
   /* flex-direction: column; */
@@ -747,5 +748,4 @@ input[type='nickname'] {
 .single-canvas-text {
   font-family: 'Bangers', cursive;
   font-size: 25px;
-
 }
