@@ -22,8 +22,8 @@ function Save(props) {
         />
       </Tooltip>
       <Tooltip title="Download Canvas" arrow>
-        <button className="link-button" onClick={() => saveToPng(canvasEl)}>
-          <img src="/images/direct-download.png" />
+        <button className="download-button" onClick={() => saveToPng(canvasEl)}>
+          <img className="nav-button" src="/images/direct-download.png" />
         </button>
       </Tooltip>
     </div>
