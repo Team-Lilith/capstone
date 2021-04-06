@@ -749,3 +749,8 @@ input[type='nickname'] {
   font-family: 'Bangers', cursive;
   font-size: 25px;
 }
+
+.download-button {
+  background: #00bfff;
+  border: 0 !important;
+}
